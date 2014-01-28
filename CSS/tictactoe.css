@@ -1,0 +1,36 @@
+html {
+	height: 100%;
+}
+body {
+	background: url("../resource/classy_fabric_@2X.png"); 
+	height: 95%;
+	margin: auto;
+	width: 100%;	
+}
+#Greeting {
+	color: #AB0000;
+	font-family: Lucida;
+	font-size: 50px;
+	font-style:oblique;
+	margin-bottom: 2%;
+	padding: 3%;
+	text-align: center;
+	text-decoration: underline;
+}
+
+.Board {
+	border-collapse: collapse;
+	border: 8px groove #16141E;
+	color: white;
+	font-size: 20px; 
+	height: 390px;
+	margin: auto;
+	text-align: center;
+	width: 390px;
+}
+th, td {
+	border: 8px groove #16141E;	
+	height: 120px;
+	margin: 10px; 
+	width: 120px;
+}
