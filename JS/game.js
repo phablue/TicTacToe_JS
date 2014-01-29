@@ -1,48 +1,35 @@
-
-board = [1,2,3,4,5,6,7,8,9];
-
-mark: function(chosen_spot, current_player) {
-	$("#" + chosen_spot).replaceWith(current_player);
-	board[chosen_spot] = current_player;
-}
-next_player: function(current_player) {
-	(current_player == "X") ? "O" : "X"
-}
-
-available_spots: function() {
-	$("td:empty")
-}
-
-wins = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]];
-gamerules: function() {
-	win: function() {
+$(document).ready(function() {
+	board = [1,2,3,4,5,6,7,8,9],
+	available_spot = [],
+	current_player = "X",
+	win = false, 
+	tie = false,
+	rule4win = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]],
+	$("td").click(function(e) {
+		$("#" + e.target.id).text(current_player);
+		board[e.target.id] = current_player;
 		for ( n in this.wins) {
 			var system = this.wins[n];
 			var s = this.board[system[0]] + this.board[system[1]] + this.board[system[2]];
-			if (s == "XXX" || s == "OOO" ) {
-				return true;
-			}
-			else {
-				return false
-			}
+			win = (s == "XXX" || s == "OOO" ) ? true : false;
 		}
-	}
-	tie: function() {
-		if (available_spots().length) {
-			return false
+		for (n in this.board) {
+				if (typeof(n) === "number") {
+					available_spot.push(n) 
+					console.log(n);
+					debugger
+				}
 		}
-		else {
-			return true
+		console.log($("td").val(""));
+		tie = (available_spot.length) ? false : true;
+		if (win) {
+			alert("Player"+ current_player + "win!!!");
 		}
-	}
-	game_over: function() {
-		if (win() || tie()) {
-			return true
-		} 
-		else {
-			return false
-		};
-	}
-}
+		else if(tie) {
+			alert("Game is tie");
+		}
+		current_player = (current_player == "X") ? "O" : "X";
+	});
+});
 
 

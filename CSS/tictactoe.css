@@ -2,7 +2,7 @@ html {
 	height: 100%;
 }
 body {
-	background: url("../resource/classy_fabric_@2X.png"); 
+	background: url("../resource/texturetastic_gray_@2X.png"); 
 	height: 95%;
 	margin: auto;
 	width: 100%;	
@@ -19,8 +19,6 @@ body {
 }
 
 .Board {
-	border-collapse: collapse;
-	border: 8px groove #16141E;
 	color: white;
 	font-size: 20px; 
 	height: 390px;
@@ -29,8 +27,9 @@ body {
 	width: 390px;
 }
 th, td {
-	border: 8px groove #16141E;	
+	border: 4px outset #D3D4C4;	
 	height: 120px;
 	margin: 10px; 
 	width: 120px;
 }
+
