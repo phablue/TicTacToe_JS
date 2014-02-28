@@ -2,7 +2,7 @@ html {
 	height: 100%;
 }
 body {
-	background: url("../resource/texturetastic_gray_@2X.png"); 
+	background: url("../image/texturetastic_gray_@2X.png"); 
 	height: 95%;
 	margin: auto;
 	width: 100%;	
@@ -19,7 +19,7 @@ body {
 }
 
 .Board {
-	color: white;
+	color: black;
 	font-size: 20px; 
 	height: 390px;
 	margin: auto;
