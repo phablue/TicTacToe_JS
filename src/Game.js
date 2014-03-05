@@ -1,13 +1,33 @@
-Game = function() {
-  this.change_player = function(current_player) {
-    return current_player == "X" ? "O" : "X";
-  };
+(function() {
+  var Game = {
+    currentPlayer: "X",
+    board: window.GameBoard,
+    rules: window.GameRules,
+    human: window.Human(this.board, this.currentPlayer),
 
-  this.next_turn = function(board, current_player) {
-    if(rules.game_over(board)) {
-      alert("You win!!");
-      $("tr td").off("click", "**");
+    nextTurn: function() {
+      if(this.rules.gameWin(this.board)) {
+        alert("Congratulations.\nYou win!!");
+        $("tr td").off("click", "**");
+      }
+      else if(this.rules.gameTie(this.board)) {
+        alert("Game is tied.\n Game Over.");
+        $("tr td").off("click", "**");
+      }
+    },
+
+    play: function() {
+      i = 0;
+      while(i < 10) {
+        console.log(window.Human);
+        this.human.choiceSpot;
+        console.log(board.spots);
+        this.nextTurn();
+        i += 1;
+      }
     }
-    this.change_player(current_player);
   };
-}
+  window.Game = Game;
+})();
+
+Game.play();

@@ -1,34 +1,51 @@
 describe ("Test Human", function() {
-  var game_board;
+  var gameboard;
   var human;
+  var currentPlayer;
 
   beforeEach(function () {
-    game_board = new GameBoard();
-    human = new Human();
-    game_board.spots = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    gameboard = window.GameBoard;
+    gameboard.spots = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  });
+
+  describe ("Change a current player", function() {
+    it ("To 'O', if a current player is 'X'", function() {
+      currentPlayer = "X"
+      human = new Human(gameboard, currentPlayer);
+      human.changePlayer(human.currentPlayer);
+      expect (human.currentPlayer).toBe("O");
+    });
+
+    it ("To 'X', if a current player is 'O'", function() {
+      currentPlayer = "O";
+      human = new Human(gameboard, currentPlayer);
+      human.changePlayer(human.currentPlayer);
+      expect (human.currentPlayer).toBe("X");
+    });
   });
 
   describe("Sets value of selected elements", function() {
-    it ("td #0 and board[0] is 'X' after setting", function() {
-      var current_player = "X";
+    it ("td #0 and board[0] value changes to 'X' and current player changes to 'O'", function() {
+      currentPlayer = "X";
       setFixtures("<tr> <td id = '0'></td></tr>");
-      human = new Human(game_board, current_player);
+      human = new Human(gameboard, currentPlayer);
       expect ($("tr td")).toBeEmpty();
       $("tr td").click();
-      human.choice_spot;
+      human.choiceSpot;
       expect ($("#0")).toHaveText("X");
-      expect (game_board.spots[0]).toBe("X");
+      expect (gameboard.spots[0]).toBe("X");
+      expect (human.currentPlayer).toBe("O");
     });
 
-    it ("td #0 and board[0] is 'O' after setting", function() {
-      var current_player = "O";
+    it ("td #3 and board[3] value changes to 'O' and current player changes to 'X'", function() {
+      currentPlayer = "O";
       setFixtures("<tr> <td id = '3'></td></tr>");
-      human = new Human(game_board, current_player);
+      human = new Human(gameboard, currentPlayer);
       expect ($("tr td")).toBeEmpty();
       $("tr td").click();
-      human.choice_spot;
+      human.choiceSpot;
       expect ($("#3")).toHaveText("O");
-      expect (game_board.spots[3]).toBe("O");
+      expect (human.currentPlayer).toBe("X");
     });
   });
 });
