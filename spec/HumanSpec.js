@@ -47,5 +47,15 @@ describe ("Test Human", function() {
       expect (gameboard.spots[3]).toBe("O");
       expect (human.currentPlayer).toBe("X");
     });
+
+    it ("Can't set of a choosen spot", function() {
+      var alert = spyOn(window,"alert");
+      currentPlayer = "O";
+      setFixtures("<tr> <td id = '0'>X</td><td id = '3'></td></tr>");
+      human = window.Human;
+      human.choiceSpot(gameboard, currentPlayer);
+      $("#0").click();
+      expect (alert).toHaveBeenCalledWith("That is not an available spot.\nPlease choose a different spot.");
+    });
   });
 });

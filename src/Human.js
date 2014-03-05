@@ -7,9 +7,15 @@
       var chosenSpot;
       var _this = this;
       $("tr td").click(function(e) {
-          chosenSpot = e.target.id;
+        chosenSpot = e.target.id;
+        if ($("#" + chosenSpot).text() == "") {
           _this.markChosenSpot(board, chosenSpot, _this.currentPlayer);
           _this.changePlayer(_this.currentPlayer);
+        }
+        else {
+          alert("That is not an available spot.\nPlease choose a different spot.")
+          return;
+        }
       });
     },
     // this.choiceSpot = (function (_this, board) {

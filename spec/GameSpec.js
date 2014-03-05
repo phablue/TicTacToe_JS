@@ -25,7 +25,7 @@ describe ("Test Game", function() {
       it ("Pops up for tie and click event doesn't work,if the game tie.", function() {
         game.board.spots = ["X", "O", "X", "O", "X", "X", "O", "X", "O"];
         game.nextTurn();
-        expect(alert).toHaveBeenCalledWith("Game is tied.\n Game Over.");
+        expect(alert).toHaveBeenCalledWith("Game is tied.\nGame Over.");
         expect(off_click).toHaveBeenCalled();
       });
 

@@ -2,18 +2,21 @@ html {
 	height: 100%;
 }
 body {
-	background: url("../image/texturetastic_gray_@2X.png"); 
+	background: url("../image/texturetastic_gray_@2X.png");
 	height: 95%;
 	margin: auto;
-	width: 100%;	
+	width: 100%;
 }
 #Greeting {
 	color: #AB0000;
-	font-family: Lucida;
-	font-size: 50px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 60px;
+	font-weight: normal;
 	font-style:oblique;
-	margin-bottom: 2%;
-	padding: 3%;
+	line-height: 1.1;
+	margin-top: 30px;
+	margin-bottom: 0;
+	padding: 2%;
 	text-align: center;
 	text-decoration: underline;
 }
@@ -27,9 +30,43 @@ body {
 	width: 390px;
 }
 th, td {
-	border: 4px outset #D3D4C4;	
+	border: 4px outset #D3D4C4;
 	height: 120px;
-	margin: 10px; 
+	margin: 10px;
 	width: 120px;
 }
-
+.btn {
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	border-radius: 4px;
+}
+.btn-play {
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;
+	padding: 10px 16px;
+	font-size: 18px;
+	line-height: 1.33;
+	border-radius: 6px;
+	margin-left: 37%;
+}
+.btn-restart {
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;
+	padding: 10px 16px;
+	font-size: 18px;
+	line-height: 1.33;
+	border-radius: 6px;
+	margin-left: 65px;
+}

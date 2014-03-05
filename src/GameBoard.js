@@ -1,6 +1,7 @@
 (function() {
+  var board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   var GameBoard = {
-    spots: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    spots: board,
 
     validSpots: function() {
       var availableSpots = [];
@@ -10,6 +11,10 @@
         }
       }
       return availableSpots;
+    },
+
+    reSet: function() {
+      this.spots = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     }
   };
   window.GameBoard = GameBoard;
