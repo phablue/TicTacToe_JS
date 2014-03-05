@@ -3,7 +3,7 @@
     currentPlayer: "X",
     board: window.GameBoard,
     rules: window.GameRules,
-    human: window.Human(this.board, this.currentPlayer),
+    human: window.Human,
 
     nextTurn: function() {
       if(this.rules.gameWin(this.board)) {
@@ -17,11 +17,10 @@
     },
 
     play: function() {
+      console.log(this.board);
       i = 0;
       while(i < 10) {
-        console.log(window.Human);
         this.human.choiceSpot;
-        console.log(board.spots);
         this.nextTurn();
         i += 1;
       }
