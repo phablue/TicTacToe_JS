@@ -14,7 +14,7 @@ describe ("Test Game", function() {
       off_click = spyOn($.fn, "off")
     });
 
-    describe ("Message", function() {
+    describe ("Test Message", function() {
       it ("Pops up for win and click event doesn't work,if the game win.", function() {
         game.board.spots = ["X", "X", "X", "O", 5, "O", 7, 8, 9];
         game.nextTurn();

@@ -1,7 +1,9 @@
 (function() {
+  var firstPlayer = "X";
+  var gameboard = window.GameBoard;
   var Game = {
-    currentPlayer: "X",
-    board: window.GameBoard,
+    currentPlayer: firstPlayer,
+    board: gameboard,
     rules: window.GameRules,
     human: window.Human,
 
@@ -17,16 +19,12 @@
     },
 
     play: function() {
-      console.log(this.board);
-      i = 0;
-      while(i < 10) {
-        this.human.choiceSpot;
-        this.nextTurn();
-        i += 1;
-      }
+      var _this = this;
+      _this.human.choiceSpot(_this.board, _this.currentPlayer);
+      $("tr td").click(function() {
+        _this.nextTurn();
+      });
     }
   };
   window.Game = Game;
 })();
-
-Game.play();
