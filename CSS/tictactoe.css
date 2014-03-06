@@ -60,6 +60,16 @@ th, td {
 	border-radius: 6px;
 	margin-left: 46%;
 }
+.btn-new {
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;
+	padding: 10px 16px;
+	font-size: 18px;
+	line-height: 1.33;
+	border-radius: 6px;
+	margin-left: 46%;
+}
 .btn-restart {
 	color: #333;
 	background-color: #fff;
