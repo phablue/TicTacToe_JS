@@ -12,14 +12,14 @@
       if(this.rules.gameWin(this.board)) {
         alert("Congratulations.\nYou win!!");
         $("tr td").unbind();
-        $(".btn-start").hide();
+        $(".btn-new").hide();
         $(".btn-restart").show();
         this.restartGame();
       }
       else if(this.rules.gameTie(this.board)) {
         alert("Game is tied.\nGame Over.");
         $("tr td").unbind();
-        $(".btn-start").hide();
+        $(".btn-new").hide();
         $(".btn-restart").show();
         this.restartGame();
       }
@@ -45,10 +45,19 @@
 
     startGame: function() {
       $(".btn-restart").hide();
+      $(".btn-new").hide();
       var _this = this;
       $(".btn-start").click(function() {
-        $(".btn-start").hide();
         _this.play();
+      });
+    },
+
+    newGame: function() {
+      $(".btn-start").hide();
+      $(".btn-new").show();
+      var _this = this;
+      $(".btn-new").click(function() {
+        _this.resetGame();
       });
     },
 
@@ -56,6 +65,7 @@
       var _this = this;
       $(".btn-restart").click(function() {
         $(".btn-restart").hide();
+        $(".btn-new").show();
         _this.resetGame();
       });
     },
@@ -71,7 +81,8 @@
       if (_this.goFirst()) {
         return;
       }
-      _this.human.choiceSpot(_this.board, _this.currentPlayer);
+      this.newGame();
+      this.human.choiceSpot(_this.board, _this.currentPlayer);
       $("tr td").click(function() {
         _this.nextTurn();
       });
