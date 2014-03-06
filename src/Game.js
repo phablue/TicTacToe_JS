@@ -12,12 +12,14 @@
       if(this.rules.gameWin(this.board)) {
         alert("Congratulations.\nYou win!!");
         $("tr td").unbind();
+        $(".btn-play").hide();
         $(".btn-restart").show();
         this.restartGame();
       }
       else if(this.rules.gameTie(this.board)) {
         alert("Game is tied.\nGame Over.");
         $("tr td").unbind();
+        $(".btn-play").hide();
         $(".btn-restart").show();
         this.restartGame();
       }
@@ -54,10 +56,14 @@
       var _this = this;
       $(".btn-restart").click(function() {
         $(".btn-restart").hide();
-        $("tr td").empty();
-        gameboard.reSet();
-        _this.play();
+        _this.resetGame();
       });
+    },
+
+    resetGame: function() {
+      $("tr td").empty();
+      gameboard.reSet();
+      this.play();
     },
 
     play: function() {
