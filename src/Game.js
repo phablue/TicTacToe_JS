@@ -13,11 +13,13 @@
         alert("Congratulations.\nYou win!!");
         $("tr td").unbind();
         $(".btn-restart").show();
+        this.restartGame();
       }
       else if(this.rules.gameTie(this.board)) {
         alert("Game is tied.\nGame Over.");
         $("tr td").unbind();
         $(".btn-restart").show();
+        this.restartGame();
       }
     },
 
@@ -53,6 +55,7 @@
         $(".btn-restart").hide();
         $("tr td").empty();
         gameboard.reSet();
+        _this.play();
       });
     },
 
