@@ -1,9 +1,8 @@
 (function() {
-  var firstPlayer = "X";
   var input;
   var gameboard = window.GameBoard;
   var Game = {
-    currentPlayer: firstPlayer,
+    currentPlayer: "X",
     board: gameboard,
     rules: window.GameRules,
     human: window.Human,
