@@ -17,7 +17,7 @@
     },
 
     gameTie: function(board) {
-      return board.validSpots().length ? false : true;
+      return board.validSpots().length === 0;
     }
   };
   window.GameRules = GameRules;
