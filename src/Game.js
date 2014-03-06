@@ -45,6 +45,7 @@
       $(".btn-restart").hide();
       var _this = this;
       $(".btn-play").click(function() {
+        $(".btn-play").hide();
         _this.play();
       });
     },
