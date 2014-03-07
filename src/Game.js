@@ -12,15 +12,13 @@
       if(this.rules.gameWin(this.board)) {
         ui.winMessage();
         $("tr td").unbind();
-        $(".btn-new").hide();
-        $(".btn-restart").show();
+        ui.toggleDisplayedButton(".btn-new", ".btn-restart");
         this.restartGame();
       }
       else if(this.rules.gameTie(this.board)) {
         ui.tieMessage();
         $("tr td").unbind();
-        $(".btn-new").hide();
-        $(".btn-restart").show();
+        ui.toggleDisplayedButton(".btn-new", ".btn-restart");
         this.restartGame();
       }
     },
@@ -45,18 +43,16 @@
     },
 
     startGame: function() {
-      $(".btn-restart").hide();
-      $(".btn-new").hide();
       var _this = this;
+      ui.hideButton(".btn-restart", ".btn-new");
       $(".btn-start").click(function() {
         _this.play();
       });
     },
 
     newGame: function() {
-      $(".btn-start").hide();
-      $(".btn-new").show();
       var _this = this;
+      ui.toggleDisplayedButton(".btn-start", ".btn-new");
       $(".btn-new").click(function() {
         _this.resetGame();
       });
@@ -65,8 +61,7 @@
     restartGame: function() {
       var _this = this;
       $(".btn-restart").click(function() {
-        $(".btn-restart").hide();
-        $(".btn-new").show();
+        ui.toggleDisplayedButton(".btn-restart", ".btn-new");
         _this.resetGame();
       });
     },

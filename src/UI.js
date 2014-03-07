@@ -18,6 +18,16 @@
 
     askGoFirst: function() {
       return prompt("Do you require the first move? (y/n):");
+    },
+
+    toggleDisplayedButton: function(hideClass, showClass) {
+      $(hideClass).hide();
+      $(showClass).show()
+    },
+
+    hideButton: function(hideClass1, hideClass2) {
+      $(hideClass1).hide();
+      $(hideClass2).hide();
     }
   };
   window.UI = UI;
