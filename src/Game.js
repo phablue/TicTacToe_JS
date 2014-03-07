@@ -8,28 +8,27 @@
     rules: window.GameRules,
     human: window.Human,
 
-    goFirst: function() {
-      var input = ui.askGoFirst();
-      console.log(input);
+    choicePlayer: function() {
+      var input = ui.askChoicePlayer();
       if (input === null || input === "") {
         return true;
       }
-      else if(input == "y") {
+      else if(input == "X") {
         this.currentPlayer = "X";
       }
-      else if(input == "n") {
+      else if(input == "O") {
         this.currentPlayer = "O";
       }
       else {
         ui.inputErrorMessage();
-        this.goFirst();
+        this.choicePlayer();
       }
       return false;
     },
 
     play: function() {
       var _this = this;
-      if (_this.goFirst()) {
+      if (_this.choicePlayer()) {
         return;
       }
       this.newGame();

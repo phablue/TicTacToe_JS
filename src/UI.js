@@ -16,8 +16,8 @@
       alert("You have to choose 'y' or 'n'.");
     },
 
-    askGoFirst: function() {
-      return prompt("Do you require the first move? (y/n):");
+    askChoicePlayer: function() {
+      return prompt("What the player do you require? ('X' or 'O'):");
     },
 
     toggleDisplayedButton: function(hideClass, showClass) {
