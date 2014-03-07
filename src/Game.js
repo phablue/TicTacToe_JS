@@ -71,7 +71,7 @@
 
     resetGame: function() {
       $("tr td").empty();
-      gameboard.reSet();
+      this.board.resetBoard();
       this.play();
     },
 
