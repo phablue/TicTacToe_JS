@@ -1,10 +1,12 @@
 describe ("Test Human", function() {
   var gameboard;
+  var ui;
   var human;
   var currentPlayer;
 
   beforeEach(function () {
     gameboard = window.GameBoard;
+    ui = window.UI;
     human = window.Human;
     gameboard.spots = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   });
@@ -49,13 +51,13 @@ describe ("Test Human", function() {
     });
 
     it ("Can't set of a choosen spot", function() {
-      var alert = spyOn(window,"alert");
+      var errorMessage = ui.spotErrorMessage();
       currentPlayer = "O";
       setFixtures("<tr> <td id = '0'>X</td><td id = '3'></td></tr>");
       human = window.Human;
       human.choiceSpot(gameboard, currentPlayer);
       $("#0").click();
-      expect (alert).toHaveBeenCalledWith("That is not an available spot.\nPlease choose a different spot.");
+      expect (errorMessage).toHaveBeenCalled();
     });
   });
 });

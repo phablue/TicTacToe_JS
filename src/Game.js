@@ -27,6 +27,7 @@
     },
 
     play: function() {
+      console.log("hi")
       var _this = this;
       if (_this.choicePlayer()) {
         return;
@@ -35,6 +36,7 @@
       this.human.choiceSpot(_this.board, _this.currentPlayer);
       $("tr td").click(function() {
         _this.nextTurn();
+        event.stopImmediatePropagation();
       });
     },
 
