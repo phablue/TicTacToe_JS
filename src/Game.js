@@ -10,7 +10,7 @@
 
     nextTurn: function() {
       if(this.rules.gameWin(this.board)) {
-        ui.winMessage();
+        ui.winMessage(this.winner());
         $("tr td").unbind();
         ui.toggleDisplayedButton(".btn-new", ".btn-restart");
         this.restartGame();
@@ -21,6 +21,10 @@
         ui.toggleDisplayedButton(".btn-new", ".btn-restart");
         this.restartGame();
       }
+    },
+
+    winner: function() {
+      return this.currentPlayer == "X" ? "Player1" : "Player 2";
     },
 
     goFirst: function() {

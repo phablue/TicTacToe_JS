@@ -4,8 +4,8 @@
       alert("That is not an available spot.\nPlease choose a different spot.");
     },
 
-    winMessage: function() {
-      alert("Congratulations.\nYou win!!");
+    winMessage: function(winner) {
+      alert("Congratulations.\n"+ winner +" win!!");
     },
 
     tieMessage: function() {
