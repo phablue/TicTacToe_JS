@@ -1,23 +1,40 @@
 (function() {
   var GameRules = {
-    gameOver: function(board) {
-      return this.gameWin(board) || this.gameWin(board);
+    winRequirementForRow: function(board) {
+      return this.winRequirement(board.rowSpots());
     },
 
-    gameWin: function(board) {
-      var rulesOfWin = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
-      for (r in rulesOfWin) {
-        var rule = rulesOfWin[r];
-        var state = board.spots[rule[0]] + board.spots[rule[1]] +  board.spots[rule[2]];
-        if (state == "XXX" || state == "OOO") {
+    winRequirementForColumn: function(board) {
+      return this.winRequirement(board.columnSpots());
+    },
+
+    winRequirementForDiagonal: function(board) {
+      return this.winRequirement(board.diagonalSpots());
+    },
+
+    winRequirement: function(spots) {
+      for (i in spots) {
+        if (this.checkForWin(spots[i])) {
           return true;
         }
       }
-      return false;
+      return false
+    },
+
+    checkForWin: function(spots) {
+      return spots.toString() == "X,X,X" || spots.toString() == "O,O,O";
+    },
+
+    gameWin: function(board) {
+      return this.winRequirementForRow(board) || this.winRequirementForColumn(board) || this.winRequirementForDiagonal(board)
     },
 
     gameTie: function(board) {
-      return board.validSpots().length === 0;
+      return board.validSpots().length == 0;
+    },
+
+    gameOver: function(board) {
+      return this.gameWin(board) || this.gameTie(board);
     }
   };
   window.GameRules = GameRules;
