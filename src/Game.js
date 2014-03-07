@@ -5,7 +5,7 @@
   var Game = {
     currentPlayer: "X",
     board: gameboard,
-    rules: window.GameRules,
+    gamerules: window.GameRules,
     human: window.Human,
 
     choicePlayer: function() {
@@ -36,18 +36,17 @@
       this.human.choiceSpot(_this.board, _this.currentPlayer);
       $("tr td").click(function() {
         _this.nextTurn();
-        event.stopImmediatePropagation();
       });
     },
 
     nextTurn: function() {
-      if(this.rules.gameWin(this.board)) {
+      if(this.gamerules.gameWin(this.board)) {
         ui.winMessage(this.winner());
         $("tr td").unbind();
         ui.toggleDisplayedButton(".btn-new", ".btn-restart");
         this.restartGame();
       }
-      else if(this.rules.gameTie(this.board)) {
+      else if(this.gamerules.gameTie(this.board)) {
         ui.tieMessage();
         $("tr td").unbind();
         ui.toggleDisplayedButton(".btn-new", ".btn-restart");
@@ -72,13 +71,12 @@
       ui.toggleDisplayedButton(".btn-start", ".btn-new");
       $(".btn-new").click(function() {
         _this.resetGame();
-        _this.play();
       });
     },
 
     restartGame: function() {
       var _this = this;
-      $(".btn-restart").click(function() {
+      $(".btn-restart").one("click", function() {
         ui.toggleDisplayedButton(".btn-restart", ".btn-new");
         _this.resetGame();
         _this.play();

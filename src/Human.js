@@ -18,7 +18,6 @@
           ui.spotErrorMessage();
           return;
         }
-        e.stopImmediatePropagation();
       });
     },
 
