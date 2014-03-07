@@ -70,6 +70,7 @@
       ui.toggleDisplayedButton(".btn-start", ".btn-new");
       $(".btn-new").click(function() {
         _this.resetGame();
+        _this.play();
       });
     },
 
@@ -78,13 +79,13 @@
       $(".btn-restart").click(function() {
         ui.toggleDisplayedButton(".btn-restart", ".btn-new");
         _this.resetGame();
+        _this.play();
       });
     },
 
     resetGame: function() {
       $("tr td").empty();
       this.board.resetBoard();
-      this.play();
     }
   };
   window.Game = Game;
