@@ -13,11 +13,11 @@
     },
 
     inputErrorMessage: function() {
-      alert("You have to choose 'y' or 'n'.");
+      alert("You have to choose 'X' or 'O'.");
     },
 
     askChoicePlayer: function() {
-      return prompt("What the player do you require? ('X' or 'O'):");
+      return prompt("What player do you require? ('X' or 'O'):");
     },
 
     toggleDisplayedButton: function(hideClass, showClass) {
