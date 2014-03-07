@@ -8,25 +8,6 @@
     rules: window.GameRules,
     human: window.Human,
 
-    nextTurn: function() {
-      if(this.rules.gameWin(this.board)) {
-        ui.winMessage(this.winner());
-        $("tr td").unbind();
-        ui.toggleDisplayedButton(".btn-new", ".btn-restart");
-        this.restartGame();
-      }
-      else if(this.rules.gameTie(this.board)) {
-        ui.tieMessage();
-        $("tr td").unbind();
-        ui.toggleDisplayedButton(".btn-new", ".btn-restart");
-        this.restartGame();
-      }
-    },
-
-    winner: function() {
-      return this.currentPlayer == "X" ? "Player1" : "Player 2";
-    },
-
     goFirst: function() {
       var input = ui.askGoFirst();
       console.log(input);
@@ -44,6 +25,37 @@
         this.goFirst();
       }
       return false;
+    },
+
+    play: function() {
+      var _this = this;
+      if (_this.goFirst()) {
+        return;
+      }
+      this.newGame();
+      this.human.choiceSpot(_this.board, _this.currentPlayer);
+      $("tr td").click(function() {
+        _this.nextTurn();
+      });
+    },
+
+    nextTurn: function() {
+      if(this.rules.gameWin(this.board)) {
+        ui.winMessage(this.winner());
+        $("tr td").unbind();
+        ui.toggleDisplayedButton(".btn-new", ".btn-restart");
+        this.restartGame();
+      }
+      else if(this.rules.gameTie(this.board)) {
+        ui.tieMessage();
+        $("tr td").unbind();
+        ui.toggleDisplayedButton(".btn-new", ".btn-restart");
+        this.restartGame();
+      }
+    },
+
+    winner: function() {
+      return this.currentPlayer == "X" ? "Player1" : "Player 2";
     },
 
     startGame: function() {
@@ -74,18 +86,6 @@
       $("tr td").empty();
       this.board.resetBoard();
       this.play();
-    },
-
-    play: function() {
-      var _this = this;
-      if (_this.goFirst()) {
-        return;
-      }
-      this.newGame();
-      this.human.choiceSpot(_this.board, _this.currentPlayer);
-      $("tr td").click(function() {
-        _this.nextTurn();
-      });
     }
   };
   window.Game = Game;
