@@ -100,11 +100,13 @@ describe ("Test game rules", function() {
       it ("Win, when 3, 5, 7 spots are 'O'", function() {
         gameboard.spots = [1, 2, "O", 4, "O", 6, "O", 8, 9];
         expect (gamerules.winRequirementForDiagonal(gameboard)).toBe(true);
+        expect (gamerules.gameWin(gameboard)).toBe(true);
       });
 
       it ("Lose, when 3, 5, 7 spots are 'X, X, O'", function() {
         gameboard.spots = [1, 2, "X", 4, "X", 6, "O", 8, 9];
         expect (gamerules.winRequirementForDiagonal(gameboard)).toBe(false);
+        expect (gamerules.gameWin(gameboard)).toBe(false);
       });
     });
   });
