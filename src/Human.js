@@ -1,4 +1,5 @@
 (function() {
+  var ui = window.UI;
   var Human = {
     currentPlayer: "",
 
@@ -13,7 +14,7 @@
           _this.changePlayer(_this.currentPlayer);
         }
         else {
-          alert("That is not an available spot.\nPlease choose a different spot.")
+          ui.spotErrorMessage();
           return;
         }
       });

@@ -1,6 +1,7 @@
 (function() {
   var input;
   var gameboard = window.GameBoard;
+  var ui = window.UI;
   var Game = {
     currentPlayer: "X",
     board: gameboard,
@@ -9,14 +10,14 @@
 
     nextTurn: function() {
       if(this.rules.gameWin(this.board)) {
-        alert("Congratulations.\nYou win!!");
+        ui.winMessage();
         $("tr td").unbind();
         $(".btn-new").hide();
         $(".btn-restart").show();
         this.restartGame();
       }
       else if(this.rules.gameTie(this.board)) {
-        alert("Game is tied.\nGame Over.");
+        ui.tieMessage();
         $("tr td").unbind();
         $(".btn-new").hide();
         $(".btn-restart").show();
@@ -25,7 +26,8 @@
     },
 
     goFirst: function() {
-      var input = prompt("Do you require the first move? (y/n):");
+      var input = ui.askGoFirst();
+      console.log(input);
       if (input === null || input === "") {
         return true;
       }
@@ -36,7 +38,7 @@
         this.currentPlayer = "O";
       }
       else {
-        alert("You have to choose 'y' or 'n'.");
+        ui.inputErrorMessage();
         this.goFirst();
       }
       return false;
