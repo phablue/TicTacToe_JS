@@ -1,40 +1,36 @@
 describe ("Test Game", function() {
-  var game;
-
-  beforeEach (function () {
-    game = window.Game;
-  });
-
   describe ("The message pops up", function() {
-    var alert;
-    var off_click;
+    var winMessage;
+    var tieMessage;
+    var unbind;
 
     beforeEach (function() {
-      alert = spyOn(window, "alert");
-      off_click = spyOn($.fn, "off")
+      winMessage = spyOn(UI, "winMessage");
+      tieMessage = spyOn(UI, "tieMessage");
+      unbind = spyOn($.fn, "unbind")
     });
 
     describe ("Test Message", function() {
-      it ("Pops up for win and click event doesn't work,if the game win.", function() {
-        game.board.spots = ["X", "X", "X", "O", 5, "O", 7, 8, 9];
-        game.nextTurn();
-        expect(alert).toHaveBeenCalledWith("Congratulations.\nYou win!!");
-        expect(off_click).toHaveBeenCalled();
+      it ("Pops up for win and click event doesn't work,if the Game win.", function() {
+        Game.board.spots = ["X", "X", "X", "O", 5, "O", 7, 8, 9];
+        Game.nextTurn();
+        expect(winMessage).toHaveBeenCalled();
+        expect(unbind).toHaveBeenCalled();
       });
 
-      it ("Pops up for tie and click event doesn't work,if the game tie.", function() {
-        game.board.spots = ["X", "O", "X", "O", "X", "X", "O", "X", "O"];
-        game.nextTurn();
-        expect(alert).toHaveBeenCalledWith("Game is tied.\nGame Over.");
-        expect(off_click).toHaveBeenCalled();
+      it ("Pops up for tie and click event doesn't work,if the Game tie.", function() {
+        Game.board.spots = ["X", "O", "X", "O", "X", "X", "O", "X", "O"];
+        Game.nextTurn();
+        expect(tieMessage).toHaveBeenCalled();
+        expect(unbind).toHaveBeenCalled();
       });
 
-      it ("Not Pops up any message and click event works,if the game is not won or tied.", function() {
-        game.board.spots = ["X", 2, 3, 4, 5, 6, 7, 8, 9];
-        game.nextTurn();
-        expect(alert).not.toHaveBeenCalledWith("Congratulations.\nYou win!!");
-        expect(alert).not.toHaveBeenCalledWith("Game is tied.\n Game Over.");
-        expect(off_click).not.toHaveBeenCalled();
+      it ("Not Pops up any message and click event works,if the Game is not won or tied.", function() {
+        Game.board.spots = ["X", 2, 3, 4, 5, 6, 7, 8, 9];
+        Game.nextTurn();
+        expect(winMessage).not.toHaveBeenCalled();
+        expect(tieMessage).not.toHaveBeenCalled();
+        expect(unbind).not.toHaveBeenCalled();
       });
     });
   });
