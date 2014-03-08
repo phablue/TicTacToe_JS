@@ -8,7 +8,6 @@
       var chosenSpot;
       var _this = this;
       $("tr td").click(function(e) {
-        console.log(board.spots);
         chosenSpot = e.target.id;
         if ($("#" + chosenSpot).text() == "") {
           _this.markChosenSpot(board, chosenSpot, _this.currentPlayer);
