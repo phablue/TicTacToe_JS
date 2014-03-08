@@ -27,7 +27,6 @@
     },
 
     play: function() {
-      console.log("hi")
       var _this = this;
       if (_this.choicePlayer()) {
         return;
