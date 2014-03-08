@@ -31,8 +31,8 @@
       if (_this.choicePlayer()) {
         return;
       }
-      this.newGame();
-      this.human.choiceSpot(_this.board, _this.currentPlayer);
+      _this.newGame();
+      _this.human.choiceSpot(_this.board, _this.currentPlayer);
       $("tr td").click(function() {
         _this.nextTurn();
       });
