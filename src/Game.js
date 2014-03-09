@@ -29,9 +29,9 @@
     },
 
     play: function() {
-      this.newGame();
       var _this = this;
-      if (_this.choicePlayer()) {
+      _this.newGame();
+      if (this.choicePlayer()) {
         return;
       }
       $("tr td").click(function() {
@@ -63,15 +63,16 @@
     startGame: function() {
       var _this = this;
       ui.hideButton(".btn-restart", ".btn-new");
-      $(".btn-start").click(function() {
+      $(".btn-start").click(function(e) {
         _this.play();
       });
     },
 
     newGame: function() {
       var _this = this;
-      $(".btn-new").one("click", function() {
+      $(".btn-new").click(function() {
         _this.resetGame();
+        _this.choicePlayer();
       });
     },
 
