@@ -34,9 +34,10 @@
       if (_this.choicePlayer()) {
         return;
       }
-      _this.human.choiceSpot(_this.board, _this.currentPlayer);
       $("tr td").click(function() {
+        _this.human.choiceSpot(_this.board, _this.currentPlayer);
         _this.nextTurn();
+        _this.currentPlayer = _this.human.changePlayer();
       });
     },
 

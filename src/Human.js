@@ -18,7 +18,7 @@
       board.spots[chosenSpot] = currentPlayer;
     },
 
-    choiceSpot: function(currentPlayer) {
+    changePlayer: function(currentPlayer) {
       return currentPlayer == "X" ? "O" : "X";
     }
   };
