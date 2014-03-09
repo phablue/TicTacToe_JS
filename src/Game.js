@@ -27,11 +27,11 @@
     },
 
     play: function() {
+      this.newGame();
       var _this = this;
       if (_this.choicePlayer()) {
         return;
       }
-      _this.newGame();
       _this.human.choiceSpot(_this.board, _this.currentPlayer);
       $("tr td").click(function() {
         _this.nextTurn();
@@ -68,7 +68,7 @@
     newGame: function() {
       var _this = this;
       ui.toggleDisplayedButton(".btn-start", ".btn-new");
-      $(".btn-new").click(function() {
+      $(".btn-new").one("click", function() {
         _this.resetGame();
       });
     },
