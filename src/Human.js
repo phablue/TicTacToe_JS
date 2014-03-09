@@ -1,8 +1,6 @@
 (function() {
   var ui = window.UI;
   var Human = {
-    currentPlayer: "",
-
     choiceSpot: function(board, currentPlayer) {
       var chosenSpot;
       chosenSpot = event.target.id;
@@ -20,7 +18,7 @@
       board.spots[chosenSpot] = currentPlayer;
     },
 
-    changePlayer: function(currentPlayer) {
+    choiceSpot: function(currentPlayer) {
       return currentPlayer == "X" ? "O" : "X";
     }
   };

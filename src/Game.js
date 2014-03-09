@@ -15,9 +15,11 @@
       }
       else if(input == "X") {
         this.currentPlayer = "X";
+        ui.toggleDisplayedButton(".btn-start", ".btn-new");
       }
       else if(input == "O") {
         this.currentPlayer = "O";
+        ui.toggleDisplayedButton(".btn-start", ".btn-new");
       }
       else {
         ui.inputErrorMessage();
@@ -67,7 +69,6 @@
 
     newGame: function() {
       var _this = this;
-      ui.toggleDisplayedButton(".btn-start", ".btn-new");
       $(".btn-new").one("click", function() {
         _this.resetGame();
       });
