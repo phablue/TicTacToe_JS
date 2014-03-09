@@ -37,7 +37,7 @@
       $("tr td").click(function() {
         _this.human.choiceSpot(_this.board, _this.currentPlayer);
         _this.nextTurn();
-        _this.currentPlayer = _this.human.changePlayer();
+        _this.currentPlayer = _this.human.changePlayer(_this.currentPlayer);
       });
     },
 
