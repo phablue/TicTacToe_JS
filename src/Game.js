@@ -54,7 +54,7 @@
     },
 
     winner: function() {
-      return this.currentPlayer == "X" ? "Player1" : "Player 2";
+      return this.currentPlayer == "X" ? "Player 1" : "Player 2";
     },
 
     startGame: function() {

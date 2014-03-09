@@ -34,4 +34,19 @@ describe ("Test Game", function() {
       });
     });
   });
+  describe ("Return the player", function() {
+    var thePlayer;
+
+    it ("Player1 if current player is 'X'", function() {
+      Game.currentPlayer = "X"
+      thePlayer = Game.winner();
+      expect(thePlayer).toBe("Player 1");
+    });
+
+    it ("Player1 if current player is 'X'", function() {
+      Game.currentPlayer = "O"
+      thePlayer = Game.winner();
+      expect(thePlayer).toBe("Player 2");
+    });
+  });
 });
