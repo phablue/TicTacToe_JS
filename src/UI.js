@@ -22,6 +22,7 @@
 
     toggleDisplayedButton: function(hideClass, showClass) {
       $(hideClass).hide();
+      $(hideClass).unbind();
       $(showClass).show()
     },
 
