@@ -39,4 +39,33 @@ describe ("Test UI", function () {
       expect(chooesnPlayer).toEqual("X");
     });
   });
+
+  describe ("Test Displaing Button", function() {
+    var unbind;
+    beforeEach (function() {
+      unbind = spyOn($.fn, "unbind");
+      setFixtures(' <button type="button" class = "btn-start">Start Game</button> \
+                              <button type="button" class = "btn-new">New Game</button> \
+                              <button type="button" class = "btn-restart">Restart Game</button> \
+                              <tr> \
+                                <td id = "0">X</td> \
+                                <td id = "1">O</td> \
+                                <td id = "2">X</td> \
+                              </tr> ');
+    });
+
+    it ("Hides start Button and unbind events, Show new Button", function() {
+      UI.toggleDisplayedButton("#jasmine-fixtures .btn-start", "#jasmine-fixtures .btn-new");
+      expect($("#jasmine-fixtures .btn-start")).toBeHidden();
+      expect(unbind).toHaveBeenCalled();
+      expect($("#jasmine-fixtures .btn-start")).not.toHandle("click");
+      expect($("#jasmine-fixtures .btn-new")).toBeVisible();
+    });
+
+    it ("Hides restart and new Button", function() {
+      UI.hideButton("#jasmine-fixtures .btn-restart", "#jasmine-fixtures .btn-new");
+      expect($("#jasmine-fixtures .btn-new")).toBeHidden();
+      expect($("#jasmine-fixtures .btn-restart")).toBeHidden();
+    });
+  });
 });
