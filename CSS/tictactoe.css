@@ -21,7 +21,22 @@ body {
 	text-decoration: underline;
 }
 
+#Computer {
+	color: #3F3240;
+	float: center;
+	font-family: inherit;
+	font-size: 36px;
+	font-weight: 500;
+	font-style:oblique;
+	line-height: 1.1;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	padding: 2%;
+	text-align: center;
+}
+
 .Board {
+	position: relative;
 	color: black;
 	font-size: 20px; 
 	height: 390px;
