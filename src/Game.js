@@ -1,7 +1,6 @@
 (function() {
   var input;
   var gameboard = window.GameBoard;
-  var ui = window.UI;
   var Game = {
     currentPlayer: "X",
     board: gameboard,
@@ -10,16 +9,16 @@
 
     visualAfterChoice: function() {
       if ($(event.target).attr('class') == "btn btn-start") {
-        ui.toggleDisplayedButton(".btn-start", ".btn-new");
+        UI.toggleDisplayedButton(".btn-start", ".btn-new");
       }
       else {
-        ui.toggleDisplayedButton(".btn-restart", ".btn-new");
+        UI.toggleDisplayedButton(".btn-restart", ".btn-new");
       }
     },
 
     visualAfterGameOver: function() {
       $("tr td").unbind();
-      ui.toggleDisplayedButton(".btn-new", ".btn-restart");
+      UI.toggleDisplayedButton(".btn-new", ".btn-restart");
       this.restartGame();
     },
 
@@ -28,7 +27,7 @@
     },
 
     choicePlayer: function() {
-      var input = ui.askChoicePlayer();
+      var input = UI.askChoicePlayer();
       if (input === null || input === "") {
         return true;  
       }
@@ -41,7 +40,7 @@
         this.visualAfterChoice();
       }
       else {
-        ui.inputErrorMessage();
+        UI.inputErrorMessage();
         this.choicePlayer();
       }
       return false;
@@ -49,11 +48,11 @@
 
     nextTurn: function() {
       if(this.gamerules.gameWin(this.board)) {
-        ui.winMessage(this.winner());
+        UI.winMessage(this.winner());
         this.visualAfterGameOver();
       }
       else if(this.gamerules.gameTie(this.board)) {
-        ui.tieMessage();
+        UI.tieMessage();
         this.visualAfterGameOver();
       }
     },
@@ -74,7 +73,7 @@
 
     startGame: function() {
       var _this = this;
-      ui.hideButton(".btn-restart", ".btn-new");
+      UI.hideButton(".btn-restart", ".btn-new");
       $(".btn-start").click(function(e) {
         _this.play();
         e.stopPropagation();
