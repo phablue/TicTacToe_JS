@@ -63,10 +63,9 @@
         return;
       } 
       this.newGame();
+      _this.human.choiceSpot(_this.board, _this.currentPlayer);
       $("tr td").click(function(e) {
-        _this.human.choiceSpot(_this.board, _this.currentPlayer);
         _this.nextTurn();
-        _this.currentPlayer = _this.human.changePlayer(_this.currentPlayer);
         e.stopPropagation();
       });
     },

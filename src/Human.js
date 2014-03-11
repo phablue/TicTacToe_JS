@@ -1,15 +1,22 @@
 (function() {
   var Human = {
+    currentPlayer: "",
+
     choiceSpot: function(board, currentPlayer) {
+      this.currentPlayer = currentPlayer;
       var chosenSpot;
-      chosenSpot = event.target.id;
-      if ($("#" + chosenSpot).text() == "") {
-        this.markChosenSpot(board, chosenSpot, currentPlayer);
-      }
-      else {
-        UI.spotErrorMessage();
-        return;
-      }
+      var _this = this;
+      $("tr td").click(function(e) {
+        chosenSpot = e.target.id;
+        if ($("#" + chosenSpot).text() == "") {
+          _this.markChosenSpot(board, chosenSpot, _this.currentPlayer);
+          _this.changePlayer(_this.currentPlayer);
+        }
+        else {
+          UI.spotErrorMessage();
+          return;
+       }
+     });
     },
 
     markChosenSpot: function(board, chosenSpot, currentPlayer) {
@@ -18,7 +25,7 @@
     },
 
     changePlayer: function(currentPlayer) {
-      return currentPlayer == "X" ? "O" : "X";
+      this.currentPlayer = currentPlayer == "X" ? "O" : "X";
     }
   };
   window.Human = Human;
