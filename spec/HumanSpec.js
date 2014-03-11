@@ -8,12 +8,14 @@ describe ("Test Human", function() {
   describe ("Change a current player", function() {
     it ("To 'O', if a current player is 'X'", function() {
       currentPlayer = "X"
-      expect (Human.changePlayer(currentPlayer)).toBe("O");
+      Human.changePlayer(currentPlayer);
+      expect (Human.currentPlayer).toBe("O");
     });
 
     it ("To 'X', if a current player is 'O'", function() {
       currentPlayer = "O";
-      expect (Human.changePlayer(currentPlayer)).toBe("X");
+      Human.changePlayer(currentPlayer);
+      expect (Human.currentPlayer).toBe("X");
     });
   });
 
