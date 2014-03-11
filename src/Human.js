@@ -15,8 +15,8 @@
         else {
           UI.spotErrorMessage();
           return;
-       }
-     });
+        }
+      });
     },
 
     markChosenSpot: function(board, chosenSpot, currentPlayer) {
