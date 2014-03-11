@@ -1,4 +1,3 @@
 $(function(){
-  var game = window.Game;
-  game.startGame();
+  Game.startGame();
 });
