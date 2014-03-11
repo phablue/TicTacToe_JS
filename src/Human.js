@@ -16,6 +16,7 @@
           UI.spotErrorMessage();
           return;
         }
+        e.stopPropagation();
       });
     },
 
