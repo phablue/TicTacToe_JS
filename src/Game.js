@@ -55,10 +55,10 @@
 
     play: function() {
       var _this = this;
+      this.newGame();
       if (this.choicePlayer()) {
         return;
-      } 
-      this.newGame();
+      }
       Human.choiceSpot(GameBoard, _this.currentPlayer);
       $("tr td").click(function(e) {
         _this.nextTurn();
@@ -82,9 +82,12 @@
 
     newGame: function() {
       var _this = this;
+      var goback = null;
       $(".btn-new").click(function(e) {
+        $(".btn-new").unbind("click");
         _this.resetGame();
-        _this.choicePlayer()
+        $("tr td").unbind("click");
+        _this.play();
         e.stopPropagation();
       });
     },
