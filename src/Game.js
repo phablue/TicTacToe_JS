@@ -1,11 +1,7 @@
 (function() {
   var input;
-  var gameboard = window.GameBoard;
   var Game = {
     currentPlayer: "X",
-    board: gameboard,
-    gamerules: window.GameRules,
-    human: window.Human,
 
     visualAfterChoice: function() {
       if ($(event.target).attr('class') == "btn btn-start") {
@@ -47,11 +43,11 @@
     },
 
     nextTurn: function() {
-      if(this.gamerules.gameWin(this.board)) {
+      if(GameRules.gameWin(GameBoard)) {
         UI.winMessage(this.winner());
         this.visualAfterGameOver();
       }
-      else if(this.gamerules.gameTie(this.board)) {
+      else if(GameRules.gameTie(GameBoard)) {
         UI.tieMessage();
         this.visualAfterGameOver();
       }
@@ -63,7 +59,7 @@
         return;
       } 
       this.newGame();
-      _this.human.choiceSpot(_this.board, _this.currentPlayer);
+      Human.choiceSpot(GameBoard, _this.currentPlayer);
       $("tr td").click(function(e) {
         _this.nextTurn();
         e.stopPropagation();
@@ -81,7 +77,7 @@
 
     resetGame: function() {
       $("tr td").empty();
-      this.board.resetBoard();
+      GameBoard.resetBoard();
     },
 
     newGame: function() {
