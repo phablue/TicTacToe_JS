@@ -8,28 +8,37 @@
     gamerules: window.GameRules,
     human: window.Human,
 
+    visualAfterChoice: function() {
+      if ($(event.target).attr('class') == "btn btn-start") {
+        ui.toggleDisplayedButton(".btn-start", ".btn-new");
+      }
+      else {
+        ui.toggleDisplayedButton(".btn-restart", ".btn-new");
+      }
+    },
+
+    visualAfterGameOver: function() {
+      $("tr td").unbind();
+      ui.toggleDisplayedButton(".btn-new", ".btn-restart");
+      this.restartGame();
+    },
+
+    winner: function() {
+      return this.currentPlayer == "X" ? "Player 1" : "Player 2";
+    },
+
     choicePlayer: function() {
       var input = ui.askChoicePlayer();
       if (input === null || input === "") {
-        return true;
+        return true;  
       }
       else if(input == "X") {
         this.currentPlayer = "X";
-        if ($(event.target).attr('class') == "btn btn-start") {
-          ui.toggleDisplayedButton(".btn-start", ".btn-new");
-        }
-        else {
-          ui.toggleDisplayedButton(".btn-restart", ".btn-new");
-        }
+        this.visualAfterChoice();
       }
       else if(input == "O") {
         this.currentPlayer = "O";
-        if($(event.target).attr('class') == "btn .btn-start") {
-          ui.toggleDisplayedButton(".btn-start", ".btn-new");
-        }
-        else {
-          ui.toggleDisplayedButton(".btn-restart", ".btn-new");
-        }
+        this.visualAfterChoice();
       }
       else {
         ui.inputErrorMessage();
@@ -38,34 +47,23 @@
       return false;
     },
 
-    winner: function() {
-      return this.currentPlayer == "X" ? "Player 1" : "Player 2";
-    },
-
     nextTurn: function() {
       if(this.gamerules.gameWin(this.board)) {
         ui.winMessage(this.winner());
-        $("tr td").unbind();
-        ui.toggleDisplayedButton(".btn-new", ".btn-restart");
-        this.restartGame();
+        this.visualAfterGameOver();
       }
       else if(this.gamerules.gameTie(this.board)) {
         ui.tieMessage();
-        $("tr td").unbind();
-        ui.toggleDisplayedButton(".btn-new", ".btn-restart");
-        this.restartGame();
+        this.visualAfterGameOver();
       }
     },
 
     play: function() {
       var _this = this;
-      if (_this.choicePlayer()) {
+      if (this.choicePlayer()) {
         return;
-      }
-      if (_this.newGame()) {
-        $("tr td").unbind();
-        return;
-      }
+      } 
+      this.newGame();
       $("tr td").click(function() {
         _this.human.choiceSpot(_this.board, _this.currentPlayer);
         _this.nextTurn();
@@ -89,9 +87,10 @@
 
     newGame: function() {
       var _this = this;
-      $(".btn-new").click(function() {
+      $(".btn-new").click(function(e) {
         _this.resetGame();
-        return _this.choicePlayer();
+        _this.choicePlayer()
+        e.stopPropagation();
       });
     },
 
