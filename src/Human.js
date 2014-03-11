@@ -1,5 +1,4 @@
 (function() {
-  var ui = window.UI;
   var Human = {
     choiceSpot: function(board, currentPlayer) {
       var chosenSpot;
@@ -8,7 +7,7 @@
         this.markChosenSpot(board, chosenSpot, currentPlayer);
       }
       else {
-        ui.spotErrorMessage();
+        UI.spotErrorMessage();
         return;
       }
     },
