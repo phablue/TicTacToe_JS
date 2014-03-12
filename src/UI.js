@@ -24,7 +24,7 @@
       alert("You have to choose 'y' or 'n'.");
     },
 
-    askChoicePlayer: function() {
+    askFirstMove: function() {
       return prompt("Do you require the first move? (y/n)");
     },
 
