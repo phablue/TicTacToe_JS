@@ -23,7 +23,7 @@
       return currentPlayer == "X" ? "Player" : "Computer";
     },
 
-    choicePlayer: function() {
+    firstMove: function() {
       var input = UI.askChoicePlayer();
       if (input === null || input === "") {
         return true;  
