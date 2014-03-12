@@ -51,15 +51,13 @@
 
     humanPlay: function(e) {
       var _this = this;
-      $("#Computer").show(220, function() {
-        Human.choiceSpot(e, GameBoard, _this.user);
-        _this.nextTurn(_this.user);
-      });
+      Human.choiceSpot(e, GameBoard, _this.user);
+      _this.nextTurn(_this.user);
     },
 
     computerPlay: function() {
       var _this = this;
-      $("#Computer").show(220, function() {
+      $("#Computer").show(function() {
         Computer.chooseTheBestSpot(_this.computer);
         _this.nextTurn(_this.computer);
       });
@@ -73,8 +71,10 @@
         return;
       }
       else if (firstmove === "y") {
+        $("#Human").show();
         $("tr td").click(function(e) {
           _this.humanPlay(e);
+          UI.hideHumanMessage();
           if (GameRules.gameOver(GameBoard)) {
             return $("tr td").unbind("click");
           }
@@ -96,8 +96,8 @@
     startGame: function() {
       var _this = this;
       UI.hideButton(".btn-restart", ".btn-new");
-      UI.hideHumanMessage();
       UI.hideComputerMessage();
+      UI.hideHumanMessage();
       $(".btn-start").click(function(e) {
         _this.play();
         e.stopPropagation();
