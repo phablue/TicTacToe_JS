@@ -40,7 +40,7 @@ describe ("Test UI", function () {
 
     it ("Pops up a inputError Message", function() {
       UI.inputErrorMessage();
-      expect(alert).toHaveBeenCalledWith("You have to choose 'X' or 'O'.");
+      expect(alert).toHaveBeenCalledWith("You have to choose 'y' or 'n'.");
     });
   });
 
@@ -48,11 +48,11 @@ describe ("Test UI", function () {
     var prompt;
     var chooesnPlayer;
     it ("Pops up a message to ask about choosen player", function() {
-      prompt = spyOn(window, "prompt").and.returnValue("X");
-      chooesnPlayer = UI.askChoicePlayer();
-      UI.askChoicePlayer();
-      expect(prompt).toHaveBeenCalledWith("What player do you require? ('X' or 'O'):");
-      expect(chooesnPlayer).toEqual("X");
+      prompt = spyOn(window, "prompt").and.returnValue("y");
+      chooesnPlayer = UI.askFirstMove();
+      UI.askFirstMove();
+      expect(prompt).toHaveBeenCalledWith("Do you require the first move? (y/n)");
+      expect(chooesnPlayer).toEqual("y");
     });
   });
 
