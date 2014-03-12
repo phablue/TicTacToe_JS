@@ -51,8 +51,11 @@
 
     humanPlay: function(e) {
       var _this = this;
-      Human.choiceSpot(e, GameBoard, _this.user);
-      _this.nextTurn(_this.user);
+      $("#Human").show(function() {
+        Human.choiceSpot(e, GameBoard, _this.user);
+        _this.nextTurn(_this.user);
+        UI.hideHumanMessage();
+      });
     },
 
     computerPlay: function() {
@@ -63,32 +66,39 @@
       });
     },
 
-    play: function() {
+    introGame: function() {
       var _this = this;
       this.newGame();
       var firstmove = this.firstMove();
       if (firstmove === true) {
         return;
       }
-      else if (firstmove === "y") {
-        $("#Human").show();
-        $("tr td").click(function(e) {
+      this.play(firstmove);
+    },
+
+    play: function(firstmove) {
+      var _this = this;
+      if (firstmove === "y") {
+        $("tr td").on('click', function(e) {
           _this.humanPlay(e);
-          UI.hideHumanMessage();
           if (GameRules.gameOver(GameBoard)) {
             return $("tr td").unbind("click");
           }
           _this.computerPlay();
+          $("tr td").promise().done(function() {
+            _this.play(firstmove);
+          });
         });
       }
       else {
-        this.computerPlay(function() {
-          $("tr td").click(function(e) {
-            _this.humanPlay(e);
-            if (GameRules.gameOver(GameBoard)) {
-              return $("tr td").unbind("click");
-            }
-          });
+        this.computerPlay();
+        $("tr td").click(function(e) {
+          if (GameRules.gameOver(GameBoard)) {
+            return $("tr td").unbind("click");
+          }
+          UI.hideHumanMessage();
+          _this.humanPlay(e);
+          _this.computerPlay();
         });
       }
     },
@@ -99,7 +109,7 @@
       UI.hideComputerMessage();
       UI.hideHumanMessage();
       $(".btn-start").click(function(e) {
-        _this.play();
+        _this.introGame();
         e.stopPropagation();
       });
     },
@@ -115,7 +125,7 @@
         $(".btn-new").unbind("click");
         _this.resetGame();
         $("tr td").unbind("click");
-        _this.play();
+        _this.introGame();
         e.stopPropagation();
       });
     },
