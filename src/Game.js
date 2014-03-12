@@ -3,7 +3,6 @@
   var Game = {
     user: "X",
     computer: "O",
-    currentPlayer: "",
 
     visualAfterChoice: function() {
       if ($(event.target).attr('class') == "btn btn-start") {
@@ -31,11 +30,9 @@
         return true;  
       }
       else if(input == "X") {
-        this.currentPlayer = input;
         this.visualAfterChoice();
       }
       else if(input == "O") {
-        this.currentPlayer = input;
         this.visualAfterChoice();
       }
       else {
@@ -46,15 +43,17 @@
     },
 
     nextTurn: function(currentPlayer) {
-      console.log(currentPlayer);
       if(GameRules.gameWin(GameBoard)) {
         UI.winMessage(this.winner(currentPlayer));
         this.visualAfterGameOver();
+        return false;
       }
       else if(GameRules.gameTie(GameBoard)) {
         UI.tieMessage();
         this.visualAfterGameOver();
+        return false;
       }
+      return true;
     },
 
     play: function() {
@@ -63,23 +62,23 @@
       if (this.choicePlayer()) {
         return;
       }
-      Human.choiceSpot(GameBoard, _this.currentPlayer);
+      Human.choiceSpot(GameBoard, this.user);
       $("tr td").click(function(e) {
-        _this.nextTurn(_this.currentPlayer);
-        e.stopPropagation();
+        _this.nextTurn(_this.user);
+        $("tr td").unbind("click");
       });
-      // $("tr td").unbind("click");
-      // Computer.chooseTheBestSpot
+      // Computer.chooseTheBestSpot(_this.computer);
+      // _this.nextTurn(_this.computer);
     },
 
     startGame: function() {
       var _this = this;
-      UI.hideComputerMessage();
       UI.hideButton(".btn-restart", ".btn-new");
       $(".btn-start").click(function(e) {
         _this.play();
         e.stopPropagation();
       });
+      UI.hideComputerMessage();
     },
 
     resetGame: function() {
