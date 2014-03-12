@@ -42,7 +42,6 @@
       if(GameRules.gameWin(GameBoard)) {
         UI.winMessage(this.winner(currentPlayer));
         this.visualAfterGameOver();
-        return true;
       }
       else if(GameRules.gameTie(GameBoard)) {
         UI.tieMessage();
@@ -73,6 +72,9 @@
       else if (firstmove === "y") {
         $("tr td").click(function(e) {
           _this.humanPlay(e);
+          if (GameRules.gameOver(GameBoard)) {
+            return $("tr td").unbind("click");
+          }
           _this.computerPlay();
         });
       }
@@ -80,6 +82,9 @@
         this.computerPlay(function() {
           $("tr td").click(function(e) {
             _this.humanPlay(e);
+            if (GameRules.gameOver(GameBoard)) {
+              return $("tr td").unbind("click");
+            }
           });
         });
       }
