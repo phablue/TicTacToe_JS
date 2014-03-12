@@ -21,11 +21,11 @@
     },
 
     inputErrorMessage: function() {
-      alert("You have to choose 'X' or 'O'.");
+      alert("You have to choose 'y' or 'n'.");
     },
 
     askChoicePlayer: function() {
-      return prompt("What player do you require? ('X' or 'O'):");
+      return prompt("Do you require the first move? (y/n)");
     },
 
     toggleDisplayedButton: function(hideClass, showClass) {
