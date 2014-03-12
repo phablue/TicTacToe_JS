@@ -74,13 +74,11 @@
         $("tr td").click(function(e) {
           _this.humanPlay(e);
           _this.computerPlay();
-          console.log("y")
         });
       }
       else {
         this.computerPlay(function() {
           $("tr td").click(function(e) {
-            console.log("n click")
             _this.humanPlay(e);
           });
         });
@@ -104,7 +102,6 @@
 
     newGame: function() {
       var _this = this;
-      var goback = null;
       $(".btn-new").click(function(e) {
         $(".btn-new").unbind("click");
         _this.resetGame();
