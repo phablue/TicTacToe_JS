@@ -24,7 +24,7 @@
     },
 
     firstMove: function() {
-      var input = UI.askChoicePlayer();
+      var input = UI.askFirstMove();
       if (input === null || input === "") {
         return true;  
       }
@@ -34,7 +34,7 @@
       }
       else {
         UI.inputErrorMessage();
-        this.choicePlayer();
+        this.firstMove();
       }
     },
 

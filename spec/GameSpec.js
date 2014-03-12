@@ -61,19 +61,19 @@ describe ("Test Game", function() {
     var thePlayer;
 
     it ("Player1 if current player is 'X'", function() {
-      Game.currentPlayer = "X"
-      thePlayer = Game.winner();
-      expect(thePlayer).toBe("Player 1");
+      currentPlayer = "X"
+      thePlayer = Game.winner(currentPlayer);
+      expect(thePlayer).toBe("Player");
     });
 
     it ("Player1 if current player is 'X'", function() {
-      Game.currentPlayer = "O"
-      thePlayer = Game.winner();
-      expect(thePlayer).toBe("Player 2");
+      currentPlayer = "O"
+      thePlayer = Game.winner(currentPlayer);
+      expect(thePlayer).toBe("Computer");
     });
   });
 
-  describe ("Teste choicePlayer function", function() {
+  describe ("Teste firstMove function", function() {
     var input;
     var visualAfterChoice;
 
@@ -83,33 +83,31 @@ describe ("Test Game", function() {
     })
 
     it ("If input is null return true", function() {
-      var askChoicePlayer = spyOn(UI, "askChoicePlayer").and.returnValue(null);
-      input = askChoicePlayer;
-      expect(Game.choicePlayer()).toBeTruthy();
+      var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue(null);
+      input = askFirstMove;
+      expect(Game.firstMove()).toBeTruthy();
     })
 
     it ("If input is '' return true", function() {
-      var askChoicePlayer = spyOn(UI, "askChoicePlayer").and.returnValue("");
-      input = askChoicePlayer;
-      expect(Game.choicePlayer()).toBeTruthy();
+      var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue("");
+      input = askFirstMove;
+      expect(Game.firstMove()).toBeTruthy();
     })
 
-    it ("If input is 'X', will call visualAfterChoice() and will change current player", function() {
-      var askChoicePlayer = spyOn(UI, "askChoicePlayer").and.returnValue("X");
-      input = askChoicePlayer;
-      Game.choicePlayer();
-      expect(Game.currentPlayer).toBe("X");
+    it ("If input is 'y', will call visualAfterChoice() and will change current player", function() {
+      var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue("y");
+      input = askFirstMove;
+      Game.firstMove();
       expect(visualAfterChoice).toHaveBeenCalled();
-      expect(Game.choicePlayer()).toBeFalsy();
+      expect(Game.firstMove()).toBe("y");
     })
 
-    it ("If input is 'O', will call visualAfterChoice() and will change current player", function() {
-      var askChoicePlayer = spyOn(UI, "askChoicePlayer").and.returnValue("O");
-      input = askChoicePlayer;
-      Game.choicePlayer();
-      expect(Game.currentPlayer).toBe("O");
+    it ("If input is 'n', will call visualAfterChoice() and will change current player", function() {
+      var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue("n");
+      input = askFirstMove;
+      Game.firstMove();
       expect(visualAfterChoice).toHaveBeenCalled();
-      expect(Game.choicePlayer()).toBeFalsy();
+      expect(Game.firstMove()).toBe("n");
     })
   });
 });
