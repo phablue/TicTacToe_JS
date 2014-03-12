@@ -1,9 +1,5 @@
 (function() {
   var UI = {
-    showComputerMessage: function() {
-      $("#Computer").show();
-    },
-
     hideComputerMessage: function() {
       $("#Computer").hide();
     },
