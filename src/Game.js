@@ -42,6 +42,7 @@
       if(GameRules.gameWin(GameBoard)) {
         UI.winMessage(this.winner(currentPlayer));
         this.visualAfterGameOver();
+        return true;
       }
       else if(GameRules.gameTie(GameBoard)) {
         UI.tieMessage();
@@ -51,14 +52,15 @@
 
     humanPlay: function(e) {
       Human.choiceSpot(e, GameBoard, this.user);
-      if (this.nextTurn(this.user)) {
-
-      }
+      this.nextTurn(this.user);
     },
 
     computerPlay: function() {
-      Computer.chooseTheBestSpot(this.computer);
-      this.nextTurn(this.computer);
+      var _this = this;
+      $("#Computer").show(220, function() {
+        Computer.chooseTheBestSpot(_this.computer);
+        _this.nextTurn(_this.computer);
+      });
     },
 
     play: function() {
@@ -72,12 +74,15 @@
         $("tr td").click(function(e) {
           _this.humanPlay(e);
           _this.computerPlay();
+          console.log("y")
         });
       }
       else {
-        $("tr td").click(function(e) {
-          _this.computerPlay();
-          _this.humanPlay(e);
+        this.computerPlay(function() {
+          $("tr td").click(function(e) {
+            console.log("n click")
+            _this.humanPlay(e);
+          });
         });
       }
     },
@@ -85,11 +90,11 @@
     startGame: function() {
       var _this = this;
       UI.hideButton(".btn-restart", ".btn-new");
+      UI.hideComputerMessage();
       $(".btn-start").click(function(e) {
         _this.play();
         e.stopPropagation();
       });
-      UI.hideComputerMessage();
     },
 
     resetGame: function() {
