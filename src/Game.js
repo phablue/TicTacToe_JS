@@ -29,10 +29,7 @@
       if (input === null || input === "") {
         return true;  
       }
-      else if(input == "X") {
-        this.visualAfterChoice();
-      }
-      else if(input == "O") {
+      else if(input == "y" || input == "n") {
         this.visualAfterChoice();
       }
       else {
