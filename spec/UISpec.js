@@ -4,14 +4,20 @@ describe ("Test UI", function () {
       setFixtures(' <h1 id = "Computer">Please wait until computer choice..</h1> ');
     });
 
-    it ("Shows computer message", function() {
-        UI.showComputerMessage();
-        expect($("#jasmine-fixtures #Computer")).toBeVisible();
-    });
-
     it ("Hides computer message", function() {
         UI.hideComputerMessage();
         expect($("#jasmine-fixtures #Computer")).toBeHidden();
+    });
+  });
+
+  describe ("Test Human Message", function() {
+    beforeEach (function() {
+      setFixtures(' <h1 id = "Human">Please wait until computer choice..</h1> ');
+    });
+
+    it ("Hides computer message", function() {
+        UI.hideHumanMessage();
+        expect($("#jasmine-fixtures #Human")).toBeHidden();
     });
   });
 
