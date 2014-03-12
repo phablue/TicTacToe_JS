@@ -1,5 +1,13 @@
 (function() {
   var UI = {
+    showComputerMessage: function() {
+      $("#Computer").show();
+    },
+
+    hideComputerMessage: function() {
+      $("#Computer").hide();
+    },
+
     spotErrorMessage: function() {
       alert("That is not an available spot.\nPlease choose a different spot.");
     },
