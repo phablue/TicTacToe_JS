@@ -50,17 +50,14 @@
     },
 
     humanPlay: function(e) {
-      var _this = this;
-      $("#Human").show(function() {
-        Human.choiceSpot(e, GameBoard, _this.user);
-        _this.nextTurn(_this.user);
-        UI.hideHumanMessage();
-      });
+      Human.choiceSpot(e, GameBoard, this.user);
+      this.nextTurn(this.user);
+      e.stopPropagation();
     },
 
     computerPlay: function() {
       var _this = this;
-      $("#Computer").show(function() {
+      $("#Computer").show(200,function() {
         Computer.chooseTheBestSpot(_this.computer);
         _this.nextTurn(_this.computer);
       });
@@ -79,13 +76,14 @@
     play: function(firstmove) {
       var _this = this;
       if (firstmove === "y") {
-        $("tr td").on('click', function(e) {
+        UI.showHumanMessage();
+        $("tr td").click(function(e) {
           _this.humanPlay(e);
           if (GameRules.gameOver(GameBoard)) {
-            return $("tr td").unbind("click");
+            return $("tr td").unbind();
           }
-          _this.computerPlay();
-          $("tr td").promise().done(function() {
+          UI.hideHumanMessage();
+          _this.computerPlay(function() {
             _this.play(firstmove);
           });
         });

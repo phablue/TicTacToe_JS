@@ -4,6 +4,10 @@
       $("#Computer").hide();
     },
 
+    showHumanMessage: function() {
+      $("#Human").show();
+    },
+
     hideHumanMessage: function() {
       $("#Human").hide();
     },
