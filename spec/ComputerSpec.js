@@ -46,5 +46,11 @@ describe ("Test Computer", function() {
   });
 
   describe ("Test minimax", function() {
+    describe ("Computer chooses easy way for win", function() {
+      it ("In a row", function() {
+        GameBoard.spots = ["X", "X", 3, 4, "X", 6,"O", "O", 9];
+        expect(Computer.minimax("O")[1]).toBe(9);
+      });
+    });
   });
 });
