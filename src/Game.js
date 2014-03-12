@@ -72,7 +72,7 @@
         $("tr td").click(function(e) {
           _this.nextTurn(_this.user);
           return;
-        }
+        });
       }
     },
 
