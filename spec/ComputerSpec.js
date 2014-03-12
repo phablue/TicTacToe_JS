@@ -32,4 +32,19 @@ describe ("Test Computer", function() {
       expect (Computer.currentPlayer).toBe("X");
     });
   });
+
+  describe ("Test gets point", function() {
+    it ("Point < 0 if game win", function() {
+      GameBoard.spots = ["X", "O", "X", "X", "O", 6, 7, "O", 9];
+      expect(Computer.getPoint(6)).toBeLessThan(0);
+    });
+
+    it ("Point == 0 if game is tied", function() {
+      GameBoard.spots = ["O", "X", "X", "X", "O", "O", "O", "X", "X"];
+      expect(Computer.getPoint(9)).toBe(0);
+    });
+  });
+
+  describe ("Test minimax", function() {
+  });
 });
