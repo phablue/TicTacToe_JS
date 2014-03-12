@@ -50,8 +50,11 @@
     },
 
     humanPlay: function(e) {
-      Human.choiceSpot(e, GameBoard, this.user);
-      this.nextTurn(this.user);
+      var _this = this;
+      $("#Computer").show(220, function() {
+        Human.choiceSpot(e, GameBoard, _this.user);
+        _this.nextTurn(_this.user);
+      });
     },
 
     computerPlay: function() {
