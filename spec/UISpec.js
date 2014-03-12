@@ -1,4 +1,20 @@
 describe ("Test UI", function () {
+  describe ("Test Computer Message", function() {
+    beforeEach (function() {
+      setFixtures(' <h1 id = "Computer">Please wait until computer choice..</h1> ');
+    });
+
+    it ("Shows computer message", function() {
+        UI.showComputerMessage();
+        expect($("#jasmine-fixtures #Computer")).toBeVisible();
+    });
+
+    it ("Hides computer message", function() {
+        UI.hideComputerMessage();
+        expect($("#jasmine-fixtures #Computer")).toBeHidden();
+    });
+  });
+
   describe ("Test alert events", function() {
     var winner = "Player1";
     var alert;
