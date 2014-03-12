@@ -1,7 +1,9 @@
 (function() {
   var input;
   var Game = {
-    currentPlayer: "X",
+    user: "X",
+    computer: "O",
+    currentPlayer: "",
 
     visualAfterChoice: function() {
       if ($(event.target).attr('class') == "btn btn-start") {
@@ -15,11 +17,12 @@
     visualAfterGameOver: function() {
       $("tr td").unbind();
       UI.toggleDisplayedButton(".btn-new", ".btn-restart");
+      UI.hideComputerMessage();
       this.restartGame();
     },
 
-    winner: function() {
-      return this.currentPlayer == "X" ? "Player 1" : "Player 2";
+    winner: function(currentPlayer) {
+      return currentPlayer == "X" ? "Player" : "Computer";
     },
 
     choicePlayer: function() {
@@ -28,11 +31,11 @@
         return true;  
       }
       else if(input == "X") {
-        this.currentPlayer = "X";
+        this.currentPlayer = input;
         this.visualAfterChoice();
       }
       else if(input == "O") {
-        this.currentPlayer = "O";
+        this.currentPlayer = input;
         this.visualAfterChoice();
       }
       else {
@@ -42,9 +45,10 @@
       return false;
     },
 
-    nextTurn: function() {
+    nextTurn: function(currentPlayer) {
+      console.log(currentPlayer);
       if(GameRules.gameWin(GameBoard)) {
-        UI.winMessage(this.winner());
+        UI.winMessage(this.winner(currentPlayer));
         this.visualAfterGameOver();
       }
       else if(GameRules.gameTie(GameBoard)) {
@@ -61,13 +65,16 @@
       }
       Human.choiceSpot(GameBoard, _this.currentPlayer);
       $("tr td").click(function(e) {
-        _this.nextTurn();
+        _this.nextTurn(_this.currentPlayer);
         e.stopPropagation();
       });
+      // $("tr td").unbind("click");
+      // Computer.chooseTheBestSpot
     },
 
     startGame: function() {
       var _this = this;
+      UI.hideComputerMessage();
       UI.hideButton(".btn-restart", ".btn-new");
       $(".btn-start").click(function(e) {
         _this.play();
