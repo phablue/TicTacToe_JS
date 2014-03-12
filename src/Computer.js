@@ -2,7 +2,6 @@
   var Computer = {
     chooseTheBestSpot: function(currentPlayer) {
       var chosenSpot;
-      UI.showComputerMessage();
       chosenSpot = this.minimax(currentPlayer)[1];
       Human.markChosenSpot(GameBoard, chosenSpot-1, currentPlayer);
       UI.hideComputerMessage();
