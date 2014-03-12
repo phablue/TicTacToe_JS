@@ -5,7 +5,7 @@
     chooseTheBestSpot: function(board, currentPlayer) {
       var chosenSpot;
       chosenSpot = minimax(board, current_player)[1];
-      Human.markChosenSpot(choice, current_player);
+      Human.markChosenSpot(board, chosenSpot, currentPlayer);
     },
 
     minimax: function(board, currentPlayer, level) {
@@ -24,9 +24,9 @@
       }
       for (var i in availableSpots) {
         chosenSpot = availableSpots[i];
-        Human.markChosenSpot(board, chosenSpot, this.currentPlayer);
+        this.markChosenSpot(board, this.currentPlayer);
         point = -this.minimax(board, this.changePlayer(this.currentPlayer), level += 1)[0];
-        this.unmarkChosenSpot(board, chosenSpot);
+        this.markChosenSpot(board, chosenSpot);
         if (point > bestPoint) {
           bestPoint = point;
           bestSpot = availableSpots[i];
@@ -35,9 +35,8 @@
       return [bestPoint, bestSpot];
     },
 
-    unmarkChosenSpot: function(board, chosenSpot) {
-      $("#" + chosenSpot).empty();
-      board.spots[chosenSpot] = chosenSpot;
+    markChosenSpot: function(board, currentPlayer) {
+      board.spots[chosenSpot] = currentPlayer;
     },    
 
     getPoint: function(board, level) {
