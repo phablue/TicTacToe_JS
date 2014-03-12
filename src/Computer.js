@@ -2,33 +2,33 @@
   var Computer = {
     currentPlayer: "",
 
-    chooseTheBestSpot: function(board, currentPlayer) {
+    chooseTheBestSpot: function(currentPlayer) {
       var chosenSpot;
       UI.showComputerMessage();
-      chosenSpot = minimax(board, currentPlayer)[1];
-      Human.markChosenSpot(board, chosenSpot, currentPlayer);
+      chosenSpot = minimax(GameBoard, currentPlayer)[1];
+      Human.markChosenSpot(GameBoard, chosenSpot, currentPlayer);
       UI.hideComputerMessage();
     },
 
-    minimax: function(board, currentPlayer, level) {
+    minimax: function(currentPlayer, level) {
       this.currentPlayer = currentPlayer;
       var chosenSpot;
       var point = -1;
       var bestPoint = -1;
       var bestSpot = null;
-      var availableSpots = board.validSpots();
+      var availableSpots = GameBoard.validSpots();
 
       if (typeof(level) === "undefined") {
         level = 0;
       }
-      if (GameRules.gameOver(board)) {
-        return this.get_point(board, this.currentPlayer, level);
+      if (GameRules.gameOver(GameBoard)) {
+        return this.get_point(level);
       }
       for (var i in availableSpots) {
         chosenSpot = availableSpots[i];
-        this.markChosenSpot(board, this.currentPlayer);
-        point = -this.minimax(board, this.changePlayer(this.currentPlayer), level += 1)[0];
-        this.markChosenSpot(board, chosenSpot);
+        this.markChosenSpot(this.currentPlayer);
+        point = -this.minimax(this.changePlayer(this.currentPlayer), level += 1)[0];
+        this.markChosenSpot(chosenSpot);
         if (point > bestPoint) {
           bestPoint = point;
           bestSpot = availableSpots[i];
@@ -37,12 +37,12 @@
       return [bestPoint, bestSpot];
     },
 
-    markChosenSpot: function(board, currentPlayer) {
-      board.spots[chosenSpot] = currentPlayer;
+    markChosenSpot: function(currentPlayer) {
+      GameBoard.spots[chosenSpot] = currentPlayer;
     },    
 
-    getPoint: function(board, level) {
-      if (GameRules.gameWin(board)) {
+    getPoint: function(level) {
+      if (GameRules.gameWin(GameBoard)) {
         return (1.0 / -level)
       }
       return 0
