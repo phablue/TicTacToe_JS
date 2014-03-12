@@ -3,10 +3,11 @@
     currentPlayer: "",
 
     chooseTheBestSpot: function(currentPlayer) {
+      this.currentPlayer = currentPlayer;
       var chosenSpot;
       UI.showComputerMessage();
-      chosenSpot = minimax(GameBoard, currentPlayer)[1];
-      Human.markChosenSpot(GameBoard, chosenSpot, currentPlayer);
+      chosenSpot = minimax(GameBoard, this.currentPlayer)[1];
+      Human.markChosenSpot(GameBoard, chosenSpot, this.currentPlayer);
       UI.hideComputerMessage();
     },
 
@@ -28,7 +29,7 @@
         chosenSpot = availableSpots[i];
         this.markChosenSpot(chosenSpot, this.currentPlayer);
         point = -this.minimax(this.changePlayer(this.currentPlayer), level += 1)[0];
-        this.markChosenSpot(chosenSpot, currentPlayer);
+        this.markChosenSpot(chosenSpot, this.currentPlayer);
         if (point > bestPoint) {
           bestPoint = point;
           bestSpot = availableSpots[i];
@@ -49,7 +50,7 @@
     },
 
     changePlayer: function(currentPlayer) {
-      return currentPlayer == "X" ? "O" : "X";
+      this.currentPlayer = currentPlayer == "X" ? "O" : "X";
     }
   }
   window.Computer = Computer;
