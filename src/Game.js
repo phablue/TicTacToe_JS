@@ -42,14 +42,11 @@
       if(GameRules.gameWin(GameBoard)) {
         UI.winMessage(this.winner(currentPlayer));
         this.visualAfterGameOver();
-        return false;
       }
       else if(GameRules.gameTie(GameBoard)) {
         UI.tieMessage();
         this.visualAfterGameOver();
-        return false;
       }
-      return true;
     },
 
     play: function() {
