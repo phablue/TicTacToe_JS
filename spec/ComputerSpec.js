@@ -8,28 +8,26 @@ describe ("Test Computer", function() {
       currentPlayer = "X";
       chosenSpot = 3;
       Computer.markChosenSpot(chosenSpot, currentPlayer);
-      expect(GameBoard.spots[chosenSpot]).toBe("X");
+      expect(GameBoard.spots[chosenSpot-1]).toBe("X");
     });
 
     it ("Marks a currentPlayer 'O' in the board When chosen spot is 9", function() {
       currentPlayer = "O";
       chosenSpot = 9;
       Computer.markChosenSpot(chosenSpot, currentPlayer);
-      expect(GameBoard.spots[chosenSpot]).toBe("O");
+      expect(GameBoard.spots[chosenSpot-1]).toBe("O");
     });
   });
 
   describe ("Change a current player", function() {
     it ("To 'O', if a current player is 'X'", function() {
       currentPlayer = "X"
-      Computer.changePlayer(currentPlayer);
-      expect (Computer.currentPlayer).toBe("O");
+      expect (Computer.changePlayer(currentPlayer)).toBe("O");
     });
 
     it ("To 'X', if a current player is 'O'", function() {
       currentPlayer = "O";
-      Computer.changePlayer(currentPlayer);
-      expect (Computer.currentPlayer).toBe("X");
+      expect (Computer.changePlayer(currentPlayer)).toBe("X");
     });
   });
 
