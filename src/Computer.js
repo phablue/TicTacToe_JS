@@ -1,13 +1,11 @@
 (function() {
   var Computer = {
     chooseTheBestSpot: function(currentPlayer) {
-      console.log("hi")
       var chosenSpot;
       UI.showComputerMessage();
-      chosenSpot = this.minimax(GameBoard, currentPlayer)[1];
+      chosenSpot = this.minimax(currentPlayer)[1];
       Human.markChosenSpot(GameBoard, chosenSpot-1, currentPlayer);
       UI.hideComputerMessage();
-      console.log("hello")
     },
 
     minimax: function(currentPlayer, level) {

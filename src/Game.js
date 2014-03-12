@@ -49,22 +49,16 @@
       }
     },
 
-    humanPlay: function() {
-      var _this = this;
-      $("tr td").click(function(e) {
-        Human.choiceSpot(e, GameBoard, _this.user);
-        _this.nextTurn(_this.user);
-        console.log("human")
-        $("tr td").unbind("click", this.humanPlay);
-      });
-      console.log("human out")
+    humanPlay: function(e) {
+      Human.choiceSpot(e, GameBoard, this.user);
+      if (this.nextTurn(this.user)) {
+
+      }
     },
 
     computerPlay: function() {
       Computer.chooseTheBestSpot(this.computer);
       this.nextTurn(this.computer);
-      console.log("comp")
-      $("tr td").unbind("click", this.humanPlay);
     },
 
     play: function() {
@@ -75,20 +69,16 @@
         return;
       }
       else if (firstmove === "y") {
-        this.humanPlay(function() {
-          this.computerPlay();
+        $("tr td").click(function(e) {
+          _this.humanPlay(e);
+          _this.computerPlay();
         });
-        console.log("y")
       }
       else {
         $("tr td").click(function(e) {
-          console.log("n in")
           _this.computerPlay();
-          _this.humanPlay();
-          $("tr td").unbind("click");
-          _this.play();
+          _this.humanPlay(e);
         });
-        console.log("n out")
       }
     },
 
