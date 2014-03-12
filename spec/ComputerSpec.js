@@ -83,12 +83,10 @@ describe ("Test Computer", function() {
 
   describe ("Computer choose the best spot", function() {
     var hideComputerMessage;
-    var showComputerMessage;
     var currentPlayer = "O";
 
     beforeEach (function() {
       hideComputerMessage = spyOn(UI, "hideComputerMessage");
-      showComputerMessage = spyOn(UI, "showComputerMessage");
       GameBoard.spots = ["X", "O", "X", "O", 5, 6, "X", 8, 9];
       setFixtures(' <button type="button" class = "btn-start">Start Game</button> \
                     <button type="button" class = "btn-new">New Game</button> \
@@ -101,7 +99,6 @@ describe ("Test Computer", function() {
     it ("Call Computer Message function", function() {
       Computer.chooseTheBestSpot(currentPlayer);
       expect(hideComputerMessage).toHaveBeenCalled();
-      expect(showComputerMessage).toHaveBeenCalled();
     });
 
     it ("Marks the best spot", function() {
