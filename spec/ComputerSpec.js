@@ -44,11 +44,70 @@ describe ("Test Computer", function() {
   });
 
   describe ("Test minimax", function() {
+    var currentPlayer = "O";
+
     describe ("Computer chooses easy way for win", function() {
-      it ("In a row", function() {
+      it ("Choose spot 9 In a row", function() {
         GameBoard.spots = ["X", "X", 3, 4, "X", 6,"O", "O", 9];
-        expect(Computer.minimax("O")[1]).toBe(9);
+        expect(Computer.minimax(currentPlayer)[1]).toBe(9);
       });
+
+      it ("Choose spot 4 In a column", function() {
+        GameBoard.spots = ["O", 2, 3, 4, "X", 6, "O", "X", "X"];
+        expect(Computer.minimax(currentPlayer)[1]).toBe(4);
+      });
+
+      it ("Choose spot 7 In a column", function() {
+        GameBoard.spots = ["X", "X", "O", 4, "O", 6, 7, 8, "X"];
+        expect(Computer.minimax(currentPlayer)[1]).toBe(7);
+      });
+    });
+
+    describe ("Computer chooses to block a spot for win", function() {
+      it ("Choose spot 8 In a row", function() {
+        GameBoard.spots = ["X", "O", 3, "O", 5, 6, "X", 8, "X"];
+        expect(Computer.minimax(currentPlayer)[1]).toBe(8);
+      });
+
+      it ("Choose spot 4 In a column", function() {
+        GameBoard.spots = ["X", "O", 3, 4, 5, 6, "X", 8, 9];
+        expect(Computer.minimax(currentPlayer)[1]).toBe(4);
+      });
+
+      it ("Choose spot 5 In a column", function() {
+        GameBoard.spots = [ "X", "O", "X", "O", 5, 6, "X", 8, 9];
+        expect(Computer.minimax(currentPlayer)[1]).toBe(5);
+      });
+    });
+  });
+
+  describe ("Computer choose the best spot", function() {
+    var hideComputerMessage;
+    var showComputerMessage;
+    var currentPlayer = "O";
+
+    beforeEach (function() {
+      hideComputerMessage = spyOn(UI, "hideComputerMessage");
+      showComputerMessage = spyOn(UI, "showComputerMessage");
+      GameBoard.spots = ["X", "O", "X", "O", 5, 6, "X", 8, 9];
+      setFixtures(' <button type="button" class = "btn-start">Start Game</button> \
+                    <button type="button" class = "btn-new">New Game</button> \
+                    <button type="button" class = "btn-restart">Restart Game</button> \
+                    <tr> <td id = "0">X</td> <td id = "1">O</td> <td id = "2">X</td> </tr> \
+                    <tr> <td id = "3">O</td> <td id = "4"></td> <td id = "5"></td> </tr> \
+                    <tr> <td id = "6">X</td> <td id = "7"></td> <td id = "8"></td> </tr> ');
+    });
+
+    it ("Call Computer Message function", function() {
+      Computer.chooseTheBestSpot(currentPlayer);
+      expect(hideComputerMessage).toHaveBeenCalled();
+      expect(showComputerMessage).toHaveBeenCalled();
+    });
+
+    it ("Marks the best spot", function() {
+      expect(GameBoard.spots[4]).toBe(5);
+      Computer.chooseTheBestSpot(currentPlayer);
+      expect(GameBoard.spots[4]).toBe("O");
     });
   });
 });

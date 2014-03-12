@@ -4,8 +4,8 @@
       var chosenSpot;
       UI.hideComputerMessage();
       UI.showComputerMessage();
-      chosenSpot = minimax(GameBoard, currentPlayer)[1];
-      Human.markChosenSpot(GameBoard, chosenSpot, currentPlayer);
+      chosenSpot = this.minimax(GameBoard, currentPlayer)[1];
+      Human.markChosenSpot(GameBoard, chosenSpot-1, currentPlayer);
       UI.hideComputerMessage();
     },
 
