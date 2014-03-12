@@ -1,19 +1,16 @@
 (function() {
   var Human = {
-    choiceSpot: function(board, currentPlayer) {
+    choiceSpot: function(e, board, currentPlayer) {
       var chosenSpot;
       var _this = this;
-      $("tr td").click(function(e) {
-        chosenSpot = e.target.id;
-        if ($("#" + chosenSpot).text() == "") {
-          _this.markChosenSpot(board, chosenSpot, currentPlayer);
-        }
-        else {
-          UI.spotErrorMessage();
-          return;
-        }
-        e.stopPropagation();
-      });
+      chosenSpot = e.target.id;
+      if ($("#" + chosenSpot).text() == "") {
+        _this.markChosenSpot(board, chosenSpot, currentPlayer);
+      }
+      else {
+        UI.spotErrorMessage();
+        return;
+      }
     },
 
     markChosenSpot: function(board, chosenSpot, currentPlayer) {

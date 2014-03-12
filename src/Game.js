@@ -49,30 +49,46 @@
       }
     },
 
+    humanPlay: function() {
+      var _this = this;
+      $("tr td").click(function(e) {
+        Human.choiceSpot(e, GameBoard, _this.user);
+        _this.nextTurn(_this.user);
+        console.log("human")
+        $("tr td").unbind("click", this.humanPlay);
+      });
+      console.log("human out")
+    },
+
+    computerPlay: function() {
+      Computer.chooseTheBestSpot(this.computer);
+      this.nextTurn(this.computer);
+      console.log("comp")
+      $("tr td").unbind("click", this.humanPlay);
+    },
+
     play: function() {
       var _this = this;
       this.newGame();
       var firstmove = this.firstMove();
-      if (firstmove) {
+      if (firstmove === true) {
         return;
       }
-      else if (firstmove == "y") {
-      Human.choiceSpot(GameBoard, this.user);
-        $("tr td").click(function(e) {
-          _this.nextTurn(_this.user);
-          $("tr td").unbind("click");
+      else if (firstmove === "y") {
+        this.humanPlay(function() {
+          this.computerPlay();
         });
-        // Computer.chooseTheBestSpot(_this.computer);
-        // _this.nextTurn(_this.computer);
+        console.log("y")
       }
       else {
-        Computer.chooseTheBestSpot(this.computer);
-        this.nextTurn(this.computer);
-        Human.choiceSpot(GameBoard, this.user);
         $("tr td").click(function(e) {
-          _this.nextTurn(_this.user);
-          return;
+          console.log("n in")
+          _this.computerPlay();
+          _this.humanPlay();
+          $("tr td").unbind("click");
+          _this.play();
         });
+        console.log("n out")
       }
     },
 
