@@ -4,6 +4,10 @@
       $("#Computer").hide();
     },
 
+    hideHumanMessage: function() {
+      $("#Human").hide();
+    },
+
     spotErrorMessage: function() {
       alert("That is not an available spot.\nPlease choose a different spot.");
     },
