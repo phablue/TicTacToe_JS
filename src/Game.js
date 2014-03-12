@@ -16,7 +16,6 @@
     visualAfterGameOver: function() {
       $("tr td").unbind();
       UI.toggleDisplayedButton(".btn-new", ".btn-restart");
-      UI.hideComputerMessage();
       this.restartGame();
     },
 
