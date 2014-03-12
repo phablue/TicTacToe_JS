@@ -4,9 +4,10 @@
 
     chooseTheBestSpot: function(board, currentPlayer) {
       var chosenSpot;
-      UI.computerMessage();
-      chosenSpot = minimax(board, current_player)[1];
+      UI.showComputerMessage();
+      chosenSpot = minimax(board, currentPlayer)[1];
       Human.markChosenSpot(board, chosenSpot, currentPlayer);
+      UI.hideComputerMessage();
     },
 
     minimax: function(board, currentPlayer, level) {
