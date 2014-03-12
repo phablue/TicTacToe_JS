@@ -26,9 +26,9 @@
       }
       for (var i in availableSpots) {
         chosenSpot = availableSpots[i];
-        this.markChosenSpot(this.currentPlayer);
+        this.markChosenSpot(chosenSpot, this.currentPlayer);
         point = -this.minimax(this.changePlayer(this.currentPlayer), level += 1)[0];
-        this.markChosenSpot(chosenSpot);
+        this.markChosenSpot(chosenSpot, currentPlayer);
         if (point > bestPoint) {
           bestPoint = point;
           bestSpot = availableSpots[i];
@@ -37,7 +37,7 @@
       return [bestPoint, bestSpot];
     },
 
-    markChosenSpot: function(currentPlayer) {
+    markChosenSpot: function(chosenSpot, currentPlayer) {
       GameBoard.spots[chosenSpot] = currentPlayer;
     },    
 
@@ -53,4 +53,4 @@
     }
   }
   window.Computer = Computer;
-});
+})();
