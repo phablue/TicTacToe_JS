@@ -19,7 +19,7 @@
     markChosenSpot: function(board, chosenSpot, currentPlayer) {
       $("#" + chosenSpot).text(currentPlayer);
       board.spots[chosenSpot] = currentPlayer;
-    },
+    }
   };
   window.Human = Human;
 })();
