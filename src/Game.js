@@ -96,6 +96,7 @@
     startGame: function() {
       var _this = this;
       UI.hideButton(".btn-restart", ".btn-new");
+      UI.hideHumanMessage();
       UI.hideComputerMessage();
       $(".btn-start").click(function(e) {
         _this.play();
