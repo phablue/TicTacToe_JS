@@ -30,12 +30,12 @@
       }
       else if(input == "y" || input == "n") {
         this.visualAfterChoice();
+        return input;
       }
       else {
         UI.inputErrorMessage();
         this.choicePlayer();
       }
-      return false;
     },
 
     nextTurn: function(currentPlayer) {
@@ -52,16 +52,28 @@
     play: function() {
       var _this = this;
       this.newGame();
-      if (this.choicePlayer()) {
+      var firstmove = this.firstMove();
+      if (firstmove) {
         return;
       }
+      else if (firstmove == "y") {
       Human.choiceSpot(GameBoard, this.user);
-      $("tr td").click(function(e) {
-        _this.nextTurn(_this.user);
-        $("tr td").unbind("click");
-      });
-      // Computer.chooseTheBestSpot(_this.computer);
-      // _this.nextTurn(_this.computer);
+        $("tr td").click(function(e) {
+          _this.nextTurn(_this.user);
+          $("tr td").unbind("click");
+        });
+        // Computer.chooseTheBestSpot(_this.computer);
+        // _this.nextTurn(_this.computer);
+      }
+      else {
+        Computer.chooseTheBestSpot(this.computer);
+        this.nextTurn(this.computer);
+        Human.choiceSpot(GameBoard, this.user);
+        $("tr td").click(function(e) {
+          _this.nextTurn(_this.user);
+          return;
+        }
+      }
     },
 
     startGame: function() {
