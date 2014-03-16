@@ -52,21 +52,20 @@
       }
     },
 
-    humanPlay: function(callback, nextturn) {
+    humanPlay: function(callback) {
       $("tr td").click(function(e) {
         $("tr td").unbind("click");
         Human.choiceSpot(e, GameBoard, Game.user);
         UI.hideHumanMessage();
         Game.nextTurn(Game.user);
-        callback(nextturn);
+        callback();
       })
     },
 
-    computerPlay: function(callback, nextturn) {
+    computerPlay: function() {
       $("#Computer").show(200,function() {
         Computer.chooseTheBestSpot(Game.computer);
         Game.nextTurn(Game.computer);
-        callback(nextturn);
       });
     },
 
@@ -82,11 +81,11 @@
     play: function() {
       if (Game.firstmove === "y") {
         UI.showHumanMessage();
-        Game.humanPlay(Game.computerPlay, nextturn);
+        Game.humanPlay(Game.computerPlay);
       }
-      else (Game.firstmove === "y") {
-        Game.computerPlay(Game.humanPlay, nextturn);
-      }
+      // else (Game.firstmove === "y") {
+      //   Game.computerPlay(Game.humanPlay, nextturn);
+      // }
     },
 
     startGame: function() {
