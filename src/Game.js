@@ -20,6 +20,7 @@
       UI.hideComputerMessage();
       UI.hideHumanMessage();
       this.restartGame();
+      return true;
     },
 
     winner: function(currentPlayer) {
@@ -44,21 +45,24 @@
     nextTurn: function(currentPlayer) {
       if(GameRules.gameWin(GameBoard)) {
         UI.winMessage(this.winner(currentPlayer));
-        this.visualAfterGameOver();
+        return this.visualAfterGameOver();
       }
       else if(GameRules.gameTie(GameBoard)) {
         UI.tieMessage();
-        this.visualAfterGameOver();
+        return this.visualAfterGameOver();
       }
+      return false;
     },
 
     humanPlay: function(callback) {
+      UI.showHumanMessage();
       $("tr td").click(function(e) {
         if (Human.choiceSpot(e, GameBoard, Game.user)) {
           $("tr td").unbind("click");
           UI.hideHumanMessage();
-          Game.nextTurn(Game.user);
-          callback(Game.play);
+          if (Game.nextTurn(Game.user) === false) {
+            callback(Game.play);
+          }
         }
         else {
           return;
@@ -69,8 +73,9 @@
     computerPlay: function(callback) {
       $("#Computer").show(200,function() {
         Computer.chooseTheBestSpot(Game.computer);
-        Game.nextTurn(Game.computer);
-        callback(Game.play);
+        if (Game.nextTurn(Game.computer) === false) {
+          callback(Game.play);
+        }
       });
     },
 
@@ -80,15 +85,15 @@
       if (this.firstmove === true) {
         return;
       }
+      console.log(this.firstmove)
       this.play();
     },
 
     play: function() {
       if (Game.firstmove === "y") {
-        UI.showHumanMessage();
         Game.humanPlay(Game.computerPlay);
       }
-      else {
+      else if (Game.firstmove === "n") {
         Game.computerPlay(Game.humanPlay);
       }
     },
