@@ -52,23 +52,20 @@
       }
     },
 
-    humanPlay: function(e, callback) {
-      Human.choiceSpot(e, GameBoard, this.user);
-      UI.hideHumanMessage();
-      this.nextTurn(this.user);
-      $("tr td").unbind("click", Game.humanPlayHandler);
-      callback(this.play);
+    humanPlay: function(callback) {
+      $("tr td").click(function(e) {
+        $("tr td").unbind("click");
+        Human.choiceSpot(e, GameBoard, Game.user);
+        UI.hideHumanMessage();
+        Game.nextTurn(Game.user);
+        callback();
+      })
     },
 
-    humanPlayHandler: function() {
-      Game.humanPlay(event, Game.computerPlay);
-    },
-
-    computerPlay: function(callback) {
+    computerPlay: function() {
       $("#Computer").show(200,function() {
         Computer.chooseTheBestSpot(Game.computer);
-        Game.nextTurn(Game.computer);        
-        callback();
+        Game.nextTurn(Game.computer);
       });
     },
 
@@ -84,7 +81,7 @@
     play: function() {
       if (Game.firstmove === "y") {
         UI.showHumanMessage();
-        $("tr td").bind("click", Game.humanPlayHandler);
+        Game.humanPlay(Game.computerPlay);
       }
     },
 
