@@ -1,14 +1,12 @@
 (function() {
   var Computer = {
     chooseTheBestSpot: function(currentPlayer) {
-      var chosenSpot;
-      chosenSpot = this.minimax(currentPlayer)[1];
+      var chosenSpot = this.minimax(currentPlayer)[1];
       Human.markChosenSpot(GameBoard, chosenSpot-1, currentPlayer);
       UI.hideComputerMessage();
     },
 
     minimax: function(currentPlayer, level) {
-      var chosenSpot;
       var point = -1;
       var bestPoint = -1;
       var bestSpot = null;
@@ -20,7 +18,7 @@
         return [this.getPoint(level), null];
       }
       for (var spot in availableSpots) {
-        chosenSpot = availableSpots[spot];
+        var chosenSpot = availableSpots[spot];
         this.markChosenSpot(chosenSpot, currentPlayer);
         point = -(this.minimax(this.changePlayer(currentPlayer), level += 1)[0]);
         this.markChosenSpot(chosenSpot, chosenSpot);
