@@ -99,7 +99,7 @@ describe ("Test Game", function() {
       input = askFirstMove;
       Game.firstMove();
       expect(visualAfterChoice).toHaveBeenCalled();
-      expect(Game.firstMove()).toBe("y");
+      expect(Game.goFirst).toBe("y");
     })
 
     it ("If input is 'n', will call visualAfterChoice() and will change current player", function() {
@@ -107,7 +107,7 @@ describe ("Test Game", function() {
       input = askFirstMove;
       Game.firstMove();
       expect(visualAfterChoice).toHaveBeenCalled();
-      expect(Game.firstMove()).toBe("n");
+      expect(Game.goFirst).toBe("n");
     })
   });
 });
