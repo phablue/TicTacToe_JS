@@ -2,14 +2,13 @@
   var Human = {
     choiceSpot: function(e, board, currentPlayer) {
       var chosenSpot;
-      var _this = this;
       chosenSpot = e.target.id;
       if ($("#" + chosenSpot).text() == "") {
-        _this.markChosenSpot(board, chosenSpot, currentPlayer);
+        this.markChosenSpot(board, chosenSpot, currentPlayer);
       }
       else {
         UI.spotErrorMessage();
-        return;
+        this.choiceSpot(e, board, currentPlayer);
       }
     },
 
