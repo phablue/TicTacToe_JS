@@ -30,7 +30,7 @@
     firstMove: function() {
       var input = UI.askFirstMove();
       if (input === null || input === "") {
-        return true;  
+        return true;
       }
       else if(input == "y" || input == "n") {
         this.visualAfterChoice();

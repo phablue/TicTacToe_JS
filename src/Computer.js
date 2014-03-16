@@ -32,7 +32,7 @@
 
     markChosenSpot: function(chosenSpot, currentPlayer) {
       GameBoard.spots[chosenSpot-1] = currentPlayer;
-    },    
+    },
 
     getPoint: function(level) {
       if (GameRules.gameWin(GameBoard)) {
