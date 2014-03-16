@@ -3,7 +3,7 @@
   var Game = {
     user: "X",
     computer: "O",
-    firstmove: null,
+    goFirst: null,
 
     visualAfterChoice: function() {
       if ($(event.target).attr('class') == "btn btn-start") {
@@ -34,7 +34,7 @@
       }
       else if(input == "y" || input == "n") {
         this.visualAfterChoice();
-        return input;
+        this.goFirst = input;
       }
       else {
         UI.inputErrorMessage();
@@ -80,20 +80,19 @@
     },
 
     introGame: function() {
-      this.firstmove = this.firstMove();
+      this.firstMove();
       this.newGame();
-      if (this.firstmove === true) {
+      if (this.goFirst === true) {
         return;
       }
-      console.log(this.firstmove)
       this.play();
     },
 
     play: function() {
-      if (Game.firstmove === "y") {
+      if (Game.goFirst === "y") {
         Game.humanPlay(Game.computerPlay);
       }
-      else if (Game.firstmove === "n") {
+      else if (Game.goFirst === "n") {
         Game.computerPlay(Game.humanPlay);
       }
     },
