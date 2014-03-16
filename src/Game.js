@@ -54,18 +54,23 @@
 
     humanPlay: function(callback) {
       $("tr td").click(function(e) {
-        $("tr td").unbind("click");
-        Human.choiceSpot(e, GameBoard, Game.user);
-        UI.hideHumanMessage();
-        Game.nextTurn(Game.user);
-        callback();
+        if (Human.choiceSpot(e, GameBoard, Game.user)) {
+          $("tr td").unbind("click");
+          UI.hideHumanMessage();
+          Game.nextTurn(Game.user);
+          callback(Game.play);
+        }
+        else {
+          return;
+        }
       })
     },
 
-    computerPlay: function() {
+    computerPlay: function(callback) {
       $("#Computer").show(200,function() {
         Computer.chooseTheBestSpot(Game.computer);
         Game.nextTurn(Game.computer);
+        callback(Game.play);
       });
     },
 
@@ -83,18 +88,17 @@
         UI.showHumanMessage();
         Game.humanPlay(Game.computerPlay);
       }
-      // else (Game.firstmove === "y") {
-      //   Game.computerPlay(Game.humanPlay, nextturn);
-      // }
+      else {
+        Game.computerPlay(Game.humanPlay);
+      }
     },
 
     startGame: function() {
-      var _this = this;
       UI.hideButton(".btn-restart", ".btn-new");
       UI.hideComputerMessage();
       UI.hideHumanMessage();
       $(".btn-start").click(function(e) {
-        _this.introGame();
+        Game.introGame();
         e.stopPropagation();
       });
     },
@@ -105,21 +109,19 @@
     },
 
     newGame: function() {
-      var _this = this;
       var newgame;
       $(".btn-new").click(function(e) {
         $(".btn-new").unbind("click");
-        _this.resetGame();
+        Game.resetGame();
         $("tr td").unbind("click");
-        _this.introGame();
+        Game.introGame();
       });
     },
 
     restartGame: function() {
-      var _this = this;
       $(".btn-restart").click(function(e) {
-        _this.resetGame();
-        _this.introGame();
+        Game.resetGame();
+        Game.introGame();
         e.stopPropagation();
       });
     }

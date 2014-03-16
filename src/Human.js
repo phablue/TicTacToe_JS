@@ -4,10 +4,11 @@
       var chosenSpot = e.target.id;
       if ($("#" + chosenSpot).text() == "") {
         this.markChosenSpot(board, chosenSpot, currentPlayer);
+        return true;
       }
       else {
         UI.spotErrorMessage();
-        this.choiceSpot(e, board, currentPlayer);
+        return false;
       }
     },
 
