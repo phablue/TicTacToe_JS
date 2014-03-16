@@ -3,6 +3,7 @@
   var Game = {
     user: "X",
     computer: "O",
+    firstmove: null,
 
     visualAfterChoice: function() {
       if ($(event.target).attr('class') == "btn btn-start") {
@@ -16,6 +17,8 @@
     visualAfterGameOver: function() {
       $("tr td").unbind();
       UI.toggleDisplayedButton(".btn-new", ".btn-restart");
+      UI.hideComputerMessage();
+      UI.hideHumanMessage();
       this.restartGame();
     },
 
@@ -49,55 +52,39 @@
       }
     },
 
-    humanPlay: function(e) {
+    humanPlay: function(e, callback) {
       Human.choiceSpot(e, GameBoard, this.user);
+      UI.hideHumanMessage();
       this.nextTurn(this.user);
-      e.stopPropagation();
+      $("tr td").unbind("click", Game.humanPlayHandler);
+      callback(this.play);
     },
 
-    computerPlay: function() {
-      var _this = this;
+    humanPlayHandler: function() {
+      Game.humanPlay(event, Game.computerPlay);
+    },
+
+    computerPlay: function(callback) {
       $("#Computer").show(200,function() {
-        Computer.chooseTheBestSpot(_this.computer);
-        _this.nextTurn(_this.computer);
+        Computer.chooseTheBestSpot(Game.computer);
+        Game.nextTurn(Game.computer);        
+        callback();
       });
     },
 
     introGame: function() {
-      var _this = this;
+      this.firstmove = this.firstMove();
       this.newGame();
-      var firstmove = this.firstMove();
-      if (firstmove === true) {
+      if (this.firstmove === true) {
         return;
       }
-      this.play(firstmove);
+      this.play();
     },
 
-    play: function(firstmove) {
-      var _this = this;
-      if (firstmove === "y") {
+    play: function() {
+      if (Game.firstmove === "y") {
         UI.showHumanMessage();
-        $("tr td").click(function(e) {
-          _this.humanPlay(e);
-          if (GameRules.gameOver(GameBoard)) {
-            return $("tr td").unbind();
-          }
-          UI.hideHumanMessage();
-          _this.computerPlay(function() {
-            _this.play(firstmove);
-          });
-        });
-      }
-      else {
-        this.computerPlay();
-        $("tr td").click(function(e) {
-          if (GameRules.gameOver(GameBoard)) {
-            return $("tr td").unbind("click");
-          }
-          UI.hideHumanMessage();
-          _this.humanPlay(e);
-          _this.computerPlay();
-        });
+        $("tr td").bind("click", Game.humanPlayHandler);
       }
     },
 
@@ -119,12 +106,12 @@
 
     newGame: function() {
       var _this = this;
+      var newgame;
       $(".btn-new").click(function(e) {
         $(".btn-new").unbind("click");
         _this.resetGame();
         $("tr td").unbind("click");
         _this.introGame();
-        e.stopPropagation();
       });
     },
 
@@ -132,7 +119,7 @@
       var _this = this;
       $(".btn-restart").click(function(e) {
         _this.resetGame();
-        _this.play();
+        _this.introGame();
         e.stopPropagation();
       });
     }
