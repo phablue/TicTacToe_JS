@@ -1,8 +1,7 @@
 (function() {
   var Human = {
     choiceSpot: function(e, board, currentPlayer) {
-      var chosenSpot;
-      chosenSpot = e.target.id;
+      var chosenSpot = e.target.id;
       if ($("#" + chosenSpot).text() == "") {
         this.markChosenSpot(board, chosenSpot, currentPlayer);
       }
