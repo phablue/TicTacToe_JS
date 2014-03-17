@@ -110,4 +110,62 @@ describe ("Test Game", function() {
       });
     });
   });
+
+  describe ("Test humanPlay function", function() {
+    var showHumanMessage;
+    var hideHumanMessage;
+    var click;
+
+    beforeEach(function() {
+      GameBoard.spots = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      showHumanMessage = spyOn(UI, "showHumanMessage");
+      hideHumanMessage = spyOn(UI, "hideHumanMessage");
+      click = spyOnEvent('tr td', 'click');
+      setFixtures(' <h1 id = "Human">Click a spot you want.</h1> \
+                    <button type="button" class = "btn-start">Start Game</button> \
+                    <button type="button" class = "btn-new">New Game</button> \
+                    <button type="button" class = "btn-restart">Restart Game</button> \
+                    <tr> \
+                      <td id = "0"></td> \
+                      <td id = "1">X</td> \
+                      <td id = "2"></td> \
+                    </tr> ');
+    });
+
+    it ("Shows message for human player after humanPlay running", function() {
+      Game.humanPlay(Game.computerPlay);
+      expect(showHumanMessage).toHaveBeenCalled();
+      expect($("#jasmine-fixtures #Human")).toBeVisible();
+    });
+
+    it ("After human choice a spot cant click", function() {
+      Game.humanPlay(Game.computerPlay);
+      $("#jasmine-fixtures #0").click();
+      expect(click).not.toHaveBeenTriggered()
+    })
+  })
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
