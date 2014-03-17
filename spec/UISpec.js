@@ -21,7 +21,7 @@ describe ("Test UI", function () {
     });
 
     it ("Shows human message", function() {
-        UI.hideHumanMessage();
+        UI.showHumanMessage();
         expect($("#jasmine-fixtures #Human")).toBeVisible();
     });
   });
