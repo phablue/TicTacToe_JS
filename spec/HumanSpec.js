@@ -5,6 +5,7 @@ describe ("Test Human", function() {
   describe("Sets value of selected elements", function() {
     beforeEach(function() {
       GameBoard.spots = [1, "X", 3];
+      e = jQuery.Event("click");
       setFixtures(' <table> <tr> \
                       <td id = "0"></td> \
                       <td id = "1">X</td> \
@@ -15,8 +16,8 @@ describe ("Test Human", function() {
     it ("td #0 and board[0] value changes to 'X' and current player changes to 'O'", function() {
       currentPlayer = "X";
       expect ($("tr td")).toBeEmpty();
-      e = $("#0").click();
-      Human.choiceSpot(e, GameBoard, _this.currentPlayer);
+      jQuery("#0").trigger(e);
+      Human.choiceSpot(e, GameBoard, currentPlayer);
       expect ($("#0")).toHaveText("X");
       expect (GameBoard.spots[0]).toBe("X");
     });
@@ -24,8 +25,8 @@ describe ("Test Human", function() {
     it ("td #2 and board[2] value changes to 'O' and current player changes to 'X'", function() {
       currentPlayer = "O";
       expect ($("#2")).toBeEmpty();
-      e = $('#2').trigger("click");
-      Human.choiceSpot(e, GameBoard, _this.currentPlayer);
+      jQuery("#2").trigger(e);
+      Human.choiceSpot(e, GameBoard, currentPlayer);
       expect ($("#2")).toHaveText("O");
       expect (GameBoard.spots[2]).toBe("O");
     });
@@ -33,8 +34,8 @@ describe ("Test Human", function() {
     it ("Can't set of a choosen spot", function() {
       var errorMessage = spyOn(UI, "spotErrorMessage");
       currentPlayer = "O";
-      e = $('#1').trigger("click");
-      Human.choiceSpot(e, GameBoard, _this.currentPlayer);
+      jQuery("#1").trigger(e);
+      Human.choiceSpot(e, GameBoard, currentPlayer);
       expect (errorMessage).toHaveBeenCalled();
     });
   });
