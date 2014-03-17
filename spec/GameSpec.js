@@ -190,7 +190,35 @@ describe ("Test Game", function() {
     })
   });
 
-  describe("Test play function", function() {
+  describe ("Test introGame function", function() {
+    var firstMove;
+    var newGame;
+    var play;
+
+    it ("Call other function", function() {
+      firstMove = spyOn(Game, "firstMove");
+      newGame = spyOn(Game, "newGame");
+      Game.introGame();
+      expect(firstMove).toHaveBeenCalled();
+      expect(newGame).toHaveBeenCalled();
+    });
+
+    it ("if goFirst is true return", function() {
+      play = spyOn(Game, "play");
+      firstMove = spyOn(Game, "firstMove").and.returnValue(true);
+      Game.introGame();
+      expect(play).not.toHaveBeenCalled();
+    });
+
+    it ("if goFirst is not true call play", function() {
+      firstMove = spyOn(Game, "firstMove").and.returnValue("");
+      play = spyOn(Game, "play");
+      Game.introGame();
+      expect(play).toHaveBeenCalled();
+    });
+  });
+
+  describe ("Test play function", function() {
     var humanPlay;
     var computerPlay;
 
@@ -199,20 +227,20 @@ describe ("Test Game", function() {
       computerPlay = spyOn(Game, "computerPlay");
     });
 
-    it("call humanplay if goFirst is 'y'", function() {
+    it ("call humanplay if goFirst is 'y'", function() {
       Game.goFirst = "y";
       Game.play();
       expect(humanPlay).toHaveBeenCalled();
     });
 
-    it("call computerPlay if goFirst is 'n'", function() {
+    it ("call computerPlay if goFirst is 'n'", function() {
       Game.goFirst = "n";
       Game.play();
       expect(computerPlay).toHaveBeenCalled();
     });
   });
 
-  describe("Test startGame function", function() {
+  describe ("Test startGame function", function() {
     var hideButton;
     var hideComputerMessage;
     var hideHumanMessage;
@@ -226,7 +254,7 @@ describe ("Test Game", function() {
       setFixtures(' <button type="button" class = "btn-start">Start Game</button> ');
     });
 
-    it("after start button click call introGame", function() {
+    it ("after start button click call introGame", function() {
       Game.startGame();
       expect(hideComputerMessage).toHaveBeenCalled();
       expect(hideHumanMessage).toHaveBeenCalled();
@@ -235,8 +263,8 @@ describe ("Test Game", function() {
     });
   });
 
-  describe("Test resetGame function", function() {
-    it("reset Gameabord and tr td", function() {
+  describe ("Test resetGame function", function() {
+    it ("reset Gameabord and tr td", function() {
       GameBoard.spots = ["O", "X", 3, 4, 5, 6, 7, 8, 9];
       setFixtures(' <table> <tr> <td id = "0">O</td><td id = "1">X</td><td id = "2"></td></tr> </table>');
       Game.resetGame();
@@ -244,9 +272,37 @@ describe ("Test Game", function() {
       expect(GameBoard.spots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
   });
+
+  describe ("Test newGame function", function() {
+    it ("when new button click call resetGame() and introGame", function() {
+      var introGame = spyOn(Game, "introGame");
+      var resetGame = spyOn(Game, "resetGame");
+      setFixtures(' <button type="button" class = "btn-new">New Game</button> ');
+      Game.newGame();
+      $(".btn-new").click();
+      expect(introGame).toHaveBeenCalled();
+      expect(resetGame).toHaveBeenCalled();
+    });
+
+    it ("unbind new button and td after clicked new button", function() {
+      var buttonclick = spyOnEvent('.btn-new', 'click');
+      var spotclick = spyOnEvent('tr td', 'click');
+      Game.newGame();
+      $(".btn-new").click();
+      expect(buttonclick).not.toHaveBeenTriggered();
+      expect(spotclick).not.toHaveBeenTriggered();
+    });
+  });
+
+  describe ("Test restartGame function", function() {
+    it ("when restart button click call resetGame() and introGame", function() {
+      var introGame = spyOn(Game, "introGame");
+      var resetGame = spyOn(Game, "resetGame");
+      setFixtures(' <button type="button" class = "btn-restart">Restart Game</button> ');
+      Game.restartGame();
+      $(".btn-restart").click();
+      expect(introGame).toHaveBeenCalled();
+      expect(resetGame).toHaveBeenCalled();
+    });
+  });
 });
-
-
-
-
-

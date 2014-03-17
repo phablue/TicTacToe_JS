@@ -80,9 +80,8 @@
     },
 
     introGame: function() {
-      this.firstMove();
       this.newGame();
-      if (this.goFirst === true) {
+      if (this.firstMove() === true) {
         return;
       }
       this.play();
@@ -113,7 +112,6 @@
     },
 
     newGame: function() {
-      var newgame;
       $(".btn-new").click(function(e) {
         $(".btn-new").unbind("click");
         Game.resetGame();
