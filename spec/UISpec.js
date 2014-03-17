@@ -1,7 +1,7 @@
 describe ("Test UI", function () {
   describe ("Test Computer Message", function() {
     beforeEach (function() {
-      setFixtures(' <h1 id = "Computer">Please wait until computer choice..</h1> ');
+      setFixtures(' <h1 id = "Computer">Please wait until computer choice..</h1>');
     });
 
     it ("Hides computer message", function() {
@@ -12,12 +12,17 @@ describe ("Test UI", function () {
 
   describe ("Test Human Message", function() {
     beforeEach (function() {
-      setFixtures(' <h1 id = "Human">Please wait until computer choice..</h1> ');
+      setFixtures(' <h1 id = "Human">Click a spot you want.</h1> ');
     });
 
-    it ("Hides computer message", function() {
+    it ("Hides human message", function() {
         UI.hideHumanMessage();
         expect($("#jasmine-fixtures #Human")).toBeHidden();
+    });
+
+    it ("Shows human message", function() {
+        UI.hideHumanMessage();
+        expect($("#jasmine-fixtures #Human")).toBeVisible();
     });
   });
 
@@ -67,13 +72,13 @@ describe ("Test UI", function () {
     beforeEach (function() {
       unbind = spyOn($.fn, "unbind");
       setFixtures(' <button type="button" class = "btn-start">Start Game</button> \
-                              <button type="button" class = "btn-new">New Game</button> \
-                              <button type="button" class = "btn-restart">Restart Game</button> \
-                              <tr> \
-                                <td id = "0">X</td> \
-                                <td id = "1">O</td> \
-                                <td id = "2">X</td> \
-                              </tr> ');
+                    <button type="button" class = "btn-new">New Game</button> \
+                    <button type="button" class = "btn-restart">Restart Game</button> \
+                    <tr> \
+                      <td id = "0">X</td> \
+                      <td id = "1">O</td> \
+                      <td id = "2">X</td> \
+                    </tr> ');
     });
 
     it ("Hides start Button and unbind events, Show new Button", function() {
