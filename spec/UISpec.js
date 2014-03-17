@@ -6,7 +6,7 @@ describe ("Test UI", function () {
 
     it ("Hides computer message", function() {
         UI.hideComputerMessage();
-        expect($("#jasmine-fixtures #Computer")).toBeHidden();
+        expect($("#Computer")).toBeHidden();
     });
   });
 
@@ -17,12 +17,12 @@ describe ("Test UI", function () {
 
     it ("Hides human message", function() {
         UI.hideHumanMessage();
-        expect($("#jasmine-fixtures #Human")).toBeHidden();
+        expect($("#Human")).toBeHidden();
     });
 
     it ("Shows human message", function() {
         UI.showHumanMessage();
-        expect($("#jasmine-fixtures #Human")).toBeVisible();
+        expect($("#Human")).toBeVisible();
     });
   });
 
@@ -73,26 +73,21 @@ describe ("Test UI", function () {
       unbind = spyOn($.fn, "unbind");
       setFixtures(' <button type="button" class = "btn-start">Start Game</button> \
                     <button type="button" class = "btn-new">New Game</button> \
-                    <button type="button" class = "btn-restart">Restart Game</button> \
-                    <tr> \
-                      <td id = "0">X</td> \
-                      <td id = "1">O</td> \
-                      <td id = "2">X</td> \
-                    </tr> ');
+                    <button type="button" class = "btn-restart">Restart Game</button> ');
     });
 
     it ("Hides start Button and unbind events, Show new Button", function() {
-      UI.toggleDisplayedButton("#jasmine-fixtures .btn-start", "#jasmine-fixtures .btn-new");
-      expect($("#jasmine-fixtures .btn-start")).toBeHidden();
+      UI.toggleDisplayedButton(".btn-start", ".btn-new");
+      expect($(".btn-start")).toBeHidden();
       expect(unbind).toHaveBeenCalled();
-      expect($("#jasmine-fixtures .btn-start")).not.toHandle("click");
-      expect($("#jasmine-fixtures .btn-new")).toBeVisible();
+      expect($(".btn-start")).not.toHandle("click");
+      expect($(".btn-new")).toBeVisible();
     });
 
     it ("Hides restart and new Button", function() {
-      UI.hideButton("#jasmine-fixtures .btn-restart", "#jasmine-fixtures .btn-new");
-      expect($("#jasmine-fixtures .btn-new")).toBeHidden();
-      expect($("#jasmine-fixtures .btn-restart")).toBeHidden();
+      UI.hideButton(".btn-restart", ".btn-new");
+      expect($(".btn-new")).toBeHidden();
+      expect($(".btn-restart")).toBeHidden();
     });
   });
 });
