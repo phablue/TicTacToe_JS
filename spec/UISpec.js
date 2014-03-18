@@ -286,7 +286,7 @@ describe ("Test UI", function () {
     });
 
     it ("if goFirst is true return", function() {
-      play = spyOn(Game, "play");
+      play = spyOn(Game, "playGame");
       firstMove = spyOn(Game, "firstMove").and.returnValue(true);
       UI.introGame();
       expect(play).not.toHaveBeenCalled();
@@ -294,7 +294,7 @@ describe ("Test UI", function () {
 
     it ("if goFirst is not true call play", function() {
       firstMove = spyOn(Game, "firstMove").and.returnValue("");
-      play = spyOn(Game, "play");
+      play = spyOn(Game, "playGame");
       UI.introGame();
       expect(play).toHaveBeenCalled();
     });
