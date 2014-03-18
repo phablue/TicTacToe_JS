@@ -32,11 +32,6 @@
       return false;
     },
 
-    humanPlay: function() {
-      UI.showHumanMessage();
-      UI.clickSpot(Game.humanChoice)
-    },
-
     humanChoice: function(chosenSpotID, callback) {
       if (Human.choiceSpot(GameBoard, chosenSpotID, Game.user)) {
         UI.unbindClick("tr td");
@@ -48,10 +43,6 @@
       else {
         return;
       }
-    },
-
-    computerPlay: function() {
-      UI.showComputerMessage(Game.computerChoice);
     },
 
     computerChoice: function(callback) {
