@@ -5,8 +5,8 @@
     computer: "O",
     goFirst: null,
 
-    visualAfterChoice: function() {
-      if ($(event.target).attr('class') == "btn btn-start") {
+    visualAfterChoice: function(button) {
+      if ($(button).attr('class') == "btn btn-start") {
         UI.toggleDisplayedButton(".btn-start", ".btn-new");
       }
       else {
@@ -27,13 +27,13 @@
       return currentPlayer == "X" ? "Player" : "Computer";
     },
 
-    firstMove: function() {
+    firstMove: function(button) {
       var input = UI.askFirstMove();
       if (input === null || input === "") {
         return true;
       }
       else if(input == "y" || input == "n") {
-        this.visualAfterChoice();
+        this.visualAfterChoice(button);
         this.goFirst = input;
       }
       else {
@@ -79,9 +79,9 @@
       });
     },
 
-    introGame: function() {
+    introGame: function(button) {
       this.newGame();
-      if (this.firstMove() === true) {
+      if (this.firstMove(button) === true) {
         return;
       }
       this.play();
@@ -101,7 +101,7 @@
       UI.hideComputerMessage();
       UI.hideHumanMessage();
       $(".btn-start").click(function(e) {
-        Game.introGame();
+        Game.introGame(e.target);
         e.stopPropagation();
       });
     },
@@ -116,14 +116,14 @@
         $(".btn-new").unbind("click");
         Game.resetGame();
         $("tr td").unbind("click");
-        Game.introGame();
+        Game.introGame(e.target);
       });
     },
 
     restartGame: function() {
       $(".btn-restart").click(function(e) {
         Game.resetGame();
-        Game.introGame();
+        Game.introGame(e.target);
         e.stopPropagation();
       });
     }
