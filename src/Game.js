@@ -15,7 +15,7 @@
         return true;
       }
       else if(input == "y" || input == "n") {
-        this.visualAfterChoice(button);
+        UI.visualAfterChoice(button);
         this.goFirst = input;
       }
       else {
@@ -27,11 +27,11 @@
     nextTurn: function(currentPlayer) {
       if(GameRules.gameWin(GameBoard)) {
         UI.winMessage(this.winner(currentPlayer));
-        return this.visualAfterGameOver();
+        return UI.visualAfterGameOver();
       }
       else if(GameRules.gameTie(GameBoard)) {
         UI.tieMessage();
-        return this.visualAfterGameOver();
+        return UI.visualAfterGameOver();
       }
       return false;
     },
