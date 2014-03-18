@@ -310,7 +310,7 @@ describe ("Test UI", function () {
       hideButton = spyOn(UI, "hideButton");
       hideComputerMessage = spyOn(UI, "hideComputerMessage");
       hideHumanMessage = spyOn(UI, "hideHumanMessage");
-      introGame = spyOn(Game, "introGame");
+      introGame = spyOn(UI, "introGame");
       setFixtures(' <button type="button" class = "btn-start">Start Game</button> ');
     });
 
@@ -335,7 +335,7 @@ describe ("Test UI", function () {
 
   describe ("Test newGame function", function() {
     it ("when new button click call resetGame() and introGame", function() {
-      var introGame = spyOn(Game, "introGame");
+      var introGame = spyOn(UI, "introGame");
       var resetGame = spyOn(UI, "resetGame");
       setFixtures(' <button type="button" class = "btn-new">New Game</button> ');
       UI.newGame();
@@ -356,7 +356,7 @@ describe ("Test UI", function () {
 
   describe ("Test restartGame function", function() {
     it ("when restart button click call resetGame() and introGame", function() {
-      var introGame = spyOn(Game, "introGame");
+      var introGame = spyOn(UI, "introGame");
       var resetGame = spyOn(UI, "resetGame");
       setFixtures(' <button type="button" class = "btn-restart">Restart Game</button> ');
       UI.restartGame();
