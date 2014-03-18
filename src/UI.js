@@ -141,12 +141,12 @@
     },
 
     humanPlay: function() {
-      UI.showHumanMessage();
-      UI.clickSpot(Game.humanChoice)
+      this.showHumanMessage();
+      this.clickSpot(Game.humanChoice)
     },
 
     computerPlay: function() {
-      UI.showComputerMessage(Game.computerChoice);
+      this.showComputerMessage(Game.computerChoice);
     }
   };
   window.UI = UI;
