@@ -38,5 +38,13 @@ describe ("Test Human", function() {
       Human.choiceSpot(GameBoard, e.target.id, currentPlayer);
       expect (errorMessage).toHaveBeenCalled();
     });
+
+    it ("return false if a choice spot has value", function() {
+      expect (Human.checkChosenSpotAvailable(1)).toBeFalsy();
+    });
+
+    it ("return true if a choice spot doesnt have value", function() {
+      expect (Human.checkChosenSpotAvailable(0)).toBeTruthy();
+    });
   });
 });
