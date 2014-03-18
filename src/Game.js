@@ -76,28 +76,6 @@
       else if (Game.goFirst === "n") {
         Game.computerPlay();
       }
-    },
-
-    startGame: function() {
-      UI.hideButton(".btn-restart", ".btn-new");
-      UI.hideComputerMessage();
-      UI.hideHumanMessage();
-      UI.clickButton(".btn-start", Game.introGame);
-    },
-
-    resetGame: function() {
-      UI.removeText("tr td");
-      GameBoard.resetBoard();
-    },
-
-    newGame: function() {
-      UI.hideComputerMessage();
-      UI.hideHumanMessage();
-      UI.clickButton(".btn-new", Game.introGame);
-    },
-
-    restartGame: function() {
-      UI.clickButton(".btn-restart", Game.introGame);
     }
   };
   window.Game = Game;
