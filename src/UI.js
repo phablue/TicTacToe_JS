@@ -1,5 +1,11 @@
 (function() {
   var UI = {
+    showComputerMessage: function(callback) {
+      $("#Computer").show(200, function() {
+        callback(Game.play);
+      });
+    },
+
     hideComputerMessage: function() {
       $("#Computer").hide();
     },

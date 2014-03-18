@@ -71,12 +71,14 @@
     },
 
     computerPlay: function(callback) {
-      $("#Computer").show(200,function() {
-        Computer.chooseTheBestSpot(Game.computer);
-        if (Game.nextTurn(Game.computer) === false) {
-          callback(Game.play);
-        }
-      });
+      UI.showComputerMessage(Game.computerChoice)
+    },
+
+    computerChoice: function(callback) {
+      Computer.chooseTheBestSpot(Game.computer);
+      if (Game.nextTurn(Game.computer) === false) {
+        callback();
+      }
     },
 
     introGame: function(button) {
