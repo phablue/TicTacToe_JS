@@ -24,14 +24,10 @@
       }
     },
 
-    nextTurn: function(currentPlayer) {
-      if(GameRules.gameWin(GameBoard)) {
-        UI.winMessage(this.winner(currentPlayer));
-        return UI.visualAfterGameOver();
-      }
-      else if(GameRules.gameTie(GameBoard)) {
-        UI.tieMessage();
-        return UI.visualAfterGameOver();
+    checkGameOver: function(currentPlayer) {
+      if(GameRules.gameOver(GameBoard)) {
+        UI.visualWhenGameOver(currentPlayer);
+        return true;
       }
       return false;
     },
