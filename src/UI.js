@@ -109,13 +109,35 @@
 
     visualWhenGameOver: function(currentPlayer) {
       if(GameRules.gameWin(GameBoard)) {
-        UI.winMessage(Game.winner(currentPlayer));
-        UI.visualAfterGameOver();
+        this.winMessage(Game.winner(currentPlayer));
+        this.visualAfterGameOver();
       }
       else if(GameRules.gameTie(GameBoard)) {
-        UI.tieMessage();
-        UI.visualAfterGameOver();
+        this.tieMessage();
+        this.visualAfterGameOver();
       }
+    },
+
+    startGame: function() {
+      this.hideButton(".btn-restart", ".btn-new");
+      this.hideComputerMessage();
+      this.hideHumanMessage();
+      this.clickButton(".btn-start", Game.introGame);
+    },
+
+    resetGame: function() {
+      this.removeText("tr td");
+      GameBoard.resetBoard();
+    },
+
+    newGame: function() {
+      this.hideComputerMessage();
+      this.hideHumanMessage();
+      this.clickButton(".btn-new", Game.introGame);
+    },
+
+    restartGame: function() {
+      this.clickButton(".btn-restart", Game.introGame);
     }
   };
   window.UI = UI;
