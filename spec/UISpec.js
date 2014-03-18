@@ -235,4 +235,40 @@ describe ("Test UI", function () {
       expect(restartGame).toHaveBeenCalled();
     });
   });
+
+  describe ("Test visualWhenGameOver function", function() {
+    var winMessage;
+    var tieMessage;
+    var visualAfterGameOver;
+
+    beforeEach (function() {
+      winMessage = spyOn(UI, "winMessage");
+      tieMessage = spyOn(UI, "tieMessage");
+      visualAfterGameOver = spyOn(UI, "visualAfterGameOver");
+    });
+
+    describe ("Message pops up when GameOver", function() {
+      it ("Pops up for win and click event doesn't work,if the Game win.", function() {
+        GameBoard.spots = ["X", "X", "X", "O", 5, "O", 7, 8, 9];
+        UI.visualWhenGameOver("X");
+        expect(winMessage).toHaveBeenCalled();
+        expect(visualAfterGameOver).toHaveBeenCalled();
+      });
+
+      it ("Pops up for tie and click event doesn't work,if the Game tie.", function() {
+        GameBoard.spots = ["X", "O", "X", "O", "X", "X", "O", "X", "O"];
+        UI.visualWhenGameOver("X");
+        expect(tieMessage).toHaveBeenCalled();
+        expect(visualAfterGameOver).toHaveBeenCalled();
+      });
+
+      it ("Not Pops up any message and click event works,if the Game is not won or tied.", function() {
+        GameBoard.spots = ["X", 2, 3, 4, 5, 6, 7, 8, 9];
+        UI.visualWhenGameOver("X");
+        expect(winMessage).not.toHaveBeenCalled();
+        expect(tieMessage).not.toHaveBeenCalled();
+        expect(visualAfterGameOver).not.toHaveBeenCalled();
+      });
+    });
+  });
 });
