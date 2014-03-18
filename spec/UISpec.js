@@ -56,7 +56,7 @@ describe ("Test UI", function () {
       introGame = spyOn(Game, "introGame");
       humanChoice = spyOn(Game, "humanChoice");
       unbindClick = spyOn(UI, "unbindClick");
-      resetGame = spyOn(Game, "resetGame");
+      resetGame = spyOn(UI, "resetGame");
       computerChoice = spyOn(Game, "computerChoice");
       setFixtures(' <button type="button" class = "btn-start">Start Game</button> \
                     <button type="button" class = "btn-new">New Game</button> \
@@ -222,7 +222,7 @@ describe ("Test UI", function () {
 
     beforeEach (function() {
       toggleDisplayedButton = spyOn(UI, "toggleDisplayedButton");
-      restartGame = spyOn(Game, "restartGame");
+      restartGame = spyOn(UI, "restartGame");
       unbind = spyOn($.fn, "unbind");
       click = spyOnEvent('tr td', 'click');
     });
