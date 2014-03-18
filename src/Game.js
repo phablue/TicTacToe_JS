@@ -52,14 +52,6 @@
       }
     },
 
-    introGame: function(button) {
-      UI.newGame();
-      if (Game.firstMove(button) === true) {
-        return;
-      }
-      Game.play();
-    },
-
     startGame: function() {
       UI.startGame();
     },
