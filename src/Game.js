@@ -37,7 +37,7 @@
         UI.unbindClick("tr td");
         UI.hideHumanMessage();
         if (Game.checkGameOver(Game.user) === false) {
-          callback(Game.play);
+          callback(Game.playGame);
         }
       }
       else {
@@ -48,7 +48,7 @@
     computerChoice: function(callback) {
       Computer.chooseTheBestSpot(Game.computer);
       if (Game.checkGameOver(Game.computer) === false) {
-        callback(Game.play);
+        callback(Game.playGame);
       }
     },
 
