@@ -1,4 +1,45 @@
 describe ("Test Game", function() {
+  describe ("Test winner function", function() {
+    var thePlayer;
+
+    it ("Player1 if current player is 'X'", function() {
+      currentPlayer = "X"
+      thePlayer = Game.winner(currentPlayer);
+      expect(thePlayer).toBe("Player");
+    });
+
+    it ("Player1 if current player is 'X'", function() {
+      currentPlayer = "O"
+      thePlayer = Game.winner(currentPlayer);
+      expect(thePlayer).toBe("Computer");
+    });
+  });
+
+  describe ("Test visualAfterChoice function", function() {
+    var toggleDisplayedButton;
+    var e;
+
+    beforeEach (function() {
+      e = jQuery.Event("click");
+      toggleDisplayedButton = spyOn(UI, "toggleDisplayedButton");
+      setFixtures(' <button type="button" class = "btn btn-start">Start Game</button> \
+                    <button type="button" class = "btn-new">New Game</button> \
+                    <button type="button" class = "btn-restart">Restart Game</button> ');
+    });
+
+    it ("call toggleDisplay function with start and new argument If button is start", function() {
+      jQuery(".btn-start").trigger(e);
+      Game.visualAfterChoice(e.target);
+      expect(toggleDisplayedButton).toHaveBeenCalledWith('.btn-start', '.btn-new');
+    });
+
+    it ("call toggleDisplay function with restart and new argument If button is not start", function() {
+      jQuery(".btn-new").trigger(e);
+      Game.visualAfterChoice(e.target);
+      expect(toggleDisplayedButton).toHaveBeenCalledWith('.btn-restart', '.btn-new');
+    });
+  });
+
   describe ("Test visualAfterGameOver function", function() {
     var toggleDisplayedButton;
     var restartGame;
@@ -18,22 +59,6 @@ describe ("Test Game", function() {
       expect(click).not.toHaveBeenTriggered();
       expect(toggleDisplayedButton).toHaveBeenCalled();
       expect(restartGame).toHaveBeenCalled();
-    });
-  });
-
-  describe ("Test winner function", function() {
-    var thePlayer;
-
-    it ("Player1 if current player is 'X'", function() {
-      currentPlayer = "X"
-      thePlayer = Game.winner(currentPlayer);
-      expect(thePlayer).toBe("Player");
-    });
-
-    it ("Player1 if current player is 'X'", function() {
-      currentPlayer = "O"
-      thePlayer = Game.winner(currentPlayer);
-      expect(thePlayer).toBe("Computer");
     });
   });
 
