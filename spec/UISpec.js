@@ -1,12 +1,24 @@
 describe ("Test UI", function () {
   describe ("Test Computer Message", function() {
+    var callback = function(){};
     beforeEach (function() {
       setFixtures(' <h1 id = "Computer">Please wait until computer choice..</h1>');
     });
 
     it ("Hides computer message", function() {
-        UI.hideComputerMessage();
-        expect($("#Computer")).toBeHidden();
+      UI.hideComputerMessage();
+      expect($("#Computer")).toBeHidden();
+    });
+
+    it ("Show computer message", function() {
+      UI.showComputerMessage(callback);
+      expect($("#Computer")).toBeVisible();
+    });
+
+    it ("Call computerChoice function after show computer message", function() {
+      var computerChoice = spyOn(Game, "computerChoice");
+      UI.showComputerMessage(Game.computerChoice);
+      expect(computerChoice).toHaveBeenCalled();
     });
   });
 
@@ -16,13 +28,13 @@ describe ("Test UI", function () {
     });
 
     it ("Hides human message", function() {
-        UI.hideHumanMessage();
-        expect($("#Human")).toBeHidden();
+      UI.hideHumanMessage();
+      expect($("#Human")).toBeHidden();
     });
 
     it ("Shows human message", function() {
-        UI.showHumanMessage();
-        expect($("#Human")).toBeVisible();
+      UI.showHumanMessage();
+      expect($("#Human")).toBeVisible();
     });
   });
 
@@ -30,6 +42,54 @@ describe ("Test UI", function () {
     it("get class in element", function() {
       setFixtures(' <button type="button" class = "btn-start">Start Game</button> ');
       expect(UI.getClass("button")).toBe("btn-start");
+    });
+  });
+
+  describe ("Test click", function() {
+    var introGame;
+    var humanChoice;
+    var unbindClick;
+    var resetGame;
+    var computerChoice;
+
+    beforeEach(function() {
+      introGame = spyOn(Game, "introGame");
+      humanChoice = spyOn(Game, "humanChoice");
+      unbindClick = spyOn(UI, "unbindClick");
+      resetGame = spyOn(Game, "resetGame");
+      computerChoice = spyOn(Game, "computerChoice");
+
+      setFixtures(' <button type="button" class = "btn-start">Start Game</button> \
+                    <button type="button" class = "btn-new">New Game</button> \
+                    <button type="button" class = "btn-restart">Restart Game</button> \
+                    <table> <td id = "0"></td><td id = "0"></td></table> ');
+    });
+
+    it("call humanChoice function after td click", function() {
+      UI.clickSpot(Game.humanChoice);
+      $("tr td").click();
+      expect(humanChoice).toHaveBeenCalled();
+    });
+
+    it("call introGame function after start button click", function() {
+      UI.clickButton(".btn-start", Game.introGame);
+      $(".btn-start").click();
+      expect(introGame).toHaveBeenCalled();
+    });
+
+    it("call functions after new button click", function() {
+      UI.clickButton(".btn-new", Game.introGame);
+      $(".btn-new").click();
+      expect(unbindClick).toHaveBeenCalled();
+      expect(resetGame).toHaveBeenCalled();
+      expect(introGame).toHaveBeenCalled();
+    });
+
+    it("call reset and introGame function after restart button click", function() {
+      UI.clickButton(".btn-restart", Game.introGame);
+      $(".btn-restart").click();
+      expect(resetGame).toHaveBeenCalled();
+      expect(introGame).toHaveBeenCalled();
     });
   });
 

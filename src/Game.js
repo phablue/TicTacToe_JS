@@ -73,7 +73,7 @@
     },
 
     computerPlay: function() {
-      UI.showComputerMessage(Game.computerChoice)
+      UI.showComputerMessage(Game.computerChoice);
     },
 
     computerChoice: function(callback) {
