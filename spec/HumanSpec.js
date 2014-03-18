@@ -17,7 +17,7 @@ describe ("Test Human", function() {
       currentPlayer = "X";
       expect ($("tr td")).toBeEmpty();
       jQuery("#0").trigger(e);
-      Human.choiceSpot(e, GameBoard, currentPlayer);
+      Human.choiceSpot(GameBoard, e.target.id, currentPlayer);
       expect ($("#0")).toHaveText("X");
       expect (GameBoard.spots[0]).toBe("X");
     });
@@ -26,7 +26,7 @@ describe ("Test Human", function() {
       currentPlayer = "O";
       expect ($("#2")).toBeEmpty();
       jQuery("#2").trigger(e);
-      Human.choiceSpot(e, GameBoard, currentPlayer);
+      Human.choiceSpot(GameBoard, e.target.id, currentPlayer);
       expect ($("#2")).toHaveText("O");
       expect (GameBoard.spots[2]).toBe("O");
     });
@@ -35,7 +35,7 @@ describe ("Test Human", function() {
       var errorMessage = spyOn(UI, "spotErrorMessage");
       currentPlayer = "O";
       jQuery("#1").trigger(e);
-      Human.choiceSpot(e, GameBoard, currentPlayer);
+      Human.choiceSpot(GameBoard, e.target.id, currentPlayer);
       expect (errorMessage).toHaveBeenCalled();
     });
   });
