@@ -12,12 +12,20 @@
       $("#Human").hide();
     },
 
+    getClass: function(element) {
+      return $(element).attr('class')
+    },
+
     unbindClick: function(element) {
       $(element).unbind("click");
     },
 
     removeText: function(element) {
       $(element).empty();
+    },
+
+    getTextContents: function(elementID) {
+      return $("#" + elementID).text()
     },
 
     setTextContents: function(elementID, TextContents) {

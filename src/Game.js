@@ -6,7 +6,7 @@
     goFirst: null,
 
     checkChosenSpotAvailable: function(chosenSpotId) {
-      return $("#" + chosenSpotId).text() == ""
+      return UI.getTextContents(chosenSpotId) == ""
     },
 
     winner: function(currentPlayer) {
@@ -14,7 +14,7 @@
     },
 
     visualAfterChoice: function(button) {
-      if ($(button).attr('class') == "btn btn-start") {
+      if (UI.getClass(button) == "btn btn-start") {
         UI.toggleDisplayedButton(".btn-start", ".btn-new");
       }
       else {
