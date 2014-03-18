@@ -16,6 +16,21 @@
       return $(element).attr('class')
     },
 
+    ClickButton: function(button, callback) {
+      $(button).click(function(e) {
+        if (button == ".btn-new") {
+          UI.unbindClick(".btn-new");
+          UI.unbindClick("tr td");
+          Game.resetGame();
+        }
+        else if (button == ".btn-restart") {
+          Game.resetGame();
+        }
+        e.stopPropagation();
+        callback(e.target);
+      });
+    },
+
     unbindClick: function(element) {
       $(element).unbind("click");
     },

@@ -80,11 +80,11 @@
     },
 
     introGame: function(button) {
-      this.newGame();
-      if (this.firstMove(button) === true) {
+      Game.newGame();
+      if (Game.firstMove(button) === true) {
         return;
       }
-      this.play();
+      Game.play();
     },
 
     play: function() {
@@ -100,10 +100,7 @@
       UI.hideButton(".btn-restart", ".btn-new");
       UI.hideComputerMessage();
       UI.hideHumanMessage();
-      $(".btn-start").click(function(e) {
-        Game.introGame(e.target);
-        e.stopPropagation();
-      });
+      UI.ClickButton(".btn-start", Game.introGame);
     },
 
     resetGame: function() {
@@ -112,21 +109,13 @@
     },
 
     newGame: function() {
-      $(".btn-new").click(function(e) {
-        UI.unbindClick(".btn-new");
-        UI.unbindClick("tr td");
-        Game.resetGame();
-        Game.introGame(e.target);
-        e.stopPropagation();
-      });
+      UI.hideComputerMessage();
+      UI.hideHumanMessage();
+      UI.ClickButton(".btn-new", Game.introGame);
     },
 
     restartGame: function() {
-      $(".btn-restart").click(function(e) {
-        Game.resetGame();
-        Game.introGame(e.target);
-        e.stopPropagation();
-      });
+      UI.ClickButton(".btn-restart", Game.introGame);
     }
   };
   window.Game = Game;
