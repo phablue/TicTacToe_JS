@@ -1,9 +1,8 @@
 (function() {
   var Human = {
-    choiceSpot: function(e, board, currentPlayer) {
-      var chosenSpot = e.target.id;
-      if ($("#" + chosenSpot).text() == "") {
-        this.markChosenSpot(board, chosenSpot, currentPlayer);
+    choiceSpot: function(board, chosenSpotId, currentPlayer) {
+      if ($("#" + chosenSpotId).text() == "") {
+        this.markChosenSpot(board, chosenSpotId, currentPlayer);
         return true;
       }
       else {
@@ -12,9 +11,9 @@
       }
     },
 
-    markChosenSpot: function(board, chosenSpot, currentPlayer) {
-      $("#" + chosenSpot).text(currentPlayer);
-      board.spots[chosenSpot] = currentPlayer;
+    markChosenSpot: function(board, chosenSpotId, currentPlayer) {
+      $("#" + chosenSpotId).text(currentPlayer);
+      board.spots[chosenSpotId] = currentPlayer;
     }
   };
   window.Human = Human;

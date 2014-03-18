@@ -57,7 +57,7 @@
     humanPlay: function(callback) {
       UI.showHumanMessage();
       $("tr td").click(function(e) {
-        if (Human.choiceSpot(e, GameBoard, Game.user)) {
+        if (Human.choiceSpot(GameBoard, e.target.id, Game.user)) {
           $("tr td").unbind("click");
           UI.hideHumanMessage();
           if (Game.nextTurn(Game.user) === false) {
