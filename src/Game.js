@@ -62,11 +62,15 @@
     },
 
     introGame: function(button) {
-      Game.newGame();
+      UI.newGame();
       if (Game.firstMove(button) === true) {
         return;
       }
       Game.play();
+    },
+
+    startGame: function() {
+      UI.startGame();
     },
 
     play: function() {

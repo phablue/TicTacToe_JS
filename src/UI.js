@@ -33,10 +33,10 @@
         if (button == ".btn-new") {
           UI.unbindClick(".btn-new");
           UI.unbindClick("tr td");
-          Game.resetGame();
+          UI.resetGame();
         }
         else if (button == ".btn-restart") {
-          Game.resetGame();
+          UI.resetGame();
         }
         e.stopPropagation();
         callback(e.target);
@@ -104,7 +104,7 @@
       this.toggleDisplayedButton(".btn-new", ".btn-restart");
       this.hideComputerMessage();
       this.hideHumanMessage();
-      Game.restartGame();
+      this.restartGame();
     },
 
     visualWhenGameOver: function(currentPlayer) {
