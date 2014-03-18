@@ -402,7 +402,7 @@ describe ("Test UI", function () {
     it ("call computerPlay if not game over", function() {
       UI.humanPlay(UI.computerPlay);
       $("#0").click();
-      expect(computerPlay).toHaveBeenCalledWith(Game.play);
+      expect(computerPlay).toHaveBeenCalledWith(Game.playGame);
     })
 
     it ("tr td stop to click if game over", function() {
@@ -410,7 +410,7 @@ describe ("Test UI", function () {
       UI.humanPlay(UI.computerPlay);
       $("#2").click();
       expect($("tr td")).not.toHaveBeenTriggered();
-      expect(computerPlay).not.toHaveBeenCalledWith(Game.play);
+      expect(computerPlay).not.toHaveBeenCalledWith(Game.playGame);
     })
   })
 
@@ -431,13 +431,13 @@ describe ("Test UI", function () {
 
     it ("call humanPlay if not game over", function() {
       UI.computerPlay(UI.humanPlay);
-      expect(humanPlay).toHaveBeenCalledWith(Game.play);
+      expect(humanPlay).toHaveBeenCalledWith(Game.playGame);
     });
 
     it ("tr td stop to click if game over", function() {
       setFixtures('<table> <td id = "0">X</td> <td id = "2">X</td></tr> </table>');
       UI.computerPlay(UI.humanPlay);
-      expect(humanPlay).not.toHaveBeenCalledWith(Game.play);
+      expect(humanPlay).not.toHaveBeenCalledWith(Game.playGame);
     })
   });
 });

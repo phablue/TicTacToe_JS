@@ -123,7 +123,7 @@
       if (Game.firstMove(button) === true) {
         return;
       }
-      Game.play();
+      Game.playGame();
     },
 
     startGame: function() {
