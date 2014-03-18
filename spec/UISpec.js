@@ -271,6 +271,34 @@ describe ("Test UI", function () {
       });
     });
   });
+  
+  describe ("Test introGame function", function() {
+    var firstMove;
+    var newGame;
+    var play;
+
+    it ("Call other function", function() {
+      firstMove = spyOn(Game, "firstMove");
+      newGame = spyOn(UI, "newGame");
+      UI.introGame();
+      expect(firstMove).toHaveBeenCalled();
+      expect(newGame).toHaveBeenCalled();
+    });
+
+    it ("if goFirst is true return", function() {
+      play = spyOn(Game, "play");
+      firstMove = spyOn(Game, "firstMove").and.returnValue(true);
+      UI.introGame();
+      expect(play).not.toHaveBeenCalled();
+    });
+
+    it ("if goFirst is not true call play", function() {
+      firstMove = spyOn(Game, "firstMove").and.returnValue("");
+      play = spyOn(Game, "play");
+      UI.introGame();
+      expect(play).toHaveBeenCalled();
+    });
+  });
 
   describe ("Test startGame function", function() {
     var hideButton;
