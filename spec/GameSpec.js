@@ -53,38 +53,39 @@ describe ("Test Game", function() {
     })
   });
 
-  describe ("Test nextTurn function", function() {
-    var winMessage;
-    var tieMessage;
-    var visualAfterGameOver;
+  describe ("Test checkGameOver function", function() {
+    var visualWhenGameOver;
 
     beforeEach (function() {
-      winMessage = spyOn(UI, "winMessage");
-      tieMessage = spyOn(UI, "tieMessage");
-      visualAfterGameOver = spyOn(UI, "visualAfterGameOver");
+      visualWhenGameOver = spyOn(UI, "visualWhenGameOver");
     });
 
-    describe ("Message pops up when GameOver", function() {
-      it ("Pops up for win and click event doesn't work,if the Game win.", function() {
+    describe ("Call UI message functions", function() {
+      it ("call visualWhenGameOver function, if the Game win.", function() {
         GameBoard.spots = ["X", "X", "X", "O", 5, "O", 7, 8, 9];
-        Game.nextTurn();
-        expect(winMessage).toHaveBeenCalled();
-        expect(visualAfterGameOver).toHaveBeenCalled();
+        Game.checkGameOver("X");
+        expect(visualWhenGameOver).toHaveBeenCalled();
       });
 
-      it ("Pops up for tie and click event doesn't work,if the Game tie.", function() {
+      it ("call visualWhenGameOver function, if the Game tie.", function() {
         GameBoard.spots = ["X", "O", "X", "O", "X", "X", "O", "X", "O"];
-        Game.nextTurn();
-        expect(tieMessage).toHaveBeenCalled();
-        expect(visualAfterGameOver).toHaveBeenCalled();
+        Game.checkGameOver("X");
+        expect(visualWhenGameOver).toHaveBeenCalled();
       });
 
-      it ("Not Pops up any message and click event works,if the Game is not won or tied.", function() {
+      it ("return true, if the Game win.", function() {
+        GameBoard.spots = ["X", 2, "X", "O", "O", "O", "X", 8, 9];
+        expect(Game.checkGameOver("O")).toBeTruthy();
+      });
+
+      it ("return true, if the Game tie.", function() {
+        GameBoard.spots = ["X", "O", "X", "O", "X", "X", "O", "X", "O"];
+        expect(Game.checkGameOver("X")).toBeTruthy();
+      });
+
+      it ("return false,if the Game is not won or tied.", function() {
         GameBoard.spots = ["X", 2, 3, 4, 5, 6, 7, 8, 9];
-        Game.nextTurn();
-        expect(winMessage).not.toHaveBeenCalled();
-        expect(tieMessage).not.toHaveBeenCalled();
-        expect(visualAfterGameOver).not.toHaveBeenCalled();
+        expect(Game.checkGameOver("X")).toBeFalsy();
       });
     });
   });
