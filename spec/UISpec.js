@@ -71,13 +71,13 @@ describe ("Test UI", function () {
     });
 
     it("call introGame function after start button click", function() {
-      UI.clickButton(".btn-start", Game.introGame);
+      UI.clickButton(".btn-start", UI.introGame);
       $(".btn-start").click();
       expect(introGame).toHaveBeenCalled();
     });
 
     it("call functions after new button click", function() {
-      UI.clickButton(".btn-new", Game.introGame);
+      UI.clickButton(".btn-new", UI.introGame);
       $(".btn-new").click();
       expect(unbindClick).toHaveBeenCalled();
       expect(resetGame).toHaveBeenCalled();
@@ -85,7 +85,7 @@ describe ("Test UI", function () {
     });
 
     it("call reset and introGame function after restart button click", function() {
-      UI.clickButton(".btn-restart", Game.introGame);
+      UI.clickButton(".btn-restart", UI.introGame);
       $(".btn-restart").click();
       expect(resetGame).toHaveBeenCalled();
       expect(introGame).toHaveBeenCalled();
