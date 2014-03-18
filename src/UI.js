@@ -116,7 +116,6 @@
         UI.tieMessage();
         UI.visualAfterGameOver();
       }
-      return true
     }
   };
   window.UI = UI;
