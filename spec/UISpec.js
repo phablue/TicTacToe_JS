@@ -26,6 +26,13 @@ describe ("Test UI", function () {
     });
   });
 
+  describe ("Test get class function", function() {
+    it("get class in element", function() {
+      setFixtures(' <button type="button" class = "btn-start">Start Game</button> ');
+      expect(UI.getClass("button")).toBe("btn-start");
+    });
+  });
+
   describe ("Test unbindClick function", function() {
     it("tr td unbind", function() {
       var click = spyOnEvent('tr td', 'click');
@@ -40,6 +47,13 @@ describe ("Test UI", function () {
       setFixtures(' <table> <tr> <td id = "0">O</td><td id = "1">X</td><td id = "2"></td></tr> </table>');
       UI.removeText("tr td");
       expect($("tr td")).toBeEmpty();
+    });
+  });
+
+  describe ("Test getTextContents function", function() {
+    it("get text contents in element", function() {
+      setFixtures(' <table> <tr> <td id = "0">O</td><td id = "1">X</td><td id = "2"></td></tr> </table>');
+      expect(UI.getTextContents("0")).toBe("O");
     });
   });
 
