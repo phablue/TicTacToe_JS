@@ -161,9 +161,10 @@ describe ("Test Game", function() {
 
   describe ("Test computerPlay function", function() {
     var humanPlay;
-    var show;
+    var showComputerMessage;
 
     beforeEach(function() {
+      showComputerMessage = spyOnEvent("#Computer", "show");
       humanPlay = spyOn(Game, "humanPlay");
       setFixtures(' <h1 id = "Computer">Please wait until computer choice..</h1> \
                     <table> <tr> \
@@ -171,11 +172,6 @@ describe ("Test Game", function() {
                       <td id = "1">X</td> \
                       <td id = "2"></td> \
                     </tr>  </table>');
-    });
-
-    it ("Shows message for computer after function running", function() {
-      Game.computerPlay(Game.humanPlay);
-      expect($("#Computer")).toBeVisible();
     });
 
     it ("call humanPlay if not game over", function() {
