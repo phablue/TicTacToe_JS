@@ -123,8 +123,8 @@ describe ("Test Game", function() {
     var computerPlay;
 
     beforeEach(function() {
-      humanPlay = spyOn(Game, "humanPlay");
-      computerPlay = spyOn(Game, "computerPlay");
+      humanPlay = spyOn(UI, "humanPlay");
+      computerPlay = spyOn(UI, "computerPlay");
     });
 
     it ("call humanplay if goFirst is 'y'", function() {
