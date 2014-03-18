@@ -105,6 +105,18 @@
       this.hideComputerMessage();
       this.hideHumanMessage();
       Game.restartGame();
+    },
+
+    visualWhenGameOver: function(currentPlayer) {
+      if(GameRules.gameWin(GameBoard)) {
+        UI.winMessage(Game.winner(currentPlayer));
+        UI.visualAfterGameOver();
+      }
+      else if(GameRules.gameTie(GameBoard)) {
+        UI.tieMessage();
+        UI.visualAfterGameOver();
+      }
+      return true
     }
   };
   window.UI = UI;
