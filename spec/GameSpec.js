@@ -15,60 +15,13 @@ describe ("Test Game", function() {
     });
   });
 
-  describe ("Test visualAfterChoice function", function() {
-    var toggleDisplayedButton;
-    var e;
-
-    beforeEach (function() {
-      e = jQuery.Event("click");
-      toggleDisplayedButton = spyOn(UI, "toggleDisplayedButton");
-      setFixtures(' <button type="button" class = "btn btn-start">Start Game</button> \
-                    <button type="button" class = "btn-new">New Game</button> \
-                    <button type="button" class = "btn-restart">Restart Game</button> ');
-    });
-
-    it ("call toggleDisplay function with start and new argument If button is start", function() {
-      jQuery(".btn-start").trigger(e);
-      Game.visualAfterChoice(e.target);
-      expect(toggleDisplayedButton).toHaveBeenCalledWith('.btn-start', '.btn-new');
-    });
-
-    it ("call toggleDisplay function with restart and new argument If button is not start", function() {
-      jQuery(".btn-new").trigger(e);
-      Game.visualAfterChoice(e.target);
-      expect(toggleDisplayedButton).toHaveBeenCalledWith('.btn-restart', '.btn-new');
-    });
-  });
-
-  describe ("Test visualAfterGameOver function", function() {
-    var toggleDisplayedButton;
-    var restartGame;
-    var unbind;
-    var click;
-
-    beforeEach (function() {
-      toggleDisplayedButton = spyOn(UI, "toggleDisplayedButton");
-      restartGame = spyOn(Game, "restartGame");
-      unbind = spyOn($.fn, "unbind");
-      click = spyOnEvent('tr td', 'click');
-    });
-
-    it ("Test call function after game over", function() {
-      Game.visualAfterGameOver();
-      expect(unbind).toHaveBeenCalled();
-      expect(click).not.toHaveBeenTriggered();
-      expect(toggleDisplayedButton).toHaveBeenCalled();
-      expect(restartGame).toHaveBeenCalled();
-    });
-  });
-
   describe ("Teste firstMove function", function() {
     var input;
     var visualAfterChoice;
 
     beforeEach(function() {
       Game.currentPlayer = "";
-      visualAfterChoice = spyOn(Game, "visualAfterChoice");
+      visualAfterChoice = spyOn(UI, "visualAfterChoice");
     })
 
     it ("If input is null return true", function() {
@@ -108,7 +61,7 @@ describe ("Test Game", function() {
     beforeEach (function() {
       winMessage = spyOn(UI, "winMessage");
       tieMessage = spyOn(UI, "tieMessage");
-      visualAfterGameOver = spyOn(Game, "visualAfterGameOver");
+      visualAfterGameOver = spyOn(UI, "visualAfterGameOver");
     });
 
     describe ("Message pops up when GameOver", function() {
