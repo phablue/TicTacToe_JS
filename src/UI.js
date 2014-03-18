@@ -118,11 +118,19 @@
       }
     },
 
+    introGame: function(button) {
+      UI.newGame();
+      if (Game.firstMove(button) === true) {
+        return;
+      }
+      Game.play();
+    },
+
     startGame: function() {
       this.hideButton(".btn-restart", ".btn-new");
       this.hideComputerMessage();
       this.hideHumanMessage();
-      this.clickButton(".btn-start", Game.introGame);
+      this.clickButton(".btn-start", UI.introGame);
     },
 
     resetGame: function() {
@@ -133,11 +141,11 @@
     newGame: function() {
       this.hideComputerMessage();
       this.hideHumanMessage();
-      this.clickButton(".btn-new", Game.introGame);
+      this.clickButton(".btn-new", UI.introGame);
     },
 
     restartGame: function() {
-      this.clickButton(".btn-restart", Game.introGame);
+      this.clickButton(".btn-restart", UI.introGame);
     },
 
     humanPlay: function() {
