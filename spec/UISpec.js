@@ -271,4 +271,70 @@ describe ("Test UI", function () {
       });
     });
   });
+
+  describe ("Test startGame function", function() {
+    var hideButton;
+    var hideComputerMessage;
+    var hideHumanMessage;
+    var introGame;
+
+    beforeEach(function () {
+      hideButton = spyOn(UI, "hideButton");
+      hideComputerMessage = spyOn(UI, "hideComputerMessage");
+      hideHumanMessage = spyOn(UI, "hideHumanMessage");
+      introGame = spyOn(Game, "introGame");
+      setFixtures(' <button type="button" class = "btn-start">Start Game</button> ');
+    });
+
+    it ("after start button click call introGame", function() {
+      UI.startGame();
+      expect(hideComputerMessage).toHaveBeenCalled();
+      expect(hideHumanMessage).toHaveBeenCalled();
+      $(".btn-start").click();
+      expect(introGame).toHaveBeenCalled();
+    });
+  });
+
+  describe ("Test resetGame function", function() {
+    it ("reset Gameabord and tr td", function() {
+      GameBoard.spots = ["O", "X", 3, 4, 5, 6, 7, 8, 9];
+      setFixtures(' <table> <tr> <td id = "0">O</td><td id = "1">X</td><td id = "2"></td></tr> </table>');
+      UI.resetGame();
+      expect($("tr td")).toBeEmpty();
+      expect(GameBoard.spots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    });
+  });
+
+  describe ("Test newGame function", function() {
+    it ("when new button click call resetGame() and introGame", function() {
+      var introGame = spyOn(Game, "introGame");
+      var resetGame = spyOn(UI, "resetGame");
+      setFixtures(' <button type="button" class = "btn-new">New Game</button> ');
+      UI.newGame();
+      $(".btn-new").click();
+      expect(introGame).toHaveBeenCalled();
+      expect(resetGame).toHaveBeenCalled();
+    });
+
+    it ("unbind new button and td after clicked new button", function() {
+      var buttonclick = spyOnEvent('.btn-new', 'click');
+      var spotclick = spyOnEvent('tr td', 'click');
+      UI.newGame();
+      $(".btn-new").click();
+      expect(buttonclick).not.toHaveBeenTriggered();
+      expect(spotclick).not.toHaveBeenTriggered();
+    });
+  });
+
+  describe ("Test restartGame function", function() {
+    it ("when restart button click call resetGame() and introGame", function() {
+      var introGame = spyOn(Game, "introGame");
+      var resetGame = spyOn(UI, "resetGame");
+      setFixtures(' <button type="button" class = "btn-restart">Restart Game</button> ');
+      UI.restartGame();
+      $(".btn-restart").click();
+      expect(introGame).toHaveBeenCalled();
+      expect(resetGame).toHaveBeenCalled();
+    });
+  });
 });
