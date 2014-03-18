@@ -149,12 +149,12 @@
     },
 
     humanPlay: function() {
-      this.showHumanMessage();
-      this.clickSpot(Game.humanChoice)
+      UI.showHumanMessage();
+      UI.clickSpot(Game.humanChoice)
     },
 
     computerPlay: function() {
-      this.showComputerMessage(Game.computerChoice);
+      UI.showComputerMessage(Game.computerChoice);
     }
   };
   window.UI = UI;
