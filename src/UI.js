@@ -88,6 +88,23 @@
     hideButton: function(hideClass1, hideClass2) {
       $(hideClass1).hide();
       $(hideClass2).hide();
+    },
+
+    visualAfterChoice: function(button) {
+      if (this.getClass(button) == "btn btn-start") {
+        this.toggleDisplayedButton(".btn-start", ".btn-new");
+      }
+      else {
+        this.toggleDisplayedButton(".btn-restart", ".btn-new");
+      }
+    },
+
+    visualAfterGameOver: function() {
+      this.unbindClick("tr td");
+      this.toggleDisplayedButton(".btn-new", ".btn-restart");
+      this.hideComputerMessage();
+      this.hideHumanMessage();
+      Game.restartGame();
     }
   };
   window.UI = UI;
