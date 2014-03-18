@@ -56,7 +56,7 @@
       UI.startGame();
     },
 
-    play: function() {
+    playGame: function() {
       if (Game.goFirst === "y") {
         UI.humanPlay();
       }

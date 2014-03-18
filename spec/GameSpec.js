@@ -101,13 +101,13 @@ describe ("Test Game", function() {
 
     it ("call humanplay if goFirst is 'y'", function() {
       Game.goFirst = "y";
-      Game.play();
+      Game.playGame();
       expect(humanPlay).toHaveBeenCalled();
     });
 
     it ("call computerPlay if goFirst is 'n'", function() {
       Game.goFirst = "n";
-      Game.play();
+      Game.playGame();
       expect(computerPlay).toHaveBeenCalled();
     });
   });
