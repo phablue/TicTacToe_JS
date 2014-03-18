@@ -172,7 +172,7 @@ describe ("Test Game", function() {
 
     it ("Call other function", function() {
       firstMove = spyOn(Game, "firstMove");
-      newGame = spyOn(Game, "newGame");
+      newGame = spyOn(UI, "newGame");
       Game.introGame();
       expect(firstMove).toHaveBeenCalled();
       expect(newGame).toHaveBeenCalled();
