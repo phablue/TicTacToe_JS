@@ -66,10 +66,10 @@
 
     play: function() {
       if (Game.goFirst === "y") {
-        Game.humanPlay();
+        UI.humanPlay();
       }
       else if (Game.goFirst === "n") {
-        Game.computerPlay();
+        UI.computerPlay();
       }
     }
   };

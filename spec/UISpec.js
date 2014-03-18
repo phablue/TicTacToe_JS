@@ -337,4 +337,79 @@ describe ("Test UI", function () {
       expect(resetGame).toHaveBeenCalled();
     });
   });
+
+  describe ("Test humanPlay function", function() {
+    var showHumanMessage;
+    var hideHumanMessage;
+    var computerPlay;
+    var click;
+
+    beforeEach(function() {
+      GameBoard.spots = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      showHumanMessage = spyOn(UI, "showHumanMessage");
+      hideHumanMessage = spyOn(UI, "hideHumanMessage");
+      computerPlay = spyOn(UI, "computerPlay");
+      click = spyOnEvent('tr td', 'click');
+      setFixtures(' <h1 id = "Human">Click a spot you want.</h1> \
+                    <table> <tr> \
+                      <td id = "0"></td> \
+                      <td id = "1">X</td> \
+                      <td id = "2"></td> \
+                    </tr>  </table>');
+    });
+
+    it ("Shows message for human player after humanPlay running", function() {
+      UI.humanPlay(UI.computerPlay);
+      expect(showHumanMessage).toHaveBeenCalled();
+    });
+
+    it ("cant click and hide human message after human choice a spot", function() {
+      UI.humanPlay(UI.computerPlay);
+      $("#0").click();
+      expect($("#0")).toHaveText("X");
+      expect(click).not.toHaveBeenTriggered();
+      expect(hideHumanMessage).toHaveBeenCalled();
+    })
+
+    it ("call computerPlay if not game over", function() {
+      UI.humanPlay(UI.computerPlay);
+      $("#0").click();
+      expect(computerPlay).toHaveBeenCalledWith(Game.play);
+    })
+
+    it ("tr td stop to click if game over", function() {
+      setFixtures('<table> <td id = "0">X</td></table>');
+      UI.humanPlay(UI.computerPlay);
+      $("#2").click();
+      expect($("tr td")).not.toHaveBeenTriggered();
+      expect(computerPlay).not.toHaveBeenCalledWith(Game.play);
+    })
+  })
+
+  describe ("Test computerPlay function", function() {
+    var humanPlay;
+    var showComputerMessage;
+
+    beforeEach(function() {
+      showComputerMessage = spyOnEvent("#Computer", "show");
+      humanPlay = spyOn(UI, "humanPlay");
+      setFixtures(' <h1 id = "Computer">Please wait until computer choice..</h1> \
+                    <table> <tr> \
+                      <td id = "0"></td> \
+                      <td id = "1">X</td> \
+                      <td id = "2"></td> \
+                    </tr>  </table>');
+    });
+
+    it ("call humanPlay if not game over", function() {
+      UI.computerPlay(UI.humanPlay);
+      expect(humanPlay).toHaveBeenCalledWith(Game.play);
+    });
+
+    it ("tr td stop to click if game over", function() {
+      setFixtures('<table> <td id = "0">X</td> <td id = "2">X</td></tr> </table>');
+      UI.computerPlay(UI.humanPlay);
+      expect(humanPlay).not.toHaveBeenCalledWith(Game.play);
+    })
+  });
 });
