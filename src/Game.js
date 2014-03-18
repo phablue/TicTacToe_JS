@@ -9,24 +9,6 @@
       return currentPlayer == "X" ? "Player" : "Computer";
     },
 
-    visualAfterChoice: function(button) {
-      if (UI.getClass(button) == "btn btn-start") {
-        UI.toggleDisplayedButton(".btn-start", ".btn-new");
-      }
-      else {
-        UI.toggleDisplayedButton(".btn-restart", ".btn-new");
-      }
-    },
-
-    visualAfterGameOver: function() {
-      UI.unbindClick("tr td");
-      UI.toggleDisplayedButton(".btn-new", ".btn-restart");
-      UI.hideComputerMessage();
-      UI.hideHumanMessage();
-      this.restartGame();
-      return true;
-    },
-
     firstMove: function(button) {
       var input = UI.askFirstMove();
       if (input === null || input === "") {
