@@ -1,7 +1,7 @@
 (function() {
   var Human = {
     choiceSpot: function(board, chosenSpotId, currentPlayer) {
-      if (checkChosenSpotAvailable(chosenSpotId)) {
+      if (this.checkChosenSpotAvailable(chosenSpotId)) {
         this.markChosenSpot(board, chosenSpotId, currentPlayer);
         return true;
       }
@@ -21,7 +21,7 @@
     },
 
     checkChosenSpotAvailable: function(chosenSpotId) {
-      return $("#" + chosenSpotId).text().length
+      return $("#" + chosenSpotId).text() == ""
     }
   };
   window.Human = Human;
