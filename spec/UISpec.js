@@ -26,6 +26,31 @@ describe ("Test UI", function () {
     });
   });
 
+  describe ("Test unbindClick function", function() {
+    it("tr td unbind", function() {
+      var click = spyOnEvent('tr td', 'click');
+      setFixtures('<table> <td id = "0"></td><td id = "0"></td></table>');
+      UI.unbindClick("tr td");
+      expect(click).not.toHaveBeenTriggered();
+    });
+  });
+
+  describe ("Test removeText function", function() {
+    it("tr td empty after event running", function() {
+      setFixtures(' <table> <tr> <td id = "0">O</td><td id = "1">X</td><td id = "2"></td></tr> </table>');
+      UI.removeText("tr td");
+      expect($("tr td")).toBeEmpty();
+    });
+  });
+
+  describe ("Test setTextContents funciton", function() {
+    it("set 'X' in td after event running", function() {
+      setFixtures(' <table> <tr> <td id = "0">O</td><td id = "1">X</td><td id = "2"></td></tr> </table>');
+      UI.setTextContents("2", "X");
+      expect($("#2")).toHaveText("X");
+    });
+  });
+
   describe ("Test alert events", function() {
     var winner = "Player1";
     var alert;
