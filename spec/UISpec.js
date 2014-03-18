@@ -58,7 +58,6 @@ describe ("Test UI", function () {
       unbindClick = spyOn(UI, "unbindClick");
       resetGame = spyOn(Game, "resetGame");
       computerChoice = spyOn(Game, "computerChoice");
-
       setFixtures(' <button type="button" class = "btn-start">Start Game</button> \
                     <button type="button" class = "btn-new">New Game</button> \
                     <button type="button" class = "btn-restart">Restart Game</button> \
