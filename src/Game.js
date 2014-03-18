@@ -54,30 +54,32 @@
       return false;
     },
 
-    humanPlay: function(callback) {
+    humanPlay: function() {
       UI.showHumanMessage();
-      $("tr td").click(function(e) {
-        if (Human.choiceSpot(GameBoard, e.target.id, Game.user)) {
-          UI.unbindClick("tr td");
-          UI.hideHumanMessage();
-          if (Game.nextTurn(Game.user) === false) {
-            callback(Game.play);
-          }
-        }
-        else {
-          return;
-        }
-      })
+      UI.clickSpot(Game.humanChoice)
     },
 
-    computerPlay: function(callback) {
+    humanChoice: function(chosenSpotID, callback) {
+      if (Human.choiceSpot(GameBoard, chosenSpotID, Game.user)) {
+        UI.unbindClick("tr td");
+        UI.hideHumanMessage();
+        if (Game.nextTurn(Game.user) === false) {
+          callback(Game.play);
+        }
+      }
+      else {
+        return;
+      }
+    },
+
+    computerPlay: function() {
       UI.showComputerMessage(Game.computerChoice)
     },
 
     computerChoice: function(callback) {
       Computer.chooseTheBestSpot(Game.computer);
       if (Game.nextTurn(Game.computer) === false) {
-        callback();
+        callback(Game.play);
       }
     },
 
@@ -91,10 +93,10 @@
 
     play: function() {
       if (Game.goFirst === "y") {
-        Game.humanPlay(Game.computerPlay);
+        Game.humanPlay();
       }
       else if (Game.goFirst === "n") {
-        Game.computerPlay(Game.humanPlay);
+        Game.computerPlay();
       }
     },
 
@@ -102,7 +104,7 @@
       UI.hideButton(".btn-restart", ".btn-new");
       UI.hideComputerMessage();
       UI.hideHumanMessage();
-      UI.ClickButton(".btn-start", Game.introGame);
+      UI.clickButton(".btn-start", Game.introGame);
     },
 
     resetGame: function() {
@@ -113,11 +115,11 @@
     newGame: function() {
       UI.hideComputerMessage();
       UI.hideHumanMessage();
-      UI.ClickButton(".btn-new", Game.introGame);
+      UI.clickButton(".btn-new", Game.introGame);
     },
 
     restartGame: function() {
-      UI.ClickButton(".btn-restart", Game.introGame);
+      UI.clickButton(".btn-restart", Game.introGame);
     }
   };
   window.Game = Game;

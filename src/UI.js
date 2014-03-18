@@ -2,7 +2,7 @@
   var UI = {
     showComputerMessage: function(callback) {
       $("#Computer").show(200, function() {
-        callback(Game.play);
+        callback(Game.humanPlay);
       });
     },
 
@@ -22,7 +22,13 @@
       return $(element).attr('class')
     },
 
-    ClickButton: function(button, callback) {
+    clickSpot: function(callback) {
+      $("tr td").click(function(e) {
+        callback(e.target.id, Game.computerPlay);
+      });
+    },
+
+    clickButton: function(button, callback) {
       $(button).click(function(e) {
         if (button == ".btn-new") {
           UI.unbindClick(".btn-new");
