@@ -138,6 +138,15 @@
 
     restartGame: function() {
       this.clickButton(".btn-restart", Game.introGame);
+    },
+
+    humanPlay: function() {
+      UI.showHumanMessage();
+      UI.clickSpot(Game.humanChoice)
+    },
+
+    computerPlay: function() {
+      UI.showComputerMessage(Game.computerChoice);
     }
   };
   window.UI = UI;
