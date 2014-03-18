@@ -54,6 +54,14 @@
       return false;
     },
 
+    setChosenSpot: function(chosenSpotId, currentPlayer) {
+      $("#" + chosenSpotId).text(currentPlayer);
+    },
+
+    checkChosenSpotAvailable: function(chosenSpotId) {
+      return $("#" + chosenSpotId).text() == ""
+    },    
+
     humanPlay: function(callback) {
       UI.showHumanMessage();
       $("tr td").click(function(e) {
