@@ -5,10 +5,6 @@
     computer: "O",
     goFirst: null,
 
-    checkChosenSpotAvailable: function(chosenSpotId) {
-      return UI.getTextContents(chosenSpotId) == ""
-    },
-
     winner: function(currentPlayer) {
       return currentPlayer == "X" ? "Player" : "Computer";
     },
