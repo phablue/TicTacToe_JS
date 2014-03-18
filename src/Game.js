@@ -41,7 +41,7 @@
       if (Human.choiceSpot(GameBoard, chosenSpotID, Game.user)) {
         UI.unbindClick("tr td");
         UI.hideHumanMessage();
-        if (Game.nextTurn(Game.user) === false) {
+        if (Game.checkGameOver(Game.user) === false) {
           callback(Game.play);
         }
       }
@@ -56,7 +56,7 @@
 
     computerChoice: function(callback) {
       Computer.chooseTheBestSpot(Game.computer);
-      if (Game.nextTurn(Game.computer) === false) {
+      if (Game.checkGameOver(Game.computer) === false) {
         callback(Game.play);
       }
     },
