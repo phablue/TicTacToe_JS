@@ -12,7 +12,7 @@
     },
 
     markChosenSpot: function(board, chosenSpotId, currentPlayer) {
-      Game.setChosenSpot(chosenSpotId, currentPlayer);
+      UI.setTextContents(chosenSpotId, currentPlayer);
       board.spots[chosenSpotId] = currentPlayer;
     }
   };

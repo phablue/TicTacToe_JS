@@ -5,6 +5,14 @@
     computer: "O",
     goFirst: null,
 
+    checkChosenSpotAvailable: function(chosenSpotId) {
+      return $("#" + chosenSpotId).text() == ""
+    },
+
+    winner: function(currentPlayer) {
+      return currentPlayer == "X" ? "Player" : "Computer";
+    },
+
     visualAfterChoice: function(button) {
       if ($(button).attr('class') == "btn btn-start") {
         UI.toggleDisplayedButton(".btn-start", ".btn-new");
@@ -15,16 +23,12 @@
     },
 
     visualAfterGameOver: function() {
-      $("tr td").unbind();
+      UI.unbindClick("tr td");
       UI.toggleDisplayedButton(".btn-new", ".btn-restart");
       UI.hideComputerMessage();
       UI.hideHumanMessage();
       this.restartGame();
       return true;
-    },
-
-    winner: function(currentPlayer) {
-      return currentPlayer == "X" ? "Player" : "Computer";
     },
 
     firstMove: function(button) {
@@ -54,19 +58,11 @@
       return false;
     },
 
-    setChosenSpot: function(chosenSpotId, currentPlayer) {
-      $("#" + chosenSpotId).text(currentPlayer);
-    },
-
-    checkChosenSpotAvailable: function(chosenSpotId) {
-      return $("#" + chosenSpotId).text() == ""
-    },    
-
     humanPlay: function(callback) {
       UI.showHumanMessage();
       $("tr td").click(function(e) {
         if (Human.choiceSpot(GameBoard, e.target.id, Game.user)) {
-          $("tr td").unbind("click");
+          UI.unbindClick("tr td");
           UI.hideHumanMessage();
           if (Game.nextTurn(Game.user) === false) {
             callback(Game.play);
@@ -115,16 +111,17 @@
     },
 
     resetGame: function() {
-      $("tr td").empty();
+      UI.removeText("tr td");
       GameBoard.resetBoard();
     },
 
     newGame: function() {
       $(".btn-new").click(function(e) {
-        $(".btn-new").unbind("click");
+        UI.unbindClick(".btn-new");
+        UI.unbindClick("tr td");
         Game.resetGame();
-        $("tr td").unbind("click");
         Game.introGame(e.target);
+        e.stopPropagation();
       });
     },
 

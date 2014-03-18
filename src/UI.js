@@ -12,6 +12,18 @@
       $("#Human").hide();
     },
 
+    unbindClick: function(element) {
+      $(element).unbind("click");
+    },
+
+    removeText: function(element) {
+      $(element).empty();
+    },
+
+    setTextContents: function(elementID, TextContents) {
+      $("#" + elementID).text(TextContents);
+    },
+
     spotErrorMessage: function() {
       alert("That is not an available spot.\nPlease choose a different spot.");
     },
