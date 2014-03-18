@@ -188,4 +188,51 @@ describe ("Test UI", function () {
       expect($(".btn-restart")).toBeHidden();
     });
   });
+
+  describe ("Test visualAfterChoice function", function() {
+    var toggleDisplayedButton;
+    var e;
+
+    beforeEach (function() {
+      e = jQuery.Event("click");
+      toggleDisplayedButton = spyOn(UI, "toggleDisplayedButton");
+      setFixtures(' <button type="button" class = "btn btn-start">Start Game</button> \
+                    <button type="button" class = "btn-new">New Game</button> \
+                    <button type="button" class = "btn-restart">Restart Game</button> ');
+    });
+
+    it ("call toggleDisplay function with start and new argument If button is start", function() {
+      jQuery(".btn-start").trigger(e);
+      UI.visualAfterChoice(e.target);
+      expect(toggleDisplayedButton).toHaveBeenCalledWith('.btn-start', '.btn-new');
+    });
+
+    it ("call toggleDisplay function with restart and new argument If button is not start", function() {
+      jQuery(".btn-new").trigger(e);
+      UI.visualAfterChoice(e.target);
+      expect(toggleDisplayedButton).toHaveBeenCalledWith('.btn-restart', '.btn-new');
+    });
+  });
+
+  describe ("Test visualAfterGameOver function", function() {
+    var toggleDisplayedButton;
+    var restartGame;
+    var unbind;
+    var click;
+
+    beforeEach (function() {
+      toggleDisplayedButton = spyOn(UI, "toggleDisplayedButton");
+      restartGame = spyOn(Game, "restartGame");
+      unbind = spyOn($.fn, "unbind");
+      click = spyOnEvent('tr td', 'click');
+    });
+
+    it ("Test call function after game over", function() {
+      UI.visualAfterGameOver();
+      expect(unbind).toHaveBeenCalled();
+      expect(click).not.toHaveBeenTriggered();
+      expect(toggleDisplayedButton).toHaveBeenCalled();
+      expect(restartGame).toHaveBeenCalled();
+    });
+  });
 });
