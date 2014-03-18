@@ -2,7 +2,7 @@
   var UI = {
     showComputerMessage: function(callback) {
       $("#Computer").show(200, function() {
-        callback(Game.humanPlay);
+        callback(UI.humanPlay);
       });
     },
 
@@ -24,7 +24,7 @@
 
     clickSpot: function(callback) {
       $("tr td").click(function(e) {
-        callback(e.target.id, Game.computerPlay);
+        callback(e.target.id, UI.computerPlay);
       });
     },
 
