@@ -53,7 +53,7 @@ describe ("Test UI", function () {
     var computerChoice;
 
     beforeEach(function() {
-      introGame = spyOn(Game, "introGame");
+      introGame = spyOn(UI, "introGame");
       humanChoice = spyOn(Game, "humanChoice");
       unbindClick = spyOn(UI, "unbindClick");
       resetGame = spyOn(UI, "resetGame");
