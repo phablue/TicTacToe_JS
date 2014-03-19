@@ -35,16 +35,19 @@
         }
         if (button == "#Xmark" || button == "#Omark") {
           Game.currentPlayer = UI.getTextContents(e.target.id);
-          UI.toggleDisplayedButton(".playerMark", ".game");          
+          UI.toggleDisplayedButton(".playerMark", ".game");
         }
-        // else if (button == ".btn-new") {
-        //   UI.unbindClick(".btn-new");
-        //   UI.unbindClick("tr td");
-        //   UI.resetGame();
-        // }
-        // else if (button == ".btn-restart") {
-        //   UI.resetGame();
-        // }
+        else if (button == ".btn-new") {
+          UI.hideButton(".game")
+          UI.unbindClick("button");
+          UI.unbindClick("tr td");
+          UI.resetGame();
+        }
+        else if (button == ".btn-restart") {
+          UI.hideButton(".game")
+          UI.unbindClick("button");
+          UI.resetGame();
+        }
         e.stopPropagation();
         callback(e.target);
       });
@@ -126,6 +129,7 @@
     },
 
     choiceMark: function() {
+      UI.hideButton(".btn-new", ".btn-restart");
       UI.toggleDisplayedButton(".menu", ".playerMark");
       UI.clickButton("#Xmark", UI.introGame);
       UI.clickButton("#Omark", UI.introGame);
@@ -138,9 +142,7 @@
 
     introGame: function(button) {
       UI.newGame();
-      if (Game.firstMove(button) === true) {
-        return;
-      }
+      Game.firstMove(button);
       Game.playGame();
     },
 
@@ -158,11 +160,11 @@
     newGame: function() {
       this.hideComputerMessage();
       this.hideHumanMessage();
-      this.clickButton(".btn-new", UI.introGame);
+      this.clickButton(".btn-new", UI.mainGame);
     },
 
     restartGame: function() {
-      this.clickButton(".btn-restart", UI.introGame);
+      this.clickButton(".btn-restart", UI.mainGame);
     },
 
     humanPlay: function() {

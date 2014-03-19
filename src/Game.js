@@ -14,10 +14,7 @@
 
     firstMove: function(button) {
       var input = UI.askFirstMove();
-      if (input === null || input === "") {
-        return true;
-      }
-      else if(input == "y" || input == "n") {
+      if(input == "y" || input == "n") {
         UI.visualAfterChoice(button);
         this.goFirst = input;
       }
