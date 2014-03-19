@@ -59,6 +59,43 @@ body {
   width: 350px;
 }
 
+.playerMark {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 50%;
+  margin: auto;
+  padding-top: 180px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.Xmark {
+  color: #F6F6F6;
+  background-color: black;
+  border-color: #ccc;
+  border-radius: 6px;
+  font-size: 100px;
+  font-weight: 600;
+  height: 120px;
+  margin-right: 50px;
+  text-align: center;
+  width: 120px;
+}
+
+.Omark {
+  color: #F6F6F6;
+  background-color: black;
+  border-color: #ccc;
+  border-radius: 6px;
+  font-size: 100px;
+  font-weight: 600;
+  height: 120px;
+  text-align: center;
+  width: 120px;
+}
+
 .message {
   color: #E8E8E8;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
