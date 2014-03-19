@@ -91,7 +91,7 @@
     },
 
     visualAfterChoice: function(button) {
-      if (this.getClass(button) == "btn btn-start") {
+      if (this.getClass(button) == "btn-start") {
         this.toggleDisplayedButton(".btn-start", ".btn-new");
       }
       else {
