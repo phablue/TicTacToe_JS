@@ -78,7 +78,7 @@ p {
   letter-spacing: 3px;
 }
 
-.Xmark {
+#Xmark {
   color: #F6F6F6;
   background-color: black;
   border-color: #ccc;
@@ -91,7 +91,7 @@ p {
   width: 120px;
 }
 
-.Omark {
+#Omark {
   color: #F6F6F6;
   background-color: black;
   border-color: #ccc;
