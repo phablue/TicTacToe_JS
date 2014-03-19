@@ -132,8 +132,8 @@
     },
 
     mainGame: function() {
-      this.hideButton(".game", ".playerMark");
-      this.clickButton(".player");
+      UI.toggleDisplayedButton(".btn-start", ".menu");
+      UI.clickButton(".player");
     },
 
     introGame: function(button) {
@@ -145,10 +145,9 @@
     },
 
     startGame: function() {
-      this.hideButton(".btn-restart", ".btn-new");
-      this.hideComputerMessage();
-      this.hideHumanMessage();
-      this.clickButton(".btn-start", UI.introGame);
+      this.hideButton(".menu");
+      this.hideButton(".game", ".playerMark");
+      this.clickButton(".btn-start", UI.mainGame);
     },
 
     resetGame: function() {

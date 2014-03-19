@@ -1,3 +1,3 @@
 $(function(){
-  UI.mainGame();
+  UI.startGame();
 });
