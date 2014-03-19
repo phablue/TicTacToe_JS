@@ -30,18 +30,21 @@
 
     clickButton: function(button, callback) {
       $(button).click(function(e) {
+        if (button == ".player") {
+          return UI.choiceMark();
+        }
         if (button == "#Xmark" || button == "#Omark") {
           Game.currentPlayer = UI.getTextContents(e.target.id);
           UI.toggleDisplayedButton(".playerMark", ".game");          
         }
-        if (button == ".btn-new") {
-          UI.unbindClick(".btn-new");
-          UI.unbindClick("tr td");
-          UI.resetGame();
-        }
-        else if (button == ".btn-restart") {
-          UI.resetGame();
-        }
+        // else if (button == ".btn-new") {
+        //   UI.unbindClick(".btn-new");
+        //   UI.unbindClick("tr td");
+        //   UI.resetGame();
+        // }
+        // else if (button == ".btn-restart") {
+        //   UI.resetGame();
+        // }
         e.stopPropagation();
         callback(e.target);
       });
@@ -122,13 +125,15 @@
       }
     },
 
+    choiceMark: function() {
+      UI.toggleDisplayedButton(".menu", ".playerMark");
+      UI.clickButton("#Xmark", UI.introGame);
+      UI.clickButton("#Omark", UI.introGame);
+    },
+
     mainGame: function() {
       this.hideButton(".game", ".playerMark");
-      $(".player").click(function(e) {
-        UI.toggleDisplayedButton(".menu", ".playerMark");
-        UI.clickButton("#Xmark", UI.introGame);
-        UI.clickButton("#Omark", UI.introGame);
-      });
+      this.clickButton(".player");
     },
 
     introGame: function(button) {
