@@ -1,9 +1,12 @@
 (function() {
   var input;
   var Game = {
-    user: "X",
-    computer: "O",
+    currentPlayer: null,
     goFirst: null,
+
+    changeCurrentPlayer: function(currentPlayer) {
+      this.currentPlayer = currentPlayer == "X" ? "O" : "X";
+    },
 
     winner: function(currentPlayer) {
       return currentPlayer == "X" ? "Player" : "Computer";
@@ -25,6 +28,7 @@
     },
 
     checkGameOver: function(currentPlayer) {
+      Game.changeCurrentPlayer(Game.currentPlayer);
       if(GameRules.gameOver(GameBoard)) {
         UI.visualWhenGameOver(currentPlayer);
         return true;
@@ -33,10 +37,10 @@
     },
 
     humanChoice: function(chosenSpotID, callback) {
-      if (Human.choiceSpot(GameBoard, chosenSpotID, Game.user)) {
+      if (Human.choiceSpot(GameBoard, chosenSpotID, Game.currentPlayer)) {
         UI.unbindClick("tr td");
         UI.hideHumanMessage();
-        if (Game.checkGameOver(Game.user) === false) {
+        if (Game.checkGameOver(Game.currentPlayer) === false) {
           callback(Game.playGame);
         }
       }
@@ -46,8 +50,8 @@
     },
 
     computerChoice: function(callback) {
-      Computer.chooseTheBestSpot(Game.computer);
-      if (Game.checkGameOver(Game.computer) === false) {
+      Computer.chooseTheBestSpot(Game.currentPlayer);
+      if (Game.checkGameOver(Game.currentPlayer) === false) {
         callback(Game.playGame);
       }
     },
