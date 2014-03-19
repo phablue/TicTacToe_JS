@@ -33,7 +33,10 @@
         if (button == ".player") {
           return UI.choiceMark();
         }
-        if (button == "#Xmark" || button == "#Omark") {
+        else if (button == ".players") {
+          return UI.choiceMark();
+        }
+        else if (button == "#Xmark" || button == "#Omark") {
           Game.currentPlayer = UI.getTextContents(e.target.id);
           UI.toggleDisplayedButton(".playerMark", ".game");
         }
@@ -138,6 +141,7 @@
     mainGame: function() {
       UI.toggleDisplayedButton(".btn-start", ".menu");
       UI.clickButton(".player");
+      UI.clickButton(".players");
     },
 
     introGame: function(button) {
