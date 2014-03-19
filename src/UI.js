@@ -51,7 +51,7 @@
       $(element).empty();
     },
 
-    getTextContents: function(elementID) {
+    getTextContents: function(element) {
       return $("#" + elementID).text()
     },
 
@@ -117,6 +117,25 @@
         this.visualAfterGameOver();
       }
     },
+
+    mainGame: function() {
+      $(".game").hide();
+      $(".playerMark").hide();
+      $(".player").click(function(e) {
+        $(".menu").hide();
+        $(".playerMark").show();
+        $("#Xmark").click(function(e) {
+          Game.currentPlayer = UI.getTextContents(e.target.id);
+          UI.toggleDisplayedButton(".playerMark", ".game");
+          UI.introGame();
+        });
+        $("#Omark").click(function(e) {
+          Game.currentPlayer = UI.getTextContents(e.target.id);
+          UI.toggleDisplayedButton(".playerMark", ".game");
+          UI.introGame();
+        });        
+      });
+    },    
 
     introGame: function(button) {
       UI.newGame();
