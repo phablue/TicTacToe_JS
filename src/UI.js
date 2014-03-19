@@ -1,7 +1,7 @@
 (function() {
   var UI = {
     showComputerMessage: function(callback) {
-      $("#Computer").show(200, function() {
+      $("#Computer").show("fast", function() {
         callback(UI.humanPlay);
       });
     },
