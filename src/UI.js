@@ -51,7 +51,7 @@
       $(element).empty();
     },
 
-    getTextContents: function(element) {
+    getTextContents: function(elementID) {
       return $("#" + elementID).text()
     },
 
