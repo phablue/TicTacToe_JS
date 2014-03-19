@@ -123,22 +123,21 @@ p {
 .message {
   color: #E8E8E8;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  height: 50px;
+  height: 45px;
   line-height: 1.0;
   margin: auto;
   text-align: center;
 }
 
 h1 {
-  font-size: 25px;
-  padding-bottom: 15px;
+  font-size: 20px;
 }
 
 .Board {
   color: #F6F6F6;
   font-size: 100px;
   font-weight: 600;
-  height: 50%;
+  height: 49%;
   margin: auto;
   padding-top: 10px;
   text-align: center;
