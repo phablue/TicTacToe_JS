@@ -30,6 +30,10 @@
 
     clickButton: function(button, callback) {
       $(button).click(function(e) {
+        if (button == "#Xmark" || button == "#Omark") {
+          Game.currentPlayer = UI.getTextContents(e.target.id);
+          UI.toggleDisplayedButton(".playerMark", ".game");          
+        }
         if (button == ".btn-new") {
           UI.unbindClick(".btn-new");
           UI.unbindClick("tr td");
@@ -119,23 +123,13 @@
     },
 
     mainGame: function() {
-      $(".game").hide();
-      $(".playerMark").hide();
+      this.hideButton(".game", ".playerMark");
       $(".player").click(function(e) {
-        $(".menu").hide();
-        $(".playerMark").show();
-        $("#Xmark").click(function(e) {
-          Game.currentPlayer = UI.getTextContents(e.target.id);
-          UI.toggleDisplayedButton(".playerMark", ".game");
-          UI.introGame();
-        });
-        $("#Omark").click(function(e) {
-          Game.currentPlayer = UI.getTextContents(e.target.id);
-          UI.toggleDisplayedButton(".playerMark", ".game");
-          UI.introGame();
-        });        
+        UI.toggleDisplayedButton(".menu", ".playerMark");
+        UI.clickButton("#Xmark", UI.introGame);
+        UI.clickButton("#Omark", UI.introGame);
       });
-    },    
+    },
 
     introGame: function(button) {
       UI.newGame();
