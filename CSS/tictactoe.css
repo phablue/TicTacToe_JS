@@ -29,7 +29,7 @@ body {
   font-weight: 500;
   letter-spacing: 3px;
   line-height: 1.2;
-  margin-top: 180px;
+  margin-top: 200px;
   padding: 10px 13px;
   text-align: center;
   width: 350px;
@@ -42,7 +42,7 @@ body {
   font-size: 14px;
   height: 50%;
   margin: auto;
-  padding-top: 180px;
+  padding-top: 140px;
   text-align: center;
   vertical-align: middle;
 }
@@ -83,7 +83,7 @@ body {
   font-size: 14px;
   height: 50%;
   margin: auto;
-  padding-top: 180px;
+  padding-top: 100px;
   text-align: center;
   vertical-align: middle;
 }
