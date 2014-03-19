@@ -123,7 +123,7 @@ p {
 .message {
   color: #E8E8E8;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  height: 45px;
+  height: 30px;
   line-height: 1.0;
   margin: auto;
   text-align: center;
@@ -137,9 +137,8 @@ h1 {
   color: #F6F6F6;
   font-size: 100px;
   font-weight: 600;
-  height: 49%;
+  height: 400px;
   margin: auto;
-  padding-top: 10px;
   text-align: center;
   width: 400px;
 }
@@ -157,7 +156,7 @@ th, td {
   cursor: pointer;
   font-size: 14px;
   font-weight: 400;
-  height: 20%;
+  height: 30px;
   margin: auto;
   padding: 50px;
   line-height: 1.5;
