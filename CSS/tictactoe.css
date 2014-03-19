@@ -74,7 +74,9 @@ h1 {
 }
 
 .Board {
-  font-size: 20px;
+  color: #F6F6F6;
+  font-size: 100px;
+  font-weight: 600;
   height: 50%;
   margin: auto;
   padding-top: 10px;
