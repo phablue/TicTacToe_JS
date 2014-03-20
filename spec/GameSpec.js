@@ -17,11 +17,11 @@ describe ("Test Game", function() {
 
   describe ("Teste firstMove function", function() {
     var input;
-    var visualAfterChoice;
+    var toggleDisplayedButton;
 
     beforeEach(function() {
       Game.currentPlayer = "";
-      visualAfterChoice = spyOn(UI, "visualAfterChoice");
+      toggleDisplayedButton = spyOn(UI, "toggleDisplayedButton");
     })
 
     // it ("If input is null return true", function() {
@@ -36,19 +36,19 @@ describe ("Test Game", function() {
     //   expect(Game.firstMove()).toBeTruthy();
     // })
 
-    it ("If input is 'y', will call visualAfterChoice() and will change current player", function() {
+    it ("If input is 'y', will call toggleDisplayedButton() and will change current player", function() {
       var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue("y");
       input = askFirstMove;
       Game.firstMove();
-      expect(visualAfterChoice).toHaveBeenCalled();
+      expect(toggleDisplayedButton).toHaveBeenCalled();
       expect(Game.goFirst).toBe("y");
     })
 
-    it ("If input is 'n', will call visualAfterChoice() and will change current player", function() {
+    it ("If input is 'n', will call toggleDisplayedButton() and will change current player", function() {
       var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue("n");
       input = askFirstMove;
       Game.firstMove();
-      expect(visualAfterChoice).toHaveBeenCalled();
+      expect(toggleDisplayedButton).toHaveBeenCalled();
       expect(Game.goFirst).toBe("n");
     })
   });
