@@ -24,17 +24,17 @@ describe ("Test Game", function() {
       visualAfterChoice = spyOn(UI, "visualAfterChoice");
     })
 
-    it ("If input is null return true", function() {
-      var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue(null);
-      input = askFirstMove;
-      expect(Game.firstMove()).toBeTruthy();
-    })
+    // it ("If input is null return true", function() {
+    //   var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue(null);
+    //   input = askFirstMove;
+    //   expect(Game.firstMove()).toBeTruthy();
+    // })
 
-    it ("If input is '' return true", function() {
-      var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue("");
-      input = askFirstMove;
-      expect(Game.firstMove()).toBeTruthy();
-    })
+    // it ("If input is '' return true", function() {
+    //   var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue("");
+    //   input = askFirstMove;
+    //   expect(Game.firstMove()).toBeTruthy();
+    // })
 
     it ("If input is 'y', will call visualAfterChoice() and will change current player", function() {
       var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue("y");
@@ -99,16 +99,33 @@ describe ("Test Game", function() {
       computerPlay = spyOn(UI, "computerPlay");
     });
 
-    it ("call humanplay if goFirst is 'y'", function() {
-      Game.goFirst = "y";
-      Game.playGame();
-      expect(humanPlay).toHaveBeenCalled();
+    describe("when human vs. computer", function() {
+      beforeEach(function() {
+        UI.gameType = ".player";
+      });
+
+      it ("call humanplay if goFirst is 'y'", function() {
+        Game.goFirst = "y";
+        Game.playGame();
+        expect(humanPlay).toHaveBeenCalled();
+      });
+
+      it ("call computerPlay if goFirst is 'n'", function() {
+        Game.goFirst = "n";
+        Game.playGame();
+        expect(computerPlay).toHaveBeenCalled();
+      });
     });
 
-    it ("call computerPlay if goFirst is 'n'", function() {
-      Game.goFirst = "n";
-      Game.playGame();
-      expect(computerPlay).toHaveBeenCalled();
+    describe("when human vs. human", function() {
+      beforeEach(function() {
+        UI.gameType = ".players";
+      });
+
+      it ("call humanplay", function() {
+        Game.playGame();
+        expect(humanPlay).toHaveBeenCalled();
+      });
     });
   });
 });
