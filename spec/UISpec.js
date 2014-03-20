@@ -96,8 +96,6 @@ describe ("Test UI", function () {
           UI.clickSpot(Game.humanChoice);
           $("tr td").click();
           expect(humanChoice).toHaveBeenCalled();
-          expect(computerPlay).toHaveBeenCalled();
-          expect(computerChoice).toHaveBeenCalled();
         });
       });
 
@@ -107,7 +105,6 @@ describe ("Test UI", function () {
           UI.clickSpot(Game.humanChoice);
           $("tr td").click();
           expect(humanChoice).toHaveBeenCalled();
-          expect(humanPlay).toHaveBeenCalled();
         });
       });
     });
