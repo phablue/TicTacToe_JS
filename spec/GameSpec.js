@@ -1,17 +1,35 @@
 describe ("Test Game", function() {
   describe ("Test winner function", function() {
-    var thePlayer;
+    describe("when human vs. computer", function() {
+      beforeEach(function() {
+        UI.gameType = ".player";
+      });
 
-    it ("Player1 if current player is 'X'", function() {
-      currentPlayer = "X"
-      thePlayer = Game.winner(currentPlayer);
-      expect(thePlayer).toBe("Player");
+      it ("Return Player if current player is 'X'", function() {
+        currentPlayer = "X"
+        expect(Game.winner(currentPlayer)).toBe("Player");
+      });
+
+      it ("Return Computer if current player is 'O'", function() {
+        currentPlayer = "O"
+        expect(Game.winner(currentPlayer)).toBe("Computer");
+      });
     });
 
-    it ("Player1 if current player is 'X'", function() {
-      currentPlayer = "O"
-      thePlayer = Game.winner(currentPlayer);
-      expect(thePlayer).toBe("Computer");
+    describe("when human vs. human", function() {
+      beforeEach(function() {
+        UI.gameType = ".players";
+      });
+
+      it ("Return Player 'X' if current player is 'X'", function() {
+        currentPlayer = "X"
+        expect(Game.winner(currentPlayer)).toBe("Player 'X'");
+      });
+
+      it ("Return Player 'O' if current player is 'O'", function() {
+        currentPlayer = "O"
+        expect(Game.winner(currentPlayer)).toBe("Player 'O'");
+      });
     });
   });
 
