@@ -122,15 +122,18 @@ p {
 
 .message {
   color: #E8E8E8;
+  display: block;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  height: 30px;
+  height: 50px;
   line-height: 1.0;
   margin: auto;
+  position: static;
   text-align: center;
 }
 
 h1 {
   font-size: 20px;
+  margin: auto;
 }
 
 .Board {
@@ -139,6 +142,7 @@ h1 {
   font-weight: 600;
   height: 400px;
   margin: auto;
+  position: static;
   text-align: center;
   width: 400px;
 }
@@ -154,11 +158,13 @@ th, td {
   border: 1px solid transparent;
   border-radius: 4px;
   cursor: pointer;
+  display: block;
   font-size: 14px;
   font-weight: 400;
   height: 30px;
   margin: auto;
   padding: 50px;
+  position: static;
   line-height: 1.5;
   text-align: center;
   white-space: nowrap;
