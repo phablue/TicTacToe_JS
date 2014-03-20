@@ -163,8 +163,6 @@ describe ("Test UI", function () {
           UI.clickButton(".btn-restart", UI.mainGame);
           $(".btn-restart").click();
           expect(resetGame).toHaveBeenCalled();
-          expect($("tr td")).toBeEmpty();
-          expect(GameBoard.spots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
         });
 
         it("Call mainGame function", function() {
