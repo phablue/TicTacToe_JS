@@ -9,7 +9,10 @@
     },
 
     winner: function(currentPlayer) {
-      return currentPlayer == "X" ? "Player" : "Computer";
+      if(UI.gameType === ".player") {
+        return currentPlayer == "X" ? "Player" : "Computer";
+      }
+      return currentPlayer == "X" ? "Player 'X'" : "Player 'O'";
     },
 
     firstMove: function() {
