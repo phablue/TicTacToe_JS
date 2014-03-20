@@ -26,10 +26,7 @@
 
     clickButton: function(button, callback) {
       $(button).click(function(e) {
-        if (button == ".player") {
-          return UI.choiceMark();
-        }
-        else if (button == ".players") {
+        if (button == ".player" || button == ".players") {
           return UI.choiceMark();
         }
         else if (button == "#Xmark" || button == "#Omark") {
