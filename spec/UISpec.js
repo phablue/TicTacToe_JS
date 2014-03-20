@@ -73,7 +73,7 @@ describe ("Test UI", function () {
       humanPlay = spyOn(UI, "humanPlay");
       humanChoice = spyOn(Game, "humanChoice");
       unbindClick = spyOn(UI, "unbindClick");
-      resetGame = spyOn(UI, "resetGame");
+      resetGame = spyOn(UI, "resetGame")
       computerChoice = spyOn(Game, "computerChoice");
       clickspot = spyOnEvent('tr td', 'click');
       clickbutton = spyOnEvent('button', 'click');
@@ -426,24 +426,38 @@ describe ("Test UI", function () {
 
   describe ("Test startGame function", function() {
     var hideButton;
-    var hideComputerMessage;
-    var hideHumanMessage;
-    var introGame;
+    var mainGame;
 
     beforeEach(function () {
-      hideButton = spyOn(UI, "hideButton");
-      hideComputerMessage = spyOn(UI, "hideComputerMessage");
-      hideHumanMessage = spyOn(UI, "hideHumanMessage");
-      introGame = spyOn(UI, "introGame");
-      setFixtures(' <button type="button" class = "btn-start">Start Game</button> ');
+      hideButton = spyOn(UI, "hideButton").and.callThrough();
+      mainGame = spyOn(UI, "mainGame");
+      setFixtures(' <button type="button" class = "btn-start">Start Game</button> \
+                    <div class = "menu"> \
+                      <button type = "button" class = "player">1 Player</button><br> \
+                      <button type = "button" class = "players">2 Players</button> \
+                    </div> \
+                    <div class = "playerMark"> \
+                      <button type = "button" id = "Xmark">X</button> \
+                      <button type = "button" id = "Omark">O</button> \
+                    </div> \
+                    <div class = "game"> \
+                    <button type="button" class = "btn-new">New Game</button> \
+                    <table> <td id = "0"></td><td id = "1"></td><td id = "2"></td></table> \
+                    </div>');
     });
 
-    it ("after start button click call introGame", function() {
+    it ("hide menu, game, mark buttons", function() {
       UI.startGame();
-      expect(hideComputerMessage).toHaveBeenCalled();
-      expect(hideHumanMessage).toHaveBeenCalled();
+      expect(hideButton).toHaveBeenCalledWith(".menu");
+      expect($(".menu")).toBeHidden();
+      expect($(".game")).toBeHidden();
+      expect($(".playerMark")).toBeHidden();
+    });
+
+    it ("vall mainGame function when click statGame button", function() {
+      UI.startGame();
       $(".btn-start").click();
-      expect(introGame).toHaveBeenCalled();
+      expect(mainGame).toHaveBeenCalled();
     });
   });
 
