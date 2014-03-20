@@ -1,5 +1,7 @@
 (function() {
   var UI = {
+    gameType: null,
+
     showComputerMessage: function(callback) {
       $("#Computer").show("fast", function() {
         callback(UI.humanPlay);
@@ -20,13 +22,20 @@
 
     clickSpot: function(callback) {
       $("tr td").click(function(e) {
-        callback(e.target.id, UI.computerPlay);
+        console.log(UI.gameType)
+        if (UI.gameType === ".player") {
+          callback(e.target.id, UI.computerPlay);
+        }
+        else {
+          callback(e.target.id, UI.humanPlay);
+        }
       });
     },
 
     clickButton: function(button, callback) {
       $(button).click(function(e) {
         if (button == ".player" || button == ".players") {
+          UI.gameType = button;
           return UI.choiceMark();
         }
         else if (button == "#Xmark" || button == "#Omark") {
@@ -45,7 +54,7 @@
           UI.resetGame();
         }
         e.stopPropagation();
-        callback(e.target);
+        callback();
       });
     },
 

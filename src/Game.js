@@ -54,11 +54,16 @@
     },
 
     playGame: function() {
-      if (Game.goFirst === "y") {
-        UI.humanPlay();
+      if(UI.gameType === ".player") {
+        if (Game.goFirst === "y") {
+          UI.humanPlay();
+        }
+        else if (Game.goFirst === "n") {
+          UI.computerPlay();
+        }
       }
-      else if (Game.goFirst === "n") {
-        UI.computerPlay();
+      else { 
+        UI.humanPlay();
       }
     }
   };
