@@ -40,19 +40,7 @@ describe ("Test Game", function() {
     beforeEach(function() {
       Game.currentPlayer = "";
       toggleDisplayedButton = spyOn(UI, "toggleDisplayedButton");
-    })
-
-    // it ("If input is null return true", function() {
-    //   var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue(null);
-    //   input = askFirstMove;
-    //   expect(Game.firstMove()).toBeTruthy();
-    // })
-
-    // it ("If input is '' return true", function() {
-    //   var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue("");
-    //   input = askFirstMove;
-    //   expect(Game.firstMove()).toBeTruthy();
-    // })
+    });
 
     it ("If input is 'y', will call toggleDisplayedButton() and will change current player", function() {
       var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue("y");
@@ -60,7 +48,7 @@ describe ("Test Game", function() {
       Game.firstMove();
       expect(toggleDisplayedButton).toHaveBeenCalled();
       expect(Game.goFirst).toBe("y");
-    })
+    });
 
     it ("If input is 'n', will call toggleDisplayedButton() and will change current player", function() {
       var askFirstMove = spyOn(UI, "askFirstMove").and.returnValue("n");
@@ -68,7 +56,7 @@ describe ("Test Game", function() {
       Game.firstMove();
       expect(toggleDisplayedButton).toHaveBeenCalled();
       expect(Game.goFirst).toBe("n");
-    })
+    });
   });
 
   describe ("Test checkGameOver function", function() {
