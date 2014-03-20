@@ -12,7 +12,7 @@
       return currentPlayer == "X" ? "Player" : "Computer";
     },
 
-    firstMove: function(button) {
+    firstMove: function() {
       var input = UI.askFirstMove();
       if(input == "y" || input == "n") {
         UI.toggleDisplayedButton(".btn-restart", ".btn-new");
