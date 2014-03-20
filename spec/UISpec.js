@@ -54,6 +54,7 @@ describe ("Test UI", function () {
   });
 
   describe ("Test click", function() {
+    var choiceMark;
     var mainGame;
     var computerPlay;
     var humanPlay;
@@ -66,6 +67,7 @@ describe ("Test UI", function () {
 
     beforeEach(function() {
       GameBoard.spots = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      choiceMark = spyOn(UI, "choiceMark");
       mainGame = spyOn(UI, "mainGame");
       computerPlay = spyOn(UI, "computerPlay");
       humanPlay = spyOn(UI, "humanPlay");
@@ -113,6 +115,22 @@ describe ("Test UI", function () {
     });
 
     describe ("Test clickButton function", function() {
+      describe ("When player or players button clicks", function() {
+        it ("call choiceMark function and gametype is .player When player button clicks", function() {
+          UI.clickButton(".player", UI.mainGame);
+          $(".player").click();
+          expect(choiceMark).toHaveBeenCalled();
+          expect(UI.gameType).toHaveBeenCalled(".player");
+        });
+
+        it ("call choiceMark function and gametype is .players When players button clicks", function() {
+          UI.clickButton(".players", UI.mainGame);
+          $(".players").click();
+          expect(choiceMark).toHaveBeenCalled();
+          expect(UI.gameType).toHaveBeenCalled(".players");
+        });
+      });
+
       it("call mainGame function when start button click", function() {
         UI.clickButton(".btn-start", UI.mainGame);
         $(".btn-start").click();
