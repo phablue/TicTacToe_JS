@@ -84,9 +84,11 @@ describe ("Test UI", function () {
                       <button type = "button" id = "Xmark">X</button> \
                       <button type = "button" id = "Omark">O</button> \
                     </div> \
+                    <div class = "game"> \
                     <button type="button" class = "btn-new">New Game</button> \
                     <button type="button" class = "btn-restart">Restart Game</button> \
-                    <table> <td id = "0"></td><td id = "0"></td></table> ');
+                    <table> <td id = "0"></td><td id = "0"></td></table> \
+                    </div>');
     });
 
     describe ("Test clickSpot function", function() {
@@ -117,7 +119,7 @@ describe ("Test UI", function () {
       });
 
       describe ("When new button click", function() {
-        it("Hide game buttons", function() {
+        it("Hide game", function() {
           UI.clickButton(".btn-new", UI.mainGame);
           $(".btn-new").click();
           expect($(".game")).toBeHidden();
