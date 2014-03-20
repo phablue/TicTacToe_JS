@@ -65,6 +65,7 @@ describe ("Test UI", function () {
     var clickbutton;
 
     beforeEach(function() {
+      GameBoard.spots = [1, 2, 3, 4, 5, 6, 7, 8, 9];
       mainGame = spyOn(UI, "mainGame");
       computerPlay = spyOn(UI, "computerPlay");
       humanPlay = spyOn(UI, "humanPlay");
@@ -87,7 +88,7 @@ describe ("Test UI", function () {
                     <div class = "game"> \
                     <button type="button" class = "btn-new">New Game</button> \
                     <button type="button" class = "btn-restart">Restart Game</button> \
-                    <table> <td id = "0"></td><td id = "0"></td></table> \
+                    <table> <td id = "0"></td><td id = "1"></td><td id = "2"></td></table> \
                     </div>');
     });
 
@@ -132,12 +133,10 @@ describe ("Test UI", function () {
           expect(clickspot).not.toHaveBeenTriggered();
         });
 
-        it("Reset game", function() {
+        it("call Reset game", function() {          
           UI.clickButton(".btn-new", UI.mainGame);
           $(".btn-new").click();
           expect(resetGame).toHaveBeenCalled();
-          expect($("tr td")).toBeEmpty();
-          expect(GameBoard.spots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
         });
 
         it("Call mainGame function", function() {
