@@ -38,13 +38,6 @@ describe ("Test UI", function () {
     });
   });
 
-  describe ("Test get class function", function() {
-    it("get class in element", function() {
-      setFixtures(' <button type="button" class = "btn-start">Start Game</button> ');
-      expect(UI.getClass("button")).toBe("btn-start");
-    });
-  });
-
   describe ("Test click", function() {
     var introGame;
     var humanChoice;
@@ -186,31 +179,6 @@ describe ("Test UI", function () {
       UI.hideButton(".btn-restart", ".btn-new");
       expect($(".btn-new")).toBeHidden();
       expect($(".btn-restart")).toBeHidden();
-    });
-  });
-
-  describe ("Test visualAfterChoice function", function() {
-    var toggleDisplayedButton;
-    var e;
-
-    beforeEach (function() {
-      e = jQuery.Event("click");
-      toggleDisplayedButton = spyOn(UI, "toggleDisplayedButton");
-      setFixtures(' <button type="button" class = "btn btn-start">Start Game</button> \
-                    <button type="button" class = "btn-new">New Game</button> \
-                    <button type="button" class = "btn-restart">Restart Game</button> ');
-    });
-
-    it ("call toggleDisplay function with start and new argument If button is start", function() {
-      jQuery(".btn-start").trigger(e);
-      UI.visualAfterChoice(e.target);
-      expect(toggleDisplayedButton).toHaveBeenCalledWith('.btn-start', '.btn-new');
-    });
-
-    it ("call toggleDisplay function with restart and new argument If button is not start", function() {
-      jQuery(".btn-new").trigger(e);
-      UI.visualAfterChoice(e.target);
-      expect(toggleDisplayedButton).toHaveBeenCalledWith('.btn-restart', '.btn-new');
     });
   });
 
