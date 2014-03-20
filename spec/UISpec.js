@@ -253,15 +253,36 @@ describe ("Test UI", function () {
       expect(newGame).toHaveBeenCalled();
     });
 
-    it ("if goFirst is true return", function() {
+    it ("if goFirst is not y or n, goback to firstMove", function() {
+      firstMove = spyOn(Game, "firstMove").and.returnValue("i");
       play = spyOn(Game, "playGame");
-      firstMove = spyOn(Game, "firstMove").and.returnValue(true);
       UI.introGame();
-      expect(play).not.toHaveBeenCalled();
+      expect(firstMove).toHaveBeenCalled();
     });
 
-    it ("if goFirst is not true call play", function() {
+    it ("if goFirst is null, goback to firstMove", function() {
+      firstMove = spyOn(Game, "firstMove").and.returnValue(null);
+      play = spyOn(Game, "playGame");
+      UI.introGame();
+      expect(firstMove).toHaveBeenCalled();
+    });
+
+    it ("if goFirst is '', goback to firstMove", function() {
       firstMove = spyOn(Game, "firstMove").and.returnValue("");
+      play = spyOn(Game, "playGame");
+      UI.introGame();
+      expect(firstMove).toHaveBeenCalled();
+    });
+
+    it ("if goFirst is y call play", function() {
+      firstMove = spyOn(Game, "firstMove").and.returnValue("y");
+      play = spyOn(Game, "playGame");
+      UI.introGame();
+      expect(play).toHaveBeenCalled();
+    });
+
+    it ("if goFirst is n call play", function() {
+      firstMove = spyOn(Game, "firstMove").and.returnValue("n");
       play = spyOn(Game, "playGame");
       UI.introGame();
       expect(play).toHaveBeenCalled();
@@ -355,39 +376,66 @@ describe ("Test UI", function () {
     });
 
     it ("Shows message for human player after humanPlay running", function() {
-      UI.humanPlay(UI.computerPlay);
+      UI.humanPlay();
       expect(showHumanMessage).toHaveBeenCalled();
     });
 
     it ("cant click and hide human message after human choice a spot", function() {
-      UI.humanPlay(UI.computerPlay);
+      UI.humanPlay();
       $("#0").click();
       expect($("#0")).toHaveText("X");
       expect(click).not.toHaveBeenTriggered();
       expect(hideHumanMessage).toHaveBeenCalled();
-    })
+    });
 
-    it ("call computerPlay if not game over", function() {
-      UI.humanPlay(UI.computerPlay);
-      $("#0").click();
-      expect(computerPlay).toHaveBeenCalledWith(Game.playGame);
-    })
+    describe ("when human vs.computer", function() {
+      beforeEach(function() {
+        UI.gameType = ".player";
+      });
 
-    it ("tr td stop to click if game over", function() {
-      setFixtures('<table> <td id = "0">X</td></table>');
-      UI.humanPlay(UI.computerPlay);
-      $("#2").click();
-      expect($("tr td")).not.toHaveBeenTriggered();
-      expect(computerPlay).not.toHaveBeenCalledWith(Game.playGame);
-    })
-  })
+      it ("call computerPlay if not game over", function() {
+        UI.humanPlay();
+        $("#0").click();
+        expect(computerPlay).toHaveBeenCalledWith(Game.playGame);
+      })
+
+      it ("tr td stop to click if game over", function() {
+        setFixtures('<table> <td id = "0">X</td></table>');
+        UI.humanPlay();
+        $("#2").click();
+        expect($("tr td")).not.toHaveBeenTriggered();
+        expect(computerPlay).not.toHaveBeenCalledWith(Game.playGame);
+      })
+    });
+
+    describe ("when human vs. human", function() {
+      var humanPlay
+      beforeEach(function() {
+        UI.gameType = ".players";
+        humanPlay = spyOn(UI, "humanPlay");
+      });
+
+      it ("call humanPlay if not game over", function() {
+        UI.humanPlay();
+        $("#0").click();
+        expect(humanPlay).toHaveBeenCalled();
+      });
+
+      it ("tr td stop to click if game over", function() {
+        setFixtures('<table> <td id = "0">X</td></table>');
+        UI.humanPlay();
+        $("#2").click();
+        expect($("tr td")).not.toHaveBeenTriggered();
+      });
+    });
+  });
 
   describe ("Test computerPlay function", function() {
     var humanPlay;
-    var showComputerMessage;
+    var click;
 
     beforeEach(function() {
-      showComputerMessage = spyOnEvent("#Computer", "show");
+      click = spyOnEvent('tr td', 'click');
       humanPlay = spyOn(UI, "humanPlay");
       setFixtures(' <h1 id = "Computer">Please wait until computer choice..</h1> \
                     <table> <tr> \
@@ -398,14 +446,14 @@ describe ("Test UI", function () {
     });
 
     it ("call humanPlay if not game over", function() {
-      UI.computerPlay(UI.humanPlay);
+      UI.computerPlay();
       expect(humanPlay).toHaveBeenCalledWith(Game.playGame);
     });
 
     it ("tr td stop to click if game over", function() {
       setFixtures('<table> <td id = "0">X</td> <td id = "2">X</td></tr> </table>');
-      UI.computerPlay(UI.humanPlay);
-      expect(humanPlay).not.toHaveBeenCalledWith(Game.playGame);
-    })
+      UI.computerPlay();
+      expect($("tr td")).not.toHaveBeenTriggered();
+    });
   });
 });
