@@ -120,14 +120,42 @@ describe ("Test UI", function () {
           UI.clickButton(".player", UI.mainGame);
           $(".player").click();
           expect(choiceMark).toHaveBeenCalled();
-          expect(UI.gameType).toHaveBeenCalled(".player");
+          expect(UI.gameType).toBe(".player");
         });
 
         it ("call choiceMark function and gametype is .players When players button clicks", function() {
           UI.clickButton(".players", UI.mainGame);
           $(".players").click();
           expect(choiceMark).toHaveBeenCalled();
-          expect(UI.gameType).toHaveBeenCalled(".players");
+          expect(UI.gameType).toBe(".players");
+        });
+      });
+
+      describe ("When mark buttons click", function() {
+        it ("hide plaryMark buttons", function() {
+          UI.clickButton("#Xmark", UI.mainGame);
+          $("#Xmark").click();
+          expect($(".playerMark")).toBeHidden();
+        });
+
+        it ("show game", function() {
+          UI.clickButton("#Xmark", UI.mainGame);
+          $("#Xmark").click();
+          expect($(".game")).toBeVisible();
+        });
+
+        it ("currentPlayer is 'X' When Xmark button clicks", function() {
+          UI.clickButton("#Xmark", UI.mainGame);
+          $("#Xmark").click();
+          expect($(".playerMark")).toBeHidden();
+          expect(Game.currentPlayer).toBe("X");
+        });
+
+        it ("currentPlayer is 'O' When Omark button clicks", function() {
+          UI.clickButton("#Omark", UI.mainGame);
+          $("#Omark").click();
+          expect($(".playerMark")).toBeHidden();
+          expect(Game.currentPlayer).toBe("O");
         });
       });
 
