@@ -103,15 +103,6 @@
       $(hideClass2).hide();
     },
 
-    visualAfterChoice: function(button) {
-      if (this.getClass(button) == "btn-start") {
-        this.toggleDisplayedButton(".btn-start", ".btn-new");
-      }
-      else {
-        this.toggleDisplayedButton(".btn-restart", ".btn-new");
-      }
-    },
-
     visualAfterGameOver: function() {
       this.unbindClick("tr td");
       this.toggleDisplayedButton(".btn-new", ".btn-restart");

@@ -15,7 +15,7 @@
     firstMove: function(button) {
       var input = UI.askFirstMove();
       if(input == "y" || input == "n") {
-        UI.visualAfterChoice(button);
+        UI.toggleDisplayedButton(".btn-restart", ".btn-new");
         this.goFirst = input;
       }
       else {
