@@ -66,14 +66,14 @@ describe ("Test UI", function () {
     var clickbutton;
 
     beforeEach(function() {
-      GameBoard.spots = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      GameBoard.spots = ["X", "O", 3, 4, 5, 6, 7, 8, 9];
       choiceMark = spyOn(UI, "choiceMark");
       mainGame = spyOn(UI, "mainGame");
       computerPlay = spyOn(UI, "computerPlay");
       humanPlay = spyOn(UI, "humanPlay");
       humanChoice = spyOn(Game, "humanChoice");
       unbindClick = spyOn(UI, "unbindClick");
-      resetGame = spyOn(UI, "resetGame")
+      resetGame = spyOn(UI, "resetGame").and.callThrough();
       computerChoice = spyOn(Game, "computerChoice");
       clickspot = spyOnEvent('tr td', 'click');
       clickbutton = spyOnEvent('button', 'click');
@@ -90,7 +90,7 @@ describe ("Test UI", function () {
                     <div class = "game"> \
                     <button type="button" class = "btn-new">New Game</button> \
                     <button type="button" class = "btn-restart">Restart Game</button> \
-                    <table> <td id = "0"></td><td id = "1"></td><td id = "2"></td></table> \
+                    <table> <td id = "0">X</td><td id = "1">O</td><td id = "2"></td></table> \
                     </div>');
     });
 
@@ -179,10 +179,12 @@ describe ("Test UI", function () {
           expect(clickspot).not.toHaveBeenTriggered();
         });
 
-        it("call Reset game", function() {          
+        it("Reset game", function() {
           UI.clickButton(".btn-new", UI.mainGame);
           $(".btn-new").click();
           expect(resetGame).toHaveBeenCalled();
+          expect($("tr td")).toBeEmpty();
+          expect(GameBoard.spots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
         });
 
         it("Call mainGame function", function() {
@@ -472,14 +474,18 @@ describe ("Test UI", function () {
   });
 
   describe ("Test newGame function", function() {
-    it ("when new button click call resetGame() and introGame", function() {
-      var introGame = spyOn(UI, "introGame");
-      var resetGame = spyOn(UI, "resetGame");
-      setFixtures(' <button type="button" class = "btn-new">New Game</button> ');
+    it ("when new button click call resetGame() and mainGame", function() {
+      var mainGame = spyOn(UI, "mainGame");
+      var resetGame = spyOn(UI, "resetGame").and.callThrough();
+      GameBoard.spots = ["O", "X", 3, 4, 5, 6, 7, 8, 9];
+      setFixtures(' <button type="button" class = "btn-new">New Game</button> \
+                    <table> <td id = "0">O</td><td id = "1">X</td><td id = "2"></td></table>');
       UI.newGame();
       $(".btn-new").click();
-      expect(introGame).toHaveBeenCalled();
+      expect(mainGame).toHaveBeenCalled();
       expect(resetGame).toHaveBeenCalled();
+      expect($("tr td")).toBeEmpty();
+      expect(GameBoard.spots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
 
     it ("unbind new button and td after clicked new button", function() {
@@ -493,14 +499,57 @@ describe ("Test UI", function () {
   });
 
   describe ("Test restartGame function", function() {
-    it ("when restart button click call resetGame() and introGame", function() {
-      var introGame = spyOn(UI, "introGame");
-      var resetGame = spyOn(UI, "resetGame");
-      setFixtures(' <button type="button" class = "btn-restart">Restart Game</button> ');
+    var resetGame;
+    var choiceMark;
+    var mainGame;
+    var clickbutton;
+
+    beforeEach(function() {
+      GameBoard.spots = ["X", "O", 3, 4, 5, 6, 7, 8, 9];
+      clickbutton = spyOnEvent('button', 'click');
+      resetGame = spyOn(UI, "resetGame").and.callThrough();
+      mainGame = spyOn(UI, "mainGame");
+      setFixtures(' <button type="button" class = "btn-start">Start Game</button> \
+                    <div class = "menu"> \
+                      <button type = "button" class = "player">1 Player</button><br> \
+                      <button type = "button" class = "players">2 Players</button> \
+                    </div> \
+                    <div class = "playerMark"> \
+                      <p>Choice a mark you want.</p> \
+                      <button type = "button" id = "Xmark">X</button> \
+                      <button type = "button" id = "Omark">O</button> \
+                    </div> \
+                    <div class = "game"> \
+                    <button type="button" class = "btn-new">New Game</button> \
+                    <button type="button" class = "btn-restart">Restart Game</button> \
+                    <table> <td id = "0">X</td><td id = "1">O</td><td id = "2"></td></table> \
+                    </div>');
+    });
+
+    it ("Reset Game when restart button click", function() {
       UI.restartGame();
       $(".btn-restart").click();
-      expect(introGame).toHaveBeenCalled();
       expect(resetGame).toHaveBeenCalled();
+      expect($("tr td")).toBeEmpty();
+      expect(GameBoard.spots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    });
+
+    it("Hide game buttons", function() {
+      UI.restartGame();
+      $(".btn-restart").click();
+      expect($(".game")).toBeHidden();
+    });
+
+    it("Unbind buttons", function() {
+      UI.restartGame();
+      $(".btn-restart").click();
+      expect(clickbutton).not.toHaveBeenTriggered();
+    });
+
+    it("Call mainGame function", function() {
+      UI.restartGame();
+      $(".btn-restart").click();
+      expect(mainGame).toHaveBeenCalled();
     });
   });
 
