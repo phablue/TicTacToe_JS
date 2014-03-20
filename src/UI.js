@@ -128,9 +128,9 @@
       UI.clickButton(".players");
     },
 
-    introGame: function(button) {
+    introGame: function() {
       UI.newGame();
-      Game.firstMove(button);
+      Game.firstMove();
       Game.playGame();
     },
 
