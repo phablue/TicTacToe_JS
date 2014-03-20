@@ -36,52 +36,145 @@ describe ("Test UI", function () {
       UI.showHumanMessage();
       expect($("#Human")).toBeVisible();
     });
+
+    describe ("Change Human Message", function() {
+      it ("message is 'Click a spot you want.' when game type is human vs. computer", function() {
+        UI.gameType = ".player";
+        UI.changeHumanMessage();
+        expect($("#Human").text()).toEqual("Click a spot you want.");
+      });
+
+      it ("message is 'Player 'X' click a spot you want' when game type is human vs. human", function() {
+        UI.gameType = ".players";
+        Game.currentPlayer = "X"
+        UI.changeHumanMessage();
+        expect($("#Human").text()).toEqual("Player '" + Game.currentPlayer + "' click a spot you want.");
+      });
+    });
   });
 
   describe ("Test click", function() {
-    var introGame;
+    var mainGame;
+    var computerPlay;
+    var humanPlay;
     var humanChoice;
     var unbindClick;
     var resetGame;
     var computerChoice;
+    var clickspot;
+    var clickbutton;
 
     beforeEach(function() {
-      introGame = spyOn(UI, "introGame");
+      mainGame = spyOn(UI, "mainGame");
+      computerPlay = spyOn(UI, "computerPlay");
+      humanPlay = spyOn(UI, "humanPlay");
       humanChoice = spyOn(Game, "humanChoice");
       unbindClick = spyOn(UI, "unbindClick");
       resetGame = spyOn(UI, "resetGame");
       computerChoice = spyOn(Game, "computerChoice");
+      clickspot = spyOnEvent('tr td', 'click');
+      clickbutton = spyOnEvent('button', 'click');
       setFixtures(' <button type="button" class = "btn-start">Start Game</button> \
+                    <div class = "menu"> \
+                      <button type = "button" class = "player">1 Player</button><br> \
+                      <button type = "button" class = "players">2 Players</button> \
+                    </div> \
+                    <div class = "playerMark"> \
+                      <p>Choice a mark you want.</p> \
+                      <button type = "button" id = "Xmark">X</button> \
+                      <button type = "button" id = "Omark">O</button> \
+                    </div> \
                     <button type="button" class = "btn-new">New Game</button> \
                     <button type="button" class = "btn-restart">Restart Game</button> \
                     <table> <td id = "0"></td><td id = "0"></td></table> ');
     });
 
-    it("call humanChoice function after td click", function() {
-      UI.clickSpot(Game.humanChoice);
-      $("tr td").click();
-      expect(humanChoice).toHaveBeenCalled();
+    describe ("Test clickSpot function", function() {
+      describe ("when gameType is human vs. computer", function() {
+        it("call computerPlay when td click", function() {
+          UI.gameType = ".player";
+          UI.clickSpot(Game.humanChoice);
+          $("tr td").click();
+          expect(humanChoice).toHaveBeenCalled();
+          expect(computerPlay).toHaveBeenCalled();
+          expect(computerChoice).toHaveBeenCalled();
+        });
+      });
+
+      describe ("when gameType is human vs. human", function() {
+        it("call humanPlay when td click", function() {
+          UI.gameType = ".players";
+          UI.clickSpot(Game.humanChoice);
+          $("tr td").click();
+          expect(humanChoice).toHaveBeenCalled();
+          expect(humanPlay).toHaveBeenCalled();
+        });
+      });
     });
 
-    it("call introGame function after start button click", function() {
-      UI.clickButton(".btn-start", UI.introGame);
-      $(".btn-start").click();
-      expect(introGame).toHaveBeenCalled();
-    });
+    describe ("Test clickButton function", function() {
+      it("call mainGame function when start button click", function() {
+        UI.clickButton(".btn-start", UI.mainGame);
+        $(".btn-start").click();
+        expect(mainGame).toHaveBeenCalled();
+      });
 
-    it("call functions after new button click", function() {
-      UI.clickButton(".btn-new", UI.introGame);
-      $(".btn-new").click();
-      expect(unbindClick).toHaveBeenCalled();
-      expect(resetGame).toHaveBeenCalled();
-      expect(introGame).toHaveBeenCalled();
-    });
+      describe ("When new button click", function() {
+        it("Hide game buttons", function() {
+          UI.clickButton(".btn-new", UI.mainGame);
+          $(".btn-new").click();
+          expect($(".game")).toBeHidden();
+        });
 
-    it("call reset and introGame function after restart button click", function() {
-      UI.clickButton(".btn-restart", UI.introGame);
-      $(".btn-restart").click();
-      expect(resetGame).toHaveBeenCalled();
-      expect(introGame).toHaveBeenCalled();
+        it("Unbind buttons and td", function() {
+          UI.clickButton(".btn-new", UI.mainGame);
+          $(".btn-new").click();
+          expect(clickbutton).not.toHaveBeenTriggered();
+          expect(clickspot).not.toHaveBeenTriggered();
+        });
+
+        it("Reset game", function() {
+          UI.clickButton(".btn-new", UI.mainGame);
+          $(".btn-new").click();
+          expect(resetGame).toHaveBeenCalled();
+          expect($("tr td")).toBeEmpty();
+          expect(GameBoard.spots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+        });
+
+        it("Call mainGame function", function() {
+          UI.clickButton(".btn-new", UI.mainGame);
+          $(".btn-new").click();
+          expect(mainGame).toHaveBeenCalled();
+        });
+      });
+
+      describe ("When restart button click", function() {
+        it("Hide game buttons", function() {
+          UI.clickButton(".btn-restart", UI.mainGame);
+          $(".btn-restart").click();
+          expect($(".game")).toBeHidden();
+        });
+
+        it("Unbind buttons", function() {
+          UI.clickButton(".btn-restart", UI.mainGame);
+          $(".btn-restart").click();
+          expect(clickbutton).not.toHaveBeenTriggered();
+        });
+
+        it("Reset Game", function() {
+          UI.clickButton(".btn-restart", UI.mainGame);
+          $(".btn-restart").click();
+          expect(resetGame).toHaveBeenCalled();
+          expect($("tr td")).toBeEmpty();
+          expect(GameBoard.spots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+        });
+
+        it("Call mainGame function", function() {
+          UI.clickButton(".btn-restart", UI.mainGame);
+          $(".btn-restart").click();
+          expect(mainGame).toHaveBeenCalled();
+        });
+      });
     });
   });
 
