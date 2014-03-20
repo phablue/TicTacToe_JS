@@ -383,7 +383,6 @@ describe ("Test UI", function () {
     it ("cant click and hide human message after human choice a spot", function() {
       UI.humanPlay();
       $("#0").click();
-      expect($("#0")).toHaveText("X");
       expect(click).not.toHaveBeenTriggered();
       expect(hideHumanMessage).toHaveBeenCalled();
     });
