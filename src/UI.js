@@ -18,10 +18,6 @@
       $("#Human").hide();
     },
 
-    getClass: function(element) {
-      return $(element).attr('class')
-    },
-
     clickSpot: function(callback) {
       $("tr td").click(function(e) {
         callback(e.target.id, UI.computerPlay);
