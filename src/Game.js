@@ -62,10 +62,14 @@
           UI.humanPlay();
         }
         else if (Game.goFirst === "n") {
+          Game.changeCurrentPlayer(Game.currentPlayer);
           UI.computerPlay();
         }
       }
       else { 
+        if (Game.goFirst !== "y") {
+          Game.changeCurrentPlayer(Game.currentPlayer);
+        }
         UI.humanPlay();
       }
     }
