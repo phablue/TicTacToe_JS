@@ -20,9 +20,17 @@
       $("#Human").hide();
     },
 
+    changeHumanMessage: function() {
+      if (UI.gameType === ".player") {
+        UI.setTextContents("Human", "Click a spot you want.");
+      }
+      else {
+        UI.setTextContents("Human", "Player '" + Game.currentPlayer + "' click a spot you want.");
+      }
+    },
+
     clickSpot: function(callback) {
       $("tr td").click(function(e) {
-        console.log(UI.gameType)
         if (UI.gameType === ".player") {
           callback(e.target.id, UI.computerPlay);
         }
@@ -165,6 +173,7 @@
     },
 
     humanPlay: function() {
+      UI.changeHumanMessage();
       UI.showHumanMessage();
       UI.clickSpot(Game.humanChoice)
     },
